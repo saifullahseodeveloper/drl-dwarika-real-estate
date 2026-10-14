@@ -8,6 +8,9 @@ declare(strict_types=1);
 
 define('APP_ROOT', dirname(__DIR__));
 
+// Global template helpers (e, format_price, etc.)
+require_once APP_ROOT . '/app/Core/helpers.php';
+
 // PSR-4 Autoloader
 spl_autoload_register(function ($class) {
     $prefix = 'App\\';

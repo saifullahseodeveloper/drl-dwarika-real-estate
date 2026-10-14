@@ -65,19 +65,4 @@ class View
     }
 }
 
-// Global helper function for concise escaping in templates
-if (!function_exists('e')) {
-    function e(?string $string): string
-    {
-        return \App\Core\View::escape($string);
-    }
-}
-
-// Global helper for formatting AED currency
-if (!function_exists('format_price')) {
-    function format_price(float|int|string $price, string $currency = 'AED'): string
-    {
-        $num = (float)$price;
-        return $currency . ' ' . number_format($num);
-    }
-}
+require_once __DIR__ . '/helpers.php';

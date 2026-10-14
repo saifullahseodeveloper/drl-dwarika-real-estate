@@ -32,6 +32,24 @@ class Database
                 );
                 self::$instance = new PDO($dsn, $config['username'], $config['password'], $config['options']);
                 self::$activeDriver = 'mysql';
+
+                // Ensure MySQL tables exist (auto-install schema & seed if fresh DB)
+                try {
+                    $tableCheck = self::$instance->query("SHOW TABLES LIKE 'locations'")->fetch();
+                    if (!$tableCheck) {
+                        $schemaFile = dirname(__DIR__, 2) . '/database/schema.sql';
+                        $seedFile = dirname(__DIR__, 2) . '/database/seed.sql';
+                        if (file_exists($schemaFile)) {
+                            self::$instance->exec(file_get_contents($schemaFile));
+                        }
+                        if (file_exists($seedFile)) {
+                            self::$instance->exec(file_get_contents($seedFile));
+                        }
+                    }
+                } catch (\Throwable $initErr) {
+                    error_log("Database auto-init notice: " . $initErr->getMessage());
+                }
+
                 return self::$instance;
             } catch (PDOException $e) {
                 // If MySQL is not reachable, fallback to SQLite for local development resilience
