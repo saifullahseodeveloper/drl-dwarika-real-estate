@@ -1,0 +1,12 @@
+{
+  "name": "drl-dwarika-real-estate",
+  "version": "1.0.0",
+  "description": "Dynamic Real Estate Platform for DRL Dwarika Real Estate LLC",
+  "main": "dev-server.js",
+  "scripts": {
+    "dev": "node dev-server.js",
+    "start": "node dev-server.js"
+  },
+  "author": "DRL Dwarika Real Estate LLC",
+  "license": "Proprietary"
+}

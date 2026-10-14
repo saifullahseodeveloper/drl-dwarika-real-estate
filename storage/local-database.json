@@ -1,0 +1,738 @@
+{
+  "settings": {
+    "site_name": "DRL Dwarika Real Estate LLC",
+    "site_tagline": "Opening Doors To Prosperity",
+    "company_phone": "+971 50 123 4567",
+    "company_whatsapp": "971501234567",
+    "company_email": "info@dwarikarealestate.ae",
+    "company_address": "Office 702, Prime Tower, Business Bay, Dubai, United Arab Emirates",
+    "rera_orn": "29482",
+    "dld_license": "1092831",
+    "stat_properties_sold": "100+",
+    "stat_happy_clients": "50+",
+    "stat_years_experience": "5+",
+    "social_facebook": "https://facebook.com/dwarikarealestate",
+    "social_instagram": "https://instagram.com/dwarikarealestate",
+    "social_linkedin": "https://linkedin.com/company/dwarikarealestate",
+    "social_youtube": "https://youtube.com/@dwarikarealestate"
+  },
+  "locations": [
+    {
+      "id": 1,
+      "name": "Dubai Hills Estate",
+      "slug": "dubai-hills-estate",
+      "city": "Dubai",
+      "description": "The green heart of Dubai, featuring an 18-hole championship golf course, Dubai Hills Mall, and luxury villas.",
+      "is_featured": 1,
+      "image_url": "/assets/images/villa-dubai-hills.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Downtown Dubai",
+      "slug": "downtown-dubai",
+      "city": "Dubai",
+      "description": "The centre of now, home to the Burj Khalifa, Dubai Mall, and premier luxury high-rise residences.",
+      "is_featured": 1,
+      "image_url": "/assets/images/apartment-downtown.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Jumeirah Village Circle (JVC)",
+      "slug": "jumeirah-village-circle",
+      "city": "Dubai",
+      "description": "A serene, family-friendly freehold community offering modern townhouses and investment apartments.",
+      "is_featured": 1,
+      "image_url": "/assets/images/townhouse-jvc.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Palm Jumeirah",
+      "slug": "palm-jumeirah",
+      "city": "Dubai",
+      "description": "World-renowned archipelago offering beachfront villas, ultra-luxury penthouses, and private marinas.",
+      "is_featured": 1,
+      "image_url": "/assets/images/penthouse-palm.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Business Bay",
+      "slug": "business-bay",
+      "city": "Dubai",
+      "description": "Dubai central commercial district along the Dubai Canal, featuring grade-A corporate offices and towers.",
+      "is_featured": 1,
+      "image_url": "/assets/images/commercial-business-bay.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Dubai Creek Harbour",
+      "slug": "dubai-creek-harbour",
+      "city": "Dubai",
+      "description": "Next-generation waterfront destination boasting panoramic wildlife sanctuary and futuristic skyline views.",
+      "is_featured": 1,
+      "image_url": "/assets/images/offplan-creek.jpg"
+    }
+  ],
+  "property_types": [
+    {
+      "id": 1,
+      "name": "Villa",
+      "slug": "villa",
+      "description": "Standalone luxury private villas with landscaped gardens and private pools.",
+      "icon": "fa-home",
+      "is_featured": 1
+    },
+    {
+      "id": 2,
+      "name": "Apartment",
+      "slug": "apartment",
+      "description": "Modern contemporary urban residences and serviced apartments.",
+      "icon": "fa-building",
+      "is_featured": 1
+    },
+    {
+      "id": 3,
+      "name": "Townhouse",
+      "slug": "townhouse",
+      "description": "Family-oriented multi-level townhouses in master-planned communities.",
+      "icon": "fa-door-open",
+      "is_featured": 1
+    },
+    {
+      "id": 4,
+      "name": "Penthouse",
+      "slug": "penthouse",
+      "description": "Crown skyline penthouses offering panoramic vistas and private sky pools.",
+      "icon": "fa-crown",
+      "is_featured": 1
+    },
+    {
+      "id": 5,
+      "name": "Commercial",
+      "slug": "commercial",
+      "description": "Prime corporate offices, retail spaces, and commercial investments.",
+      "icon": "fa-briefcase",
+      "is_featured": 1
+    }
+  ],
+  "amenities": [
+    {
+      "id": 1,
+      "name": "Swimming Pool",
+      "icon": "fa-water-ladder"
+    },
+    {
+      "id": 2,
+      "name": "Gymnasium",
+      "icon": "fa-dumbbell"
+    },
+    {
+      "id": 3,
+      "name": "24/7 Security & CCTV",
+      "icon": "fa-shield-halved"
+    },
+    {
+      "id": 4,
+      "name": "Covered Parking",
+      "icon": "fa-square-parking"
+    },
+    {
+      "id": 5,
+      "name": "Balcony & Terrace",
+      "icon": "fa-sun"
+    },
+    {
+      "id": 6,
+      "name": "Central Air Conditioning",
+      "icon": "fa-snowflake"
+    },
+    {
+      "id": 7,
+      "name": "Concierge Service",
+      "icon": "fa-bell-concierge"
+    },
+    {
+      "id": 8,
+      "name": "Children Play Area",
+      "icon": "fa-children"
+    },
+    {
+      "id": 9,
+      "name": "Private Garden",
+      "icon": "fa-seedling"
+    },
+    {
+      "id": 10,
+      "name": "High Speed Elevators",
+      "icon": "fa-arrow-up-wide-short"
+    }
+  ],
+  "properties": [
+    {
+      "id": 1,
+      "title": "Modern Villa in Dubai Hills",
+      "slug": "modern-villa-in-dubai-hills",
+      "reference_code": "DRL-DH-401",
+      "description": "Experience timeless architectural elegance in this masterfully crafted 4-bedroom contemporary villa in Dubai Hills Estate. Designed with expansive floor-to-ceiling double-glazed glass curtain walls, this residence welcomes natural daylight into open-plan living, dining, and show kitchen areas.\n\nKey features include an infinity-edge private swimming pool, integrated smart home automation, high-end Italian porcelain finishes, maid room with en-suite bath, and double private covered parking. Steps away from the Dubai Hills Golf Club, private international schools, and King’s College Hospital.",
+      "price": 4500000,
+      "currency": "AED",
+      "bedrooms": 4,
+      "bathrooms": 5,
+      "area_sqft": 4850,
+      "listing_type": "sale",
+      "property_type_id": 1,
+      "location_id": 1,
+      "address": "Maple Avenue, Dubai Hills Estate, Dubai",
+      "status": "published",
+      "is_featured": 1,
+      "featured_image": "/assets/images/villa-dubai-hills.jpg",
+      "rera_permit": "DLD-749210-2025",
+      "completion_year": "2024",
+      "amenities": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9
+      ],
+      "agent_id": 1
+    },
+    {
+      "id": 2,
+      "title": "Luxury Apartment",
+      "slug": "luxury-apartment-downtown-dubai",
+      "reference_code": "DRL-DT-202",
+      "description": "Positioned in the vibrant epicenter of Downtown Dubai, this immaculate 2-bedroom luxury residence redefines cosmopolitan living. Offering uninterrupted panoramic views toward the Dubai Fountain and Burj Khalifa Boulevard, the property features a designer European kitchen with built-in Miele appliances, hardwood parquet flooring, and two lavish marble en-suite bathrooms.\n\nResidents enjoy direct indoor footbridge access to Dubai Mall, an Olympic-length skyline pool deck, state-of-the-art gym, valet parking, and 24/7 dedicated concierge services.",
+      "price": 2200000,
+      "currency": "AED",
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "area_sqft": 1420,
+      "listing_type": "sale",
+      "property_type_id": 2,
+      "location_id": 2,
+      "address": "Burj Crown Tower, Downtown Dubai",
+      "status": "published",
+      "is_featured": 1,
+      "featured_image": "/assets/images/apartment-downtown.jpg",
+      "rera_permit": "DLD-810934-2025",
+      "completion_year": "2023",
+      "amenities": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        10
+      ],
+      "agent_id": 2
+    },
+    {
+      "id": 3,
+      "title": "Spacious Townhouse",
+      "slug": "spacious-townhouse-jvc",
+      "reference_code": "DRL-JVC-303",
+      "description": "A sanctuary for modern family living, this pristine 3-bedroom plus maid townhouse in Jumeirah Village Circle (JVC) combines space, privacy, and superior connectivity. Spread across two sunlit levels, the property features high ceilings, a generous private landscaped rear garden, and a rooftop leisure terrace perfect for evening entertainment.\n\nIncludes three spacious master suites with built-in wardrobes, fitted quartz kitchen, covered dual car parking, and immediate access to central community parks and Circle Mall.",
+      "price": 3100000,
+      "currency": "AED",
+      "bedrooms": 3,
+      "bathrooms": 3,
+      "area_sqft": 2680,
+      "listing_type": "sale",
+      "property_type_id": 3,
+      "location_id": 3,
+      "address": "District 12, Jumeirah Village Circle, Dubai",
+      "status": "published",
+      "is_featured": 1,
+      "featured_image": "/assets/images/townhouse-jvc.jpg",
+      "rera_permit": "DLD-528391-2025",
+      "completion_year": "2024",
+      "amenities": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9
+      ],
+      "agent_id": 3
+    },
+    {
+      "id": 4,
+      "title": "Signature Beachfront Penthouse",
+      "slug": "signature-beachfront-penthouse-palm-jumeirah",
+      "reference_code": "DRL-PJ-501",
+      "description": "An ultra-exclusive sky palace occupying the top two floors on the iconic Palm Jumeirah crescent. Featuring 360-degree views of the Arabian Gulf and Dubai Marina skyline, private infinity sky pool, private elevator foyer, Gaggenau kitchen, and private yacht berth privileges.",
+      "price": 12500000,
+      "currency": "AED",
+      "bedrooms": 4,
+      "bathrooms": 5,
+      "area_sqft": 6800,
+      "listing_type": "sale",
+      "property_type_id": 4,
+      "location_id": 4,
+      "address": "Crescent West, Palm Jumeirah, Dubai",
+      "status": "published",
+      "is_featured": 1,
+      "featured_image": "/assets/images/penthouse-palm.jpg",
+      "rera_permit": "DLD-991204-2025",
+      "completion_year": "2024",
+      "amenities": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        10
+      ],
+      "agent_id": 4
+    },
+    {
+      "id": 5,
+      "title": "Grade-A Executive Office",
+      "slug": "grade-a-executive-office-business-bay",
+      "reference_code": "DRL-BB-105",
+      "description": "Fully fitted corporate office space perched high in a trophy tower along the Dubai Canal in Business Bay. Turnkey layout with executive boardroom, 4 private manager cabins, open collaboration bullpen for 24 workstations, and dedicated server room. Ideal for international firms and family offices.",
+      "price": 1850000,
+      "currency": "AED",
+      "bedrooms": 0,
+      "bathrooms": 2,
+      "area_sqft": 2150,
+      "listing_type": "commercial",
+      "property_type_id": 5,
+      "location_id": 5,
+      "address": "The Opus by Omniyat, Business Bay, Dubai",
+      "status": "published",
+      "is_featured": 1,
+      "featured_image": "/assets/images/commercial-business-bay.jpg",
+      "rera_permit": "DLD-332918-2025",
+      "completion_year": "2023",
+      "amenities": [
+        3,
+        4,
+        6,
+        7,
+        10
+      ],
+      "agent_id": 5
+    },
+    {
+      "id": 6,
+      "title": "Waterfront Haven at Dubai Creek Harbour",
+      "slug": "waterfront-haven-dubai-creek-harbour",
+      "reference_code": "DRL-DCH-204",
+      "description": "High-capital-growth off-plan investment located directly on the Creek Promenade. Attractive 80/20 multi-tiered payment plan with handover scheduled for Q4 2026. Panoramic views overlooking the Ras Al Khor Flamingo Sanctuary and futuristic Creek Tower.",
+      "price": 2800000,
+      "currency": "AED",
+      "bedrooms": 2,
+      "bathrooms": 3,
+      "area_sqft": 1620,
+      "listing_type": "off-plan",
+      "property_type_id": 2,
+      "location_id": 6,
+      "address": "Creek Promenade, Dubai Creek Harbour, Dubai",
+      "status": "published",
+      "is_featured": 1,
+      "featured_image": "/assets/images/offplan-creek.jpg",
+      "rera_permit": "DLD-418290-2025",
+      "completion_year": "2026",
+      "amenities": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        10
+      ],
+      "agent_id": 6
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "title": "Buy Home",
+      "slug": "buy-property",
+      "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+      "full_desc": "Whether you are purchasing your primary family home or a blue-chip vacation property, our seasoned advisors guide you through inventory selection, developer credentials, title deed verification, and escrow account procedures. We provide transparent access to off-market listings, pre-launch allotments, and ready resale transactions.",
+      "icon": "fa-house"
+    },
+    {
+      "id": 2,
+      "title": "Sell Property",
+      "slug": "sell-property",
+      "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+      "full_desc": "Selling luxury real estate in Dubai demands strategic positioning, premium architectural photography, and international buyer reach. Dwarika Real Estate LLC deploys precision digital syndication, targeted private wealth matching, and strict price protection to close transactions swiftly at premium market multiples.",
+      "icon": "fa-hand-holding-dollar"
+    },
+    {
+      "id": 3,
+      "title": "Consultancy",
+      "slug": "property-consultancy",
+      "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+      "full_desc": "The UAE real estate market evolves rapidly with new laws, Golden Visa regulations, and tax policies. Our experienced property consultants provide impartial, data-driven counsel on ownership structures, freehold zones, corporate acquisitions, leasehold conversions, and mortgage structuring.",
+      "icon": "fa-user-tie"
+    },
+    {
+      "id": 4,
+      "title": "Investment Advisory",
+      "slug": "investment-advisory",
+      "short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+      "full_desc": "We help international investors and wealth managers build resilient property portfolios in Dubai generating 7% to 10% net yields. We analyze rental demand heatmaps, off-plan capital appreciation trajectories, short-term holiday home projections, and exit strategies across market cycles.",
+      "icon": "fa-building-columns"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "client_name": "Amit Sharma",
+      "location": "Dubai",
+      "quote": "Dwarika Real Estate made our home buying process so easy. Their team was professional, responsive and genuinely helpful.",
+      "avatar_initial": "A",
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "client_name": "Priya Nair",
+      "location": "Abu Dhabi",
+      "quote": "Excellent service and great property options. Highly recommended for anyone looking to invest in Dubai.",
+      "avatar_initial": "P",
+      "rating": 5
+    },
+    {
+      "id": 3,
+      "client_name": "Rahul Verma",
+      "location": "Sharjah",
+      "quote": "From property search to final paperwork, everything was handled smoothly. Truly a reliable real estate partner.",
+      "avatar_initial": "R",
+      "rating": 5
+    }
+  ],
+  "enquiries": [
+    {
+      "id": 7,
+      "property_id": null,
+      "property_title": "",
+      "service_id": null,
+      "name": "Mohammad Saifullah",
+      "email": "md.saifullah05@gmail.com",
+      "phone": "+918840432382",
+      "subject": "General Inquiry",
+      "message": "qwe",
+      "status": "new",
+      "created_at": "2026-10-14T13:24:59.878Z"
+    },
+    {
+      "id": 6,
+      "property_id": null,
+      "property_title": "",
+      "service_id": null,
+      "name": "Anonymous",
+      "email": "",
+      "phone": "",
+      "subject": "Website Inquiry",
+      "message": "",
+      "status": "new",
+      "created_at": "2026-10-14T13:24:59.756Z"
+    },
+    {
+      "id": 5,
+      "property_id": null,
+      "property_title": "",
+      "service_id": null,
+      "name": "Mohammad Saifullah",
+      "email": "md.saifullah05@gmail.com",
+      "phone": "+918840432382",
+      "subject": "General Inquiry",
+      "message": "qwerty",
+      "status": "new",
+      "created_at": "2026-10-14T13:24:48.713Z"
+    },
+    {
+      "id": 4,
+      "property_id": null,
+      "property_title": "",
+      "service_id": null,
+      "name": "Anonymous",
+      "email": "",
+      "phone": "",
+      "subject": "Website Inquiry",
+      "message": "",
+      "status": "new",
+      "created_at": "2026-10-14T13:24:48.562Z"
+    },
+    {
+      "id": 3,
+      "property_id": 1,
+      "property_title": "Modern Villa in Dubai Hills",
+      "service_id": null,
+      "name": "Tariq Mansoor",
+      "email": "tariq.mansoor@gmail.com",
+      "phone": "+971 55 777 8899",
+      "subject": "Website Inquiry",
+      "message": "I want to schedule an urgent private viewing for the Dubai Hills villa.",
+      "status": "new",
+      "created_at": "2026-10-14T13:17:21.962Z"
+    },
+    {
+      "id": 1,
+      "property_id": 1,
+      "property_title": "Modern Villa in Dubai Hills",
+      "name": "Farhan Al Qasimi",
+      "email": "farhan.qasimi@emirates.ae",
+      "phone": "+971 52 984 1120",
+      "message": "Hello, I am interested in scheduling a viewing for the 4-bedroom Modern Villa in Dubai Hills Estate this Saturday afternoon.",
+      "status": "new",
+      "created_at": "2026-10-14T13:16:02.483Z"
+    },
+    {
+      "id": 2,
+      "property_id": 2,
+      "property_title": "Luxury Apartment",
+      "name": "Sophie Laurent",
+      "email": "sophie.laurent@outlook.com",
+      "phone": "+33 6 42 19 88 02",
+      "message": "I am an investor based in Paris looking for ready 2-bed apartments in Downtown Dubai for high rental yields. Is this unit currently rented or vacant on transfer?",
+      "status": "contacted",
+      "created_at": "2026-10-14T08:16:02.509Z"
+    }
+  ],
+  "agents": [
+    {
+      "id": 1,
+      "name": "Omar Farooq",
+      "slug": "omar-farooq",
+      "designation": "Senior Luxury Property Consultant",
+      "rera_brn": "42918",
+      "experience": "9+ Years Experience",
+      "photo_url": "/assets/images/agents/omar-farooq.jpg",
+      "email": "omar.farooq@dwarikarealestate.ae",
+      "phone": "+971 50 234 5671",
+      "whatsapp": "971502345671",
+      "short_bio": "Specializing in prime villa communities across Dubai Hills Estate and luxury enclaves, Omar brings nearly a decade of high-end advisory experience to discerning home buyers and private investors.",
+      "full_bio": "Omar Farooq is a Senior Luxury Property Consultant at DRL Dwarika Real Estate LLC, licensed under Dubai Land Department (RERA BRN: 42918). Over nine years of distinguished service in Dubai's prime residential market, Omar has advised ultra-high-net-worth families, expatriate executives, and international institutional clients on acquiring trophy properties across master-planned developments.\n\nHis core advisory portfolio includes luxury standalone villas, golf course estates, and off-plan turnkey acquisitions in Dubai Hills Estate, Emirates Hills, and Downtown Dubai. Renowned for his analytical precision and transparent negotiation demeanor, Omar manages every transaction with uncompromising discretion and regulatory diligence.",
+      "languages": [
+        "English",
+        "Arabic",
+        "Urdu"
+      ],
+      "specializations": [
+        "luxury",
+        "residential",
+        "off-plan"
+      ],
+      "locations": [
+        "Dubai Hills Estate",
+        "Downtown Dubai"
+      ],
+      "testimonial_quote": "Omar's deep understanding of Dubai Hills Estate was invaluable. He negotiated the best possible price for our family villa and navigated the DLD paperwork seamlessly.",
+      "testimonial_client": "Amit Sharma, Homeowner",
+      "status": "active",
+      "sort_order": 1
+    },
+    {
+      "id": 2,
+      "name": "Elena Rostova",
+      "slug": "elena-rostova",
+      "designation": "Downtown & Waterfront Specialist",
+      "rera_brn": "51820",
+      "experience": "7+ Years Experience",
+      "photo_url": "/assets/images/agents/elena-rostova.jpg",
+      "email": "elena.rostova@dwarikarealestate.ae",
+      "phone": "+971 50 345 6782",
+      "whatsapp": "971503456782",
+      "short_bio": "Elena is an authority on luxury high-rise residences, serviced penthouses, and waterfront apartments in Downtown Dubai and Palm Jumeirah, serving international private wealth clients.",
+      "full_bio": "Elena Rostova joined DRL Dwarika Real Estate LLC with an established reputation across European and CIS investor networks. With over 7 years in the Dubai real estate ecosystem, Elena focuses exclusively on high-yielding Downtown Dubai apartments, luxury sky residences, and branded beachfront developments.\n\nShe holds extensive expertise in rental yield optimization, corporate tenant placement, and cross-border currency conveyancing under UAE banking frameworks. Fluent in English, Russian, and conversational French, Elena provides tailored concierge advisory for international buyers seeking safe-haven capital deployment and Golden Visa qualifying assets.",
+      "languages": [
+        "English",
+        "Russian",
+        "French"
+      ],
+      "specializations": [
+        "luxury",
+        "residential",
+        "rental"
+      ],
+      "locations": [
+        "Downtown Dubai",
+        "Palm Jumeirah"
+      ],
+      "testimonial_quote": "Elena found our Downtown apartment within three days of our arrival in Dubai. Her insight into rental yield forecasts was spot on.",
+      "testimonial_client": "Sophie Laurent, Paris Investor",
+      "status": "active",
+      "sort_order": 2
+    },
+    {
+      "id": 3,
+      "name": "Sarah Al-Mansoori",
+      "slug": "sarah-al-mansoori",
+      "designation": "Senior Residential Consultant",
+      "rera_brn": "49102",
+      "experience": "6+ Years Experience",
+      "photo_url": "/assets/images/agents/sarah-al-mansoori.jpg",
+      "email": "sarah.almansoori@dwarikarealestate.ae",
+      "phone": "+971 50 567 8904",
+      "whatsapp": "971505678904",
+      "short_bio": "Specializing in family-centric communities, modern townhouses, and high-yield suburban developments, Sarah delivers warm, dedicated guidance for first-time buyers and growing families.",
+      "full_bio": "Sarah Al-Mansoori is a certified Dubai real estate consultant specializing in master-planned communities including Jumeirah Village Circle (JVC), Dubai Hills Estate, and Arabian Ranches. With six years of client-centric practice, Sarah has helped hundreds of local and expatriate families secure their dream homes.\n\nHer thorough knowledge of community amenities, international school catchments, park networks, and service charges makes her the go-to advisor for end-user buyers. Sarah is renowned for her patience, transparent guidance on mortgage pre-approvals, and post-handover utility setups.",
+      "languages": [
+        "English",
+        "Arabic"
+      ],
+      "specializations": [
+        "residential",
+        "rental",
+        "off-plan"
+      ],
+      "locations": [
+        "Jumeirah Village Circle (JVC)",
+        "Dubai Hills Estate"
+      ],
+      "testimonial_quote": "Sarah helped our family navigate our first home purchase in JVC with genuine care. She made what felt daunting into a joyful experience.",
+      "testimonial_client": "Priya Nair, Homeowner",
+      "status": "active",
+      "sort_order": 3
+    },
+    {
+      "id": 4,
+      "name": "Leila Hadid",
+      "slug": "leila-hadid",
+      "designation": "Ultra-Luxury & Penthouse Specialist",
+      "rera_brn": "47812",
+      "experience": "8+ Years Experience",
+      "photo_url": "/assets/images/agents/leila-hadid.jpg",
+      "email": "leila.hadid@dwarikarealestate.ae",
+      "phone": "+971 50 789 0126",
+      "whatsapp": "971507890126",
+      "short_bio": "Representing elite architectural masterpieces, beachfront estates on Palm Jumeirah, and bespoke sky penthouses, Leila offers private clients unparalleled access to off-market luxury listings.",
+      "full_bio": "Leila Hadid is one of Dubai's most respected luxury residential advisors, specializing in ultra-prime beachfront properties on Palm Jumeirah, waterfront mansions, and crown penthouses. Leila operates at the pinnacle of the Dubai luxury market, representing international ultra-high-net-worth clients, celebrity buyers, and royal family offices.\n\nKnown for her impeccable taste, discretion, and access to private pocket listings never advertised publicly, Leila provides white-glove advisory from initial confidential consultation through to title deed escrow settlement.",
+      "languages": [
+        "English",
+        "Arabic",
+        "French"
+      ],
+      "specializations": [
+        "luxury",
+        "residential",
+        "off-plan"
+      ],
+      "locations": [
+        "Palm Jumeirah",
+        "Dubai Creek Harbour"
+      ],
+      "testimonial_quote": "Leila's access to off-market Palm Jumeirah residences was unmatched. She handled our transaction with the highest level of confidentiality.",
+      "testimonial_client": "Tariq Mansoor, Private Investor",
+      "status": "active",
+      "sort_order": 4
+    },
+    {
+      "id": 5,
+      "name": "Marcus Vance",
+      "slug": "marcus-vance",
+      "designation": "Commercial Real Estate Director",
+      "rera_brn": "36219",
+      "experience": "14+ Years Experience",
+      "photo_url": "/assets/images/agents/marcus-vance.jpg",
+      "email": "marcus.vance@dwarikarealestate.ae",
+      "phone": "+971 50 678 9015",
+      "whatsapp": "971506789015",
+      "short_bio": "With 14 years of commercial brokerage experience in the UK and UAE, Marcus advises multinational corporations, tech firms, and private funds on Grade-A office acquisitions and commercial leases.",
+      "full_bio": "Marcus Vance leads the Commercial Brokerage division at DRL Dwarika Real Estate LLC. Prior to joining the Dubai market eight years ago, Marcus advised FTSE 100 corporations on office relocations across London's financial district. In Dubai, he has transacted over 350,000 square feet of prime commercial real estate in Business Bay, DIFC, and Downtown Dubai.\n\nHis expertise encompasses commercial lease negotiations, corporate fit-out feasibility, freezone versus mainland licensing considerations, and sale-and-leaseback transactions for institutional property holders.",
+      "languages": [
+        "English"
+      ],
+      "specializations": [
+        "commercial",
+        "investment",
+        "luxury"
+      ],
+      "locations": [
+        "Business Bay",
+        "Downtown Dubai"
+      ],
+      "testimonial_quote": "Marcus negotiated our corporate headquarters lease in Business Bay with total professionalism. We secured excellent terms and saved weeks of administrative delay.",
+      "testimonial_client": "David K., Regional Managing Director",
+      "status": "active",
+      "sort_order": 5
+    },
+    {
+      "id": 6,
+      "name": "Rahul Kapoor",
+      "slug": "rahul-kapoor",
+      "designation": "Off-Plan & Investment Advisory Director",
+      "rera_brn": "38945",
+      "experience": "11+ Years Experience",
+      "photo_url": "/assets/images/agents/rahul-kapoor.jpg",
+      "email": "rahul.kapoor@dwarikarealestate.ae",
+      "phone": "+971 50 456 7893",
+      "whatsapp": "971504567893",
+      "short_bio": "A veteran real estate financial analyst and off-plan strategist, Rahul guides global portfolio investors in securing early-stage launch allocations with optimal capital appreciation trajectories.",
+      "full_bio": "Rahul Kapoor brings over eleven years of structured investment experience across Dubai's capital markets and top-tier master developers including Emaar, Nakheel, and Meraas. At DRL Dwarika Real Estate LLC, Rahul spearheads off-plan portfolio advisory, developer allotment negotiations, and ROI modeling for high-net-worth individuals and family offices.\n\nHis analytical approach breaks down construction milestones, escrow account protections, secondary market liquidity cycles, and tax-efficient UAE structuring. Rahul is a frequent market commentator and trusted advisor to investors seeking 8-12% target annualized returns.",
+      "languages": [
+        "English",
+        "Hindi",
+        "Urdu"
+      ],
+      "specializations": [
+        "off-plan",
+        "commercial",
+        "residential"
+      ],
+      "locations": [
+        "Dubai Creek Harbour",
+        "Business Bay",
+        "Downtown Dubai"
+      ],
+      "testimonial_quote": "Rahul's investment models for Dubai Creek Harbour gave us total confidence. His pre-launch access saved us significant capital.",
+      "testimonial_client": "Rajesh Patel, TechCorp India",
+      "status": "active",
+      "sort_order": 6
+    }
+  ],
+  "founders": [
+    {
+      "id": 1,
+      "name": "Rajesh Dwarika",
+      "slug": "rajesh-dwarika",
+      "designation": "Founder & Managing Director",
+      "photo_url": "/assets/images/founders/founder-rajesh-dwarika.jpg",
+      "short_bio": "Founding visionary steering DRL Dwarika Real Estate LLC. Oversees strategic institutional vision, high-net-worth portfolio advisory, and corporate governance.",
+      "full_bio": "Rajesh Dwarika founded DRL Dwarika Real Estate LLC with a steadfast commitment to market transparency, professional governance, and sustainable investor prosperity across the United Arab Emirates.\n\nWith over two decades of capital markets and real estate advisory experience, Rajesh has cemented strategic alliances with Dubai's premier master developers including Emaar, Nakheel, Meraas, and Damac. Headquartered in Business Bay, he leads an international team delivering institutional-grade advisory, off-market acquisitions, and luxury residential conveyance under Dubai Land Department regulatory frameworks.\n\nHis guiding philosophy—Opening Doors to Prosperity—reflects an unyielding dedication to safeguarding investor capital and building enduring generational value.",
+      "background": "Real Estate Brokerage Leadership, Institutional Capital Markets, Dubai Land Department Regulatory Frameworks",
+      "leadership_areas": "Strategic Vision, Institutional Alliances, Corporate Governance, Market Expansion",
+      "quote": "Opening doors to prosperity through uncompromising transparency, ethical counsel, and enduring value creation for our clients.",
+      "email": "rajesh.dwarika@dwarikarealestate.ae",
+      "phone": "+971 50 123 4567",
+      "linkedin_url": "https://linkedin.com",
+      "status": "published",
+      "missing_fields": "",
+      "sort_order": 1
+    },
+    {
+      "id": 2,
+      "name": "Vikram Singhania",
+      "slug": "vikram-singhania",
+      "designation": "Co-Founder & Chief Operating Officer",
+      "photo_url": "/assets/images/founders/founder-vikram-singhania.jpg",
+      "short_bio": "Directs brokerage operations, developer relations, transaction integrity, and digital property intelligence systems.",
+      "full_bio": "Vikram Singhania leads operational execution and transaction integrity at DRL Dwarika Real Estate LLC, overseeing end-to-end conveyance, escrow compliance, and advanced property intelligence operations.\n\nWith extensive background in multinational property brokerage administration and developer relations, Vikram ensures that every transaction—from prime off-plan allocation to turnkey freehold conveyance—is executed with frictionless accuracy and stringent RERA compliance.\n\nHe oversees Dwarika's specialized advisory desks across Downtown Dubai, Dubai Hills Estate, and Palm Jumeirah.",
+      "background": "Real Estate Operations, Developer Portfolios, Escrow & Conveyance Governance, Client Experience",
+      "leadership_areas": "Brokerage Operations, Developer Alliances, CRM Systems, RERA Regulatory Compliance",
+      "quote": "Excellence in real estate is built upon trust, operational rigor, and relentless dedication to our investors.",
+      "email": "vikram.singhania@dwarikarealestate.ae",
+      "phone": "+971 50 123 4568",
+      "linkedin_url": "https://linkedin.com",
+      "status": "published",
+      "missing_fields": "",
+      "sort_order": 2
+    }
+  ]
+}

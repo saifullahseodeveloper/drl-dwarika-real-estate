@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 56" width="250" height="56">
+  <defs>
+    <style>
+      .logo-title { font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif; font-weight: 800; font-size: 19px; fill: #0F1E2E; letter-spacing: 0.8px; }
+      .logo-sub { font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 7.5px; fill: #334155; letter-spacing: 1.8px; }
+      .logo-tagline { font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif; font-weight: 700; font-size: 6.8px; fill: #1689CC; letter-spacing: 1.2px; }
+    </style>
+  </defs>
+
+  <!-- Architectural Building Bars Icon (Matching Reference Illustration) -->
+  <g transform="translate(2, 3)">
+    <!-- Tower 1: Left Medium Tower (Navy) -->
+    <path d="M 2 48 L 2 22 L 11 15 L 11 48 Z" fill="#0F1E2E" />
+    <line x1="6.5" y1="24" x2="6.5" y2="44" stroke="#FFFFFF" stroke-width="1.2" opacity="0.85" stroke-linecap="round" />
+
+    <!-- Tower 2: Center-Left Tallest Tower (Vibrant Blue) -->
+    <path d="M 13 48 L 13 8 L 23 1 L 23 48 Z" fill="#1689CC" />
+    <line x1="18" y1="12" x2="18" y2="44" stroke="#FFFFFF" stroke-width="1.5" opacity="0.95" stroke-linecap="round" />
+    
+    <!-- Tower 3: Center-Right Tower (Navy) -->
+    <path d="M 25 48 L 25 12 L 35 19 L 35 48 Z" fill="#0F1E2E" />
+    <line x1="30" y1="22" x2="30" y2="44" stroke="#FFFFFF" stroke-width="1.2" opacity="0.85" stroke-linecap="round" />
+
+    <!-- Tower 4: Right Lower Tower (Vibrant Blue) -->
+    <path d="M 37 48 L 37 25 L 45 30 L 45 48 Z" fill="#1689CC" />
+    <line x1="41" y1="32" x2="41" y2="44" stroke="#FFFFFF" stroke-width="1.2" opacity="0.9" stroke-linecap="round" />
+
+    <!-- Base baseline accent -->
+    <rect x="0" y="48" width="47" height="2" fill="#0F1E2E" rx="1" />
+  </g>
+
+  <!-- Text Lockup -->
+  <!-- Line 1: DRL DWARIKA -->
+  <text x="56" y="21" class="logo-title">DRL DWARIKA</text>
+
+  <!-- Line 2: — REAL ESTATE LLC — -->
+  <line x1="57" y1="31.5" x2="72" y2="31.5" stroke="#1689CC" stroke-width="1.2" stroke-linecap="round" />
+  <text x="77" y="34" class="logo-sub">REAL ESTATE LLC</text>
+  <line x1="168" y1="31.5" x2="183" y2="31.5" stroke="#1689CC" stroke-width="1.2" stroke-linecap="round" />
+
+  <!-- Line 3: OPENING DOORS TO PROSPERITY -->
+  <text x="57" y="47" class="logo-tagline">OPENING DOORS TO PROSPERITY</text>
+</svg>

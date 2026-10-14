@@ -1,0 +1,190 @@
+<?php
+/**
+ * Homepage View — Exact Master Design Replication for DRL Dwarika Real Estate LLC
+ */
+?>
+
+<!-- 1. HERO SECTION -->
+<section class="hero-section">
+  <div class="container hero-container">
+    
+    <!-- Left Column: Hero Text & Trust Badges -->
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Opening Doors<br>
+        To Prosperity
+      </h1>
+      <p class="hero-subtitle">
+        Find your dream home with Dwarika Real Estate
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="/properties" class="btn-primary-pill" id="btnHeroExplore">
+          <span>Explore Properties</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="/contact-us" class="btn-outline-pill" id="btnHeroContact">
+          <span>Contact Us</span>
+        </a>
+      </div>
+
+      <!-- Trust Indicators Pill Badges -->
+      <div class="hero-trust-badges">
+        <div class="trust-badge-item">
+          <div class="trust-icon"><i class="fa-solid fa-user-shield"></i></div>
+          <div class="trust-text">
+            <strong>Trusted</strong>
+            <span>Real Estate Partner</span>
+          </div>
+        </div>
+
+        <div class="trust-badge-item">
+          <div class="trust-icon"><i class="fa-solid fa-city"></i></div>
+          <div class="trust-text">
+            <strong>Wide Range</strong>
+            <span>of Properties</span>
+          </div>
+        </div>
+
+        <div class="trust-badge-item">
+          <div class="trust-icon"><i class="fa-solid fa-handshake"></i></div>
+          <div class="trust-text">
+            <strong>Transparent</strong>
+            <span>&amp; Hassle-Free Deals</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Hero Real Estate Imagery -->
+    <div class="hero-media-wrap">
+      <div class="hero-image-card">
+        <img src="/assets/images/hero-building.jpg" alt="Luxury Dubai Residences - DRL Dwarika Real Estate" width="620" height="520" class="hero-img">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 2. QUICK PROPERTY SEARCH (Floating Overlapping Card) -->
+  <div class="container search-container-wrap">
+    <?php \App\Core\View::component('quick-search', [
+        'locations'     => $locations,
+        'propertyTypes' => $propertyTypes
+    ]); ?>
+  </div>
+</section>
+
+<!-- 3. OUR SERVICES SECTION -->
+<section class="services-section section-padding">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-badge">— OUR SERVICES —</span>
+      <h2 class="section-title">How We Can Help You</h2>
+    </div>
+
+    <div class="services-grid">
+      <?php foreach ($services as $service): ?>
+        <?php \App\Core\View::component('service-card', ['service' => $service]); ?>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+<!-- 4. FEATURED PROPERTIES SECTION -->
+<section class="featured-section section-padding surface-bg">
+  <div class="container">
+    <div class="featured-header-row">
+      <div class="header-left">
+        <span class="section-badge">— FEATURED PROPERTIES —</span>
+        <h2 class="section-title">Explore Our Best Properties</h2>
+        <p class="section-desc">Find the perfect property that matches your lifestyle and budget.</p>
+      </div>
+      <div class="header-right">
+        <a href="/properties" class="btn-primary-pill btn-view-all" id="btnViewAllProps">
+          <span>View All Properties</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Properties Grid -->
+    <div class="properties-grid">
+      <?php if (!empty($featuredProperties)): ?>
+        <?php foreach ($featuredProperties as $prop): ?>
+          <?php \App\Core\View::component('property-card', ['property' => $prop]); ?>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <p class="text-muted">No featured properties currently available. Check back soon!</p>
+      <?php endif; ?>
+    </div>
+  </div>
+</section>
+
+<!-- 5. ABOUT DWARIKA REAL ESTATE LLC SECTION -->
+<section class="about-section section-padding">
+  <div class="container about-container">
+    
+    <!-- Left Column: Dubai Skyline Image with Handwritten Sticker -->
+    <div class="about-media-col">
+      <div class="about-image-card">
+        <img src="/assets/images/burj-skyline.jpg" alt="Dubai Downtown Skyline - Burj Khalifa" width="560" height="380" class="about-img">
+        <div class="handwritten-sticker">
+          <span>Your Trusted<br>Real Estate Partner<br>in Dubai</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Story & Statistics -->
+    <div class="about-text-col">
+      <span class="section-badge">— ABOUT DWARIKA REAL ESTATE LLC —</span>
+      <h2 class="section-title">Building Dreams,<br>One Property at a Time</h2>
+      
+      <p class="about-paragraph">
+        Dwarika Real Estate LLC is a trusted real estate brokerage in Dubai, helping individuals and families find the perfect property. With a commitment to transparency, professionalism, and personalized service, we make your real estate journey smooth and successful.
+      </p>
+
+      <!-- 3 Statistic Counters -->
+      <div class="about-stats-row">
+        <div class="stat-card">
+          <div class="stat-number"><?= e($settings['stat_properties_sold'] ?? '100+') ?></div>
+          <div class="stat-label">Properties Sold</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card">
+          <div class="stat-number"><?= e($settings['stat_happy_clients'] ?? '50+') ?></div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card">
+          <div class="stat-number"><?= e($settings['stat_years_experience'] ?? '5+') ?></div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 6. WHAT OUR CLIENTS SAY (TESTIMONIALS) SECTION -->
+<section class="testimonials-section section-padding surface-bg">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-badge">— WHAT OUR CLIENTS SAY —</span>
+      <h2 class="section-title">Trusted by Many, Loved by All</h2>
+    </div>
+
+    <!-- Testimonials Grid -->
+    <div class="testimonials-grid" id="testimonialsTrack">
+      <?php foreach ($testimonials as $testimonial): ?>
+        <?php \App\Core\View::component('testimonial-card', ['testimonial' => $testimonial]); ?>
+      <?php endforeach; ?>
+    </div>
+
+    <!-- Carousel Indicator Dots -->
+    <div class="testimonial-carousel-dots" aria-hidden="true">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
