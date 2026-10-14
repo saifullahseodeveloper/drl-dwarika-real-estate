@@ -7,11 +7,11 @@ declare(strict_types=1);
  */
 return [
     'driver'    => getenv('DB_DRIVER') ?: 'mysql',
-    'host'      => getenv('DB_HOST') ?: '127.0.0.1',
+    'host'      => getenv('DB_HOST') ?: 'localhost',
     'port'      => (int)(getenv('DB_PORT') ?: 3306),
-    'database'  => getenv('DB_NAME') ?: 'dwarika_db',
-    'username'  => getenv('DB_USER') ?: 'root',
-    'password'  => getenv('DB_PASS') ?: '',
+    'database'  => getenv('DB_NAME') ?: 'u178516069_drl_estate',
+    'username'  => getenv('DB_USER') ?: 'u178516069_drl_admin',
+    'password'  => getenv('DB_PASS') ?: '8x#vP2!zQ9wL5mN',
     'charset'   => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
     
