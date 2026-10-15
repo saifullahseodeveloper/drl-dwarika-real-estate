@@ -40,18 +40,14 @@ if (!str_starts_with($ogImage, 'http')) {
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
 
-  <!-- DNS Prefetch & Preconnect for High-Speed Asset Handshake -->
-  <link rel="dns-prefetch" href="//fonts.googleapis.com">
-  <link rel="dns-prefetch" href="//fonts.gstatic.com">
-  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <!-- Preload Local WOFF2 Webfonts for Instant 0ms Paint -->
+  <link rel="preload" href="/assets/fonts/playfair-display.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
 
   <?php if (($activeNav ?? '') === 'home'): ?>
   <!-- Preload LCP Hero Image for Instant Mobile & Desktop Painting -->
-  <link rel="preload" as="image" href="/assets/images/hero-building-mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
-  <link rel="preload" as="image" href="/assets/images/hero-building.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/assets/images/hero-building-mobile-v3.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/assets/images/hero-building-v3.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
   <?php endif; ?>
 
   <!-- Inline Critical Above-The-Fold CSS for Instant 0ms Render-Blocking Paint -->
@@ -68,16 +64,6 @@ if (!str_starts_with($ogImage, 'http')) {
   <!-- AI Concierge Stylesheet (Non-blocking) -->
   <link rel="stylesheet" href="/assets/css/chatbot.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/assets/css/chatbot.css"></noscript>
-
-  <!-- Preload Primary Heading WOFF2 Font directly from CDN for Instant LCP Text Painting -->
-  <link rel="preload" href="https://fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKeiunDXbtM.woff2" as="font" type="font/woff2" crossorigin>
-
-  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans (Streamlined, Non-blocking) -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap">
-  </noscript>
 
   <!-- Font Awesome 6 (Non-blocking async load) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'">

@@ -292,33 +292,24 @@ function renderPage(title, content, activeNav = 'home', extraMeta = {}) {
   <link rel="icon" type="image/svg+xml" href="/assets/images/logo.svg">
   
   <!-- DNS Prefetch & Preconnect for High-Speed Connection Setup -->
-  <link rel="dns-prefetch" href="//fonts.googleapis.com">
-  <link rel="dns-prefetch" href="//fonts.gstatic.com">
-  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <!-- Preload Local WOFF2 Webfonts for Instant 0ms Paint -->
+  <link rel="preload" href="/assets/fonts/playfair-display.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
 
   ${activeNav === 'home' ? `
   <!-- Preload LCP Hero Image for Instant Mobile & Desktop Painting -->
-  <link rel="preload" as="image" href="/assets/images/hero-building-mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
-  <link rel="preload" as="image" href="/assets/images/hero-building.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/assets/images/hero-building-mobile-v3.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/assets/images/hero-building-v3.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
   ` : ''}
 
-  <!-- Core Minified Stylesheet & Noor AI Concierge CSS -->
-  <link rel="preload" as="style" href="/assets/css/styles.min.css">
-  <link rel="stylesheet" href="/assets/css/styles.min.css">
-  <link rel="stylesheet" href="/assets/css/chatbot.css">
-
-  <!-- Non-blocking Google Fonts -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap">
-  </noscript>
+  <!-- Inlined Critical CSS -->
+  <style id="critical-css">${fs.existsSync(path.join(PUBLIC_DIR, 'assets', 'css', 'critical.min.css')) ? fs.readFileSync(path.join(PUBLIC_DIR, 'assets', 'css', 'critical.min.css'), 'utf8') : ''}</style>
+  <link rel="stylesheet" href="/assets/css/styles.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/css/styles.min.css"></noscript>
+  <link rel="stylesheet" href="/assets/css/chatbot.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/css/chatbot.css"></noscript>
 
   <!-- Non-blocking Font Awesome 6 -->
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'">
   <noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -646,6 +637,52 @@ const server = http.createServer((req, res) => {
     xml += `</urlset>`;
     res.writeHead(200, { 'Content-Type': 'application/xml; charset=utf-8' });
     return res.end(xml);
+  }
+
+  // 2.5 Live AI Concierge Knowledge Base API (Real-Time Synchronized)
+  if (pathname === '/api/chatbot-knowledge') {
+    const db = getDB();
+    const publishedProps = db.properties.filter(p => p.status === 'published').map(p => {
+      const loc = db.locations.find(l => l.id == p.location_id) || {};
+      const type = db.property_types.find(t => t.id == p.property_type_id) || {};
+      return {
+        id: p.id,
+        title: p.title,
+        slug: p.slug,
+        reference_code: p.reference_code,
+        price: p.price,
+        priceFormatted: `${p.currency || 'AED'} ${Number(p.price).toLocaleString()}`,
+        currency: p.currency || 'AED',
+        bedrooms: p.bedrooms,
+        bathrooms: p.bathrooms,
+        area_sqft: p.area_sqft,
+        listing_type: p.listing_type,
+        category: (type.slug || 'residential').toLowerCase(),
+        typeName: type.name || 'Property',
+        location: loc.name || 'Dubai',
+        locationSlug: loc.slug || 'dubai',
+        address: p.address,
+        featured_image: p.featured_image,
+        badge: p.is_featured ? 'Featured' : (p.listing_type === 'off-plan' ? 'Off-Plan' : 'Verified'),
+        rera_permit: p.rera_permit || 'DLD-VERIFIED',
+        description: p.description
+      };
+    });
+
+    res.writeHead(200, {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    });
+    return res.end(JSON.stringify({
+      success: true,
+      updated_at: new Date().toISOString(),
+      properties: publishedProps,
+      locations: db.locations,
+      services: db.services,
+      settings: db.settings
+    }));
   }
 
   // Helper to read POST body (supports JSON & URL-encoded)

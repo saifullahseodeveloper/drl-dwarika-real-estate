@@ -418,6 +418,32 @@
   ],
   "enquiries": [
     {
+      "id": 10,
+      "property_id": null,
+      "property_title": "",
+      "service_id": null,
+      "name": "Qwe",
+      "email": "qwe@lead.dwarika.ae",
+      "phone": "+91 1234567890",
+      "subject": "AI Concierge Qualified Lead (Noor AI)",
+      "message": "User verified contact during Noor AI Concierge chat on website.",
+      "status": "new",
+      "created_at": "2026-10-15T14:11:30.266Z"
+    },
+    {
+      "id": 9,
+      "property_id": null,
+      "property_title": "",
+      "service_id": null,
+      "name": "Vikram Malhotra",
+      "email": "",
+      "phone": "+91 9876543210",
+      "subject": "AI Concierge Lead (Noor AI)",
+      "message": "User verified contact during Noor AI Concierge chat on website.",
+      "status": "new",
+      "created_at": "2026-10-15T14:10:39.067Z"
+    },
+    {
       "id": 8,
       "property_id": null,
       "property_title": "",

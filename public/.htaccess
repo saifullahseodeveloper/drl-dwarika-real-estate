@@ -47,6 +47,10 @@
 
 # Cache-Control & Security Headers
 <IfModule mod_headers.c>
+    <FilesMatch "\.(woff2?|ttf|eot|otf)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+
     <FilesMatch "\.(ico|jpe?g|png|gif|webp|svg|css|js|woff2?|ttf|eot)$">
         Header set Cache-Control "max-age=31536000, public, immutable"
     </FilesMatch>

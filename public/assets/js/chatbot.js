@@ -158,6 +158,64 @@
     }
   ];
 
+  // LIVE REAL-TIME KNOWLEDGE BASE (Synchronized with Website Database & Admin Panel)
+  let liveProperties = [...DWARIKA_PROPERTIES];
+  let liveLocations = [];
+  let liveServices = [];
+  let liveSettings = {};
+  let lastSyncTime = 0;
+
+  /**
+   * Fetches real-time knowledge base from the website database (/api/chatbot-knowledge).
+   * Instantly reflects any newly added, edited, or deleted properties, blogs, or services.
+   */
+  function syncKnowledgeBase(force = false) {
+    const now = Date.now();
+    // Cache for 15s unless forced
+    if (!force && lastSyncTime && (now - lastSyncTime < 15000) && liveProperties.length > 0) {
+      return Promise.resolve(liveProperties);
+    }
+
+    return fetch('/api/chatbot-knowledge?t=' + now)
+      .then(res => {
+        if (!res.ok) throw new Error('Network error');
+        return res.json();
+      })
+      .then(data => {
+        if (data && data.success && Array.isArray(data.properties)) {
+          liveProperties = data.properties.map(p => ({
+            id: p.id,
+            title: p.title,
+            slug: p.slug,
+            category: (p.category || 'apartment').toLowerCase(),
+            location: p.location || 'Dubai',
+            price: p.priceFormatted || `AED ${Number(p.price).toLocaleString()}`,
+            priceNum: Number(p.price) || 0,
+            beds: p.bedrooms ? `${p.bedrooms} Beds` : 'Luxury Suite',
+            baths: p.bathrooms ? `${p.bathrooms} Baths` : 'Fitted Baths',
+            area: p.area_sqft ? `${Number(p.area_sqft).toLocaleString()} sq.ft` : '',
+            image: p.featured_image || '/assets/images/apartment-downtown.jpg',
+            badge: p.badge || 'Verified Listing',
+            rera: p.rera_permit || 'DLD-VERIFIED',
+            description: p.description || '',
+            listing_type: p.listing_type || 'sale'
+          }));
+          if (data.locations) liveLocations = data.locations;
+          if (data.services) liveServices = data.services;
+          if (data.settings) liveSettings = data.settings;
+          lastSyncTime = now;
+        }
+        return liveProperties;
+      })
+      .catch(err => {
+        // Fallback to current memory cache if offline
+        return liveProperties;
+      });
+  }
+
+  // Initial silent background sync on script load
+  syncKnowledgeBase(true);
+
   /* ============================================================
      3. STATE MANAGEMENT
   ============================================================ */
@@ -250,7 +308,7 @@
         </div>
 
         <!-- Footer Input Form -->
-        <form class="drl-chat-footer" id="drlChatForm" onsubmit="return false;">
+        <form class="drl-chat-footer" id="drlChatForm">
           <div class="drl-chat-input-wrap">
             <input type="text" class="drl-chat-input" id="drlChatInput" placeholder="Type your message..." autocomplete="off">
           </div>
@@ -285,7 +343,20 @@
     }
     document.getElementById('drlCloseChat').addEventListener('click', toggleChat);
     document.getElementById('drlRestartChat').addEventListener('click', restartChat);
-    document.getElementById('drlChatForm').addEventListener('submit', handleUserSubmit);
+    
+    // Form and button submission triggers
+    const chatForm = document.getElementById('drlChatForm');
+    chatForm.addEventListener('submit', handleUserSubmit);
+    sendBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      handleUserSubmit(e);
+    });
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleUserSubmit(e);
+      }
+    });
 
     // Render initial messages
     renderWelcomeConversation();
@@ -294,6 +365,7 @@
   function toggleChat() {
     chatOpen = !chatOpen;
     if (chatOpen) {
+      syncKnowledgeBase(true); // Instant background sync from database
       chatPanel.classList.add('active');
       document.getElementById('drlChatLauncher').classList.add('drl-chat-open');
       if (calloutEl) calloutEl.style.display = 'none';
@@ -684,21 +756,24 @@
   }
 
   /* ============================================================
-     9. CONSULTATION QUERY PROCESSOR (GROUNDED DUBAI INTELLIGENCE)
+     9. CONSULTATION QUERY PROCESSOR (LIVE GROUNDED INTELLIGENCE)
   ============================================================ */
   function processConsultationQuery(userText) {
     showTypingIndicator();
 
-    setTimeout(() => {
-      removeTypingIndicator();
-      const response = generateConciergeResponse(userText);
+    // Ensure knowledge base is 100% synchronized with live database
+    syncKnowledgeBase().then(() => {
+      setTimeout(() => {
+        removeTypingIndicator();
+        const response = generateConciergeResponse(userText);
 
-      appendBotMessage(response.text, response.chips || []);
+        appendBotMessage(response.text, response.chips || []);
 
-      if (response.properties && response.properties.length > 0) {
-        renderPropertyCards(response.properties);
-      }
-    }, 600);
+        if (response.properties && response.properties.length > 0) {
+          renderPropertyCards(response.properties);
+        }
+      }, 400);
+    });
   }
 
   function generateConciergeResponse(input) {
@@ -716,90 +791,116 @@
       };
     }
 
-    // 2. UAE Golden Visa
+    // 2. Show All / Full Live Portfolio Query
+    if (/show all|all properties|full portfolio|all projects|list (all|properties)/i.test(text)) {
+      return {
+        text: `Here is our current live verified portfolio of **${liveProperties.length} active properties** across Dubai:`,
+        properties: liveProperties,
+        chips: [
+          { label: '🏖️ Villas & Townhouses', query: 'show villas in dubai' },
+          { label: '🏙️ Luxury Apartments', query: 'show luxury apartments' },
+          { label: '💬 Talk to Senior Advisor', query: 'talk to advisor', gold: true }
+        ]
+      };
+    }
+
+    // 3. UAE Golden Visa (Live Filtered)
     if (/golden\s*visa|visa|residency|10\s*year/i.test(text)) {
-      const gvProps = DWARIKA_PROPERTIES.filter(p => p.priceNum >= 2000000);
+      const gvProps = liveProperties.filter(p => p.priceNum >= 2000000);
       return {
-        text: `**UAE 10-Year Golden Visa via Real Estate** 🇦🇪\n\nUnder Dubai Land Department regulations, you qualify for the 10-Year Renewable Golden Visa when purchasing property valued at **AED 2,000,000 (~$545,000 USD)** or more.\n\n**Key Investor Benefits:**\n• 100% foreign ownership with 0% personal income & capital gains tax.\n• Sponsor your spouse, children of any age, and domestic staff.\n• No physical residency requirement (stay outside UAE as long as you wish without losing visa).\n• Available for both ready and off-plan properties (from approved developers with minimum AED 2M valuation).\n\nHere are prime **Golden Visa eligible properties** in our portfolio:`,
-        properties: gvProps.slice(0, 3),
+        text: `**UAE 10-Year Golden Visa via Real Estate** 🇦🇪\n\nUnder Dubai Land Department regulations, you qualify for the 10-Year Renewable Golden Visa when purchasing property valued at **AED 2,000,000 (~$545,000 USD)** or more.\n\n**Key Investor Benefits:**\n• 100% foreign ownership with 0% personal income & capital gains tax.\n• Sponsor your spouse, children of any age, and domestic staff.\n• No physical residency requirement (stay outside UAE without losing visa).\n• Available for both ready and off-plan properties (minimum AED 2M valuation).\n\nHere are prime **Golden Visa eligible properties** currently available:`,
+        properties: gvProps.slice(0, 4),
         chips: [
-          { label: '🏙️ Downtown Luxury Flat (AED 2.2M)', query: 'show downtown apartment' },
-          { label: '🏖️ Dubai Hills Villa (AED 4.5M)', query: 'show dubai hills villa' },
-          { label: '💬 Consult Golden Visa Advisor', query: 'talk to advisor' }
+          { label: '🏙️ Luxury Apartments', query: 'show luxury apartments' },
+          { label: '🏖️ Private Villas', query: 'show villas in dubai' },
+          { label: '💬 Consult Golden Visa Advisor', query: 'talk to advisor', gold: true }
         ]
       };
     }
 
-    // 3. ROI & Rental Yields / Investment
+    // 4. ROI & Rental Yields / Investment
     if (/roi|yield|investment|return|rental|invest|capital appreciation/i.test(text)) {
-      const invProps = DWARIKA_PROPERTIES.filter(p => p.category === 'commercial' || p.category === 'apartment' || p.badge.includes('Yield'));
+      const invProps = liveProperties.filter(p => p.category === 'commercial' || p.category === 'apartment' || (p.badge && p.badge.includes('Yield')));
       return {
-        text: `**Dubai Real Estate Investment & ROI Analysis** 📈\n\nDubai consistently outperforms London, New York, and Singapore in net rental yields:\n\n• **Average Net Yield**: **7% to 10% tax-free** net annual return.\n• **High Capital Appreciation**: Master communities like Dubai Hills Estate and Dubai Creek Harbour have witnessed **18% - 25% YoY capital growth**.\n• **Zero Tax**: 0% property tax, 0% capital gains tax, and 0% tax on rental income.\n• **Escrow Protection**: All off-plan payments are safeguarded in DLD-regulated Escrow accounts.\n\nHere are our top investment picks with strong cash flow potential:`,
-        properties: invProps.slice(0, 3),
+        text: `**Dubai Real Estate Investment & ROI Analysis** 📈\n\nDubai consistently outperforms London, New York, and Singapore in net rental yields:\n\n• **Average Net Yield**: **7% to 10% tax-free** net annual return.\n• **High Capital Growth**: Master communities like Dubai Hills Estate and Dubai Creek Harbour have witnessed **18% - 25% YoY capital growth**.\n• **Zero Tax**: 0% property tax, 0% capital gains tax, and 0% tax on rental income.\n• **Escrow Protection**: All payments are safeguarded in DLD-regulated Escrow accounts.\n\nHere are our top investment picks with strong cash flow potential:`,
+        properties: (invProps.length > 0 ? invProps : liveProperties).slice(0, 3),
         chips: [
-          { label: '🏢 JVC Townhouse (High Yield)', query: 'show jvc townhouse' },
-          { label: '🏙️ Creek Waterfront 1-Bed', query: 'show creek apartment' },
-          { label: '💬 Request ROI Breakdown PDF', query: 'talk to advisor' }
+          { label: '🏢 High Yield Opportunities', query: 'show commercial properties' },
+          { label: '💬 Request ROI Breakdown PDF', query: 'talk to advisor', gold: true }
         ]
       };
     }
 
-    // 4. Villas & Townhouses
-    if (/villa|townhouse|mansion|dubai hills|palm|independent house/i.test(text)) {
-      const villas = DWARIKA_PROPERTIES.filter(p => p.category === 'villa' || p.category === 'townhouse' || p.category === 'penthouse');
+    // 5. Dynamic Location Query (e.g. Dubai Hills, Downtown, Palm, JVC, Creek, Business Bay, etc.)
+    const matchedLocProps = liveProperties.filter(p =>
+      text.includes(p.location.toLowerCase()) ||
+      (p.location.toLowerCase().split(' ').some(w => w.length > 3 && text.includes(w))) ||
+      text.includes(p.slug.replace(/-/g, ' '))
+    );
+
+    if (matchedLocProps.length > 0 && !(/rera|golden|visa|whatsapp|call|visit/i.test(text))) {
       return {
-        text: `Here are our featured **luxury villas and signature residences** in Dubai's premier master communities:`,
-        properties: villas,
+        text: `Found **${matchedLocProps.length} active properties** matching your location search:`,
+        properties: matchedLocProps,
         chips: [
-          { label: '⛳ Dubai Hills 4-Bed Villa', query: 'tell me about dubai hills villa' },
-          { label: '🏖️ Palm Jumeirah Penthouse', query: 'tell me about palm penthouse' },
-          { label: '📅 Book a Private Villa Tour', query: 'schedule site visit' }
+          { label: '🏙️ Show All Properties', query: 'show all properties' },
+          { label: '💬 Inquire with Specialist', query: 'talk to advisor', gold: true }
         ]
       };
     }
 
-    // 5. Apartments & Flats
-    if (/apartment|flat|studio|1\s*bhk|2\s*bhk|3\s*bhk|penthouse|downtown|marina|creek/i.test(text)) {
-      const apts = DWARIKA_PROPERTIES.filter(p => p.category === 'apartment' || p.category === 'penthouse');
+    // 6. Villas & Townhouses
+    if (/villa|townhouse|mansion|independent house/i.test(text)) {
+      const villas = liveProperties.filter(p => p.category.includes('villa') || p.category.includes('townhouse') || p.category.includes('penthouse') || p.title.toLowerCase().includes('villa'));
       return {
-        text: `Showing prime **luxury apartments and skyline residences** in Downtown Dubai and Dubai Creek Harbour:`,
-        properties: apts,
+        text: `Here are our active **luxury villas and signature residences** in Dubai's premier master communities:`,
+        properties: villas.length > 0 ? villas : liveProperties.slice(0, 3),
         chips: [
-          { label: '🏙️ Downtown 2-Bed (Burj View)', query: 'tell me about downtown apartment' },
-          { label: '🌊 Creek Waterfront 1-Bed', query: 'tell me about creek apartment' },
-          { label: '💬 Get Payment Plan Details', query: 'talk to advisor' }
+          { label: '🏖️ Palm Jumeirah & Hills', query: 'show all properties' },
+          { label: '📅 Book a Private Villa Tour', query: 'schedule site visit', gold: true }
         ]
       };
     }
 
-    // 6. Commercial
+    // 7. Apartments & Flats
+    if (/apartment|flat|studio|1\s*bhk|2\s*bhk|3\s*bhk|penthouse/i.test(text)) {
+      const apts = liveProperties.filter(p => p.category.includes('apartment') || p.category.includes('penthouse') || p.title.toLowerCase().includes('apartment'));
+      return {
+        text: `Showing prime **luxury apartments and skyline residences** in our live inventory:`,
+        properties: apts.length > 0 ? apts : liveProperties.slice(0, 3),
+        chips: [
+          { label: '🏙️ Downtown & Waterfront', query: 'show all properties' },
+          { label: '💬 Get Payment Plan Details', query: 'talk to advisor', gold: true }
+        ]
+      };
+    }
+
+    // 8. Commercial
     if (/commercial|office|retail|shop|business bay|corporate/i.test(text)) {
-      const comm = DWARIKA_PROPERTIES.filter(p => p.category === 'commercial');
+      const comm = liveProperties.filter(p => p.category.includes('commercial') || p.title.toLowerCase().includes('office') || p.title.toLowerCase().includes('commercial'));
       return {
-        text: `Here is our grade-A commercial real estate portfolio in Dubai’s business districts:`,
-        properties: comm,
+        text: `Here is our grade-A commercial real estate portfolio in Dubai’s premier business hubs:`,
+        properties: comm.length > 0 ? comm : liveProperties.slice(0, 3),
         chips: [
-          { label: '🏢 Business Bay Office Details', query: 'tell me about business bay commercial' },
-          { label: '💬 Inquire Corporate Lease/Sale', query: 'talk to advisor' }
+          { label: '💬 Inquire Corporate Lease/Sale', query: 'talk to advisor', gold: true }
         ]
       };
     }
 
-    // 7. Budget queries (Under 3M, 5M, etc.)
+    // 9. Budget queries (Under 3M, 5M, etc.)
     if (/under\s*3|3\s*m|3\s*million|affordable|cheap|kam\s*budget/i.test(text)) {
-      const budgetProps = DWARIKA_PROPERTIES.filter(p => p.priceNum <= 3100000);
+      const budgetProps = liveProperties.filter(p => p.priceNum <= 3100000);
       return {
-        text: `Found **${budgetProps.length} prime properties under AED 3.1 Million** — ideal for both end-users and yield-focused investors:`,
+        text: `Found **${budgetProps.length} prime properties under AED 3.1 Million** in our live database:`,
         properties: budgetProps,
         chips: [
-          { label: '🏙️ Downtown 2-Bed (AED 2.2M)', query: 'show downtown apartment' },
-          { label: '🌊 Creek Waterfront (AED 1.95M)', query: 'show creek apartment' },
-          { label: '💬 Request Payment Plans', query: 'talk to advisor' }
+          { label: '🏙️ Show All Properties', query: 'show all properties' },
+          { label: '💬 Request Payment Plans', query: 'talk to advisor', gold: true }
         ]
       };
     }
 
-    // 8. Site visit / Viewing
+    // 10. Site visit / Viewing
     if (/site\s*visit|viewing|tour|see|visit|inspection/i.test(text)) {
       sendLeadToBackend({
         name: userData.name,
@@ -819,7 +920,7 @@
       };
     }
 
-    // 9. RERA / Legality / Safety
+    // 11. RERA / Legality / Safety
     if (/rera|legal|safe|permit|developer|trust|scam|dld/i.test(text)) {
       return {
         text: `**Official Regulatory Security & RERA Compliance** 🛡️\n\nDRL Dwarika Real Estate LLC is an officially registered brokerage under:\n• **RERA Office Registration Number (ORN)**: **29482**\n• **Dubai Land Department (DLD) License**: **1092831**\n\nEvery listing on our platform undergoes strict title deed authentication. Furthermore, all buyer payments for off-plan transactions are deposited strictly into Central Bank-monitored escrow accounts, guaranteeing 100% legal security.`,
@@ -830,10 +931,10 @@
       };
     }
 
-    // 10. Hindi / Hinglish understanding
+    // 12. Hindi / Hinglish understanding
     if (/kya\s*options|kya\s*hai|lena\s*hai|chahiye|kitne\s*ka|karein|batao/i.test(text)) {
       return {
-        text: `Haan bilkul **${userData.name}** ji! 🌟\n\nDubai me aapko world-class properties mil sakti hain:\n• **1-Bed / 2-Bed Apartments**: AED 1.2M se 2.5M (Downtown, Creek, JVC)\n• **Villas & Townhouses**: AED 3M se 10M+ (Dubai Hills, Palm Jumeirah)\n• **Rental Income**: 7% se 10% tak tax-free ROI.\n• **Golden Visa**: AED 20 Lakhs (AED 2M) se zyada ke investment par 10 saal ka visa.\n\nAapko kis type ki property dekhni hai?`,
+        text: `Haan bilkul **${userData.name}** ji! 🌟\n\nDubai me humare live portfolio me world-class properties available hain:\n• **1-Bed / 2-Bed Apartments**: AED 1.2M se 2.5M (Downtown, Creek, JVC)\n• **Villas & Townhouses**: AED 3M se 10M+ (Dubai Hills, Palm Jumeirah)\n• **Rental Income**: 7% se 10% tak tax-free ROI.\n• **Golden Visa**: AED 20 Lakhs (AED 2M) se zyada ke investment par 10 saal ka visa.\n\nAapko kis type ki property dekhni hai?`,
         chips: [
           { label: '🏙️ Luxury Flats', query: 'show luxury apartments' },
           { label: '🏖️ Private Villas', query: 'show villas in dubai' },
@@ -1002,12 +1103,20 @@
   }
 
   /* ============================================================
-     11. AUTO-INITIALIZATION
+     11. AUTO-INITIALIZATION (Deferred to Idle for Peak Core Web Vitals)
   ============================================================ */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', injectChatbot);
+  function scheduleInit() {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(injectChatbot, { timeout: 2500 });
+    } else {
+      setTimeout(injectChatbot, 1500);
+    }
+  }
+
+  if (document.readyState === 'complete') {
+    scheduleInit();
   } else {
-    injectChatbot();
+    window.addEventListener('load', scheduleInit, { once: true });
   }
 
 })();

@@ -87,6 +87,9 @@ $router->get('/property-types/{slug}', 'Frontend\\PropertyTypeController@show');
 // Enquiries
 $router->post('/enquiry/submit', 'Frontend\\LeadController@submit');
 
+// Live AI Concierge Knowledge Base API
+$router->get('/api/chatbot-knowledge', 'Frontend\\ApiController@chatbotKnowledge');
+
 // Technical SEO
 $router->get('/sitemap.xml', 'Frontend\\SeoController@sitemap');
 $router->get('/robots.txt', 'Frontend\\SeoController@robots');

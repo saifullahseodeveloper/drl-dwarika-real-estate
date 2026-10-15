@@ -21,7 +21,7 @@
       <div class="hero-cta-group">
         <a href="/properties" class="btn-primary-pill" id="btnHeroExplore">
           <span>Explore Properties</span>
-          <i class="fa-solid fa-arrow-right"></i>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
         <a href="/contact-us" class="btn-outline-pill" id="btnHeroContact">
           <span>Contact Us</span>
@@ -31,7 +31,9 @@
       <!-- Trust Indicators Pill Badges -->
       <div class="hero-trust-badges">
         <div class="trust-badge-item">
-          <div class="trust-icon"><i class="fa-solid fa-user-shield"></i></div>
+          <div class="trust-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
           <div class="trust-text">
             <strong>Trusted</strong>
             <span>Real Estate Partner</span>
@@ -39,7 +41,9 @@
         </div>
 
         <div class="trust-badge-item">
-          <div class="trust-icon"><i class="fa-solid fa-city"></i></div>
+          <div class="trust-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="2"></line><line x1="8" y1="6" x2="8.01" y2="6"></line><line x1="16" y1="6" x2="16.01" y2="6"></line><line x1="8" y1="10" x2="8.01" y2="10"></line><line x1="16" y1="10" x2="16.01" y2="10"></line><line x1="8" y1="14" x2="8.01" y2="14"></line><line x1="16" y1="14" x2="16.01" y2="14"></line><line x1="8" y1="18" x2="8.01" y2="18"></line><line x1="16" y1="18" x2="16.01" y2="18"></line></svg>
+          </div>
           <div class="trust-text">
             <strong>Wide Range</strong>
             <span>of Properties</span>
@@ -47,7 +51,9 @@
         </div>
 
         <div class="trust-badge-item">
-          <div class="trust-icon"><i class="fa-solid fa-handshake"></i></div>
+          <div class="trust-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+          </div>
           <div class="trust-text">
             <strong>Transparent</strong>
             <span>&amp; Hassle-Free Deals</span>
@@ -60,9 +66,9 @@
     <div class="hero-media-wrap">
       <div class="hero-image-card">
         <picture>
-          <source media="(max-width: 768px)" srcset="/assets/images/hero-building-mobile.webp" type="image/webp">
-          <source media="(min-width: 769px)" srcset="/assets/images/hero-building.webp" type="image/webp">
-          <img src="/assets/images/hero-building.jpg" alt="Luxury Dubai Residences - DRL Dwarika Real Estate" width="620" height="520" class="hero-img" fetchpriority="high" decoding="async">
+          <source media="(max-width: 768px)" srcset="/assets/images/hero-building-mobile-v3.webp" type="image/webp">
+          <source media="(min-width: 769px)" srcset="/assets/images/hero-building-v3.webp" type="image/webp">
+          <img src="/assets/images/hero-building-mobile-v3.webp" alt="Luxury Dubai Residences - DRL Dwarika Real Estate" width="480" height="360" class="hero-img" fetchpriority="high" decoding="async">
         </picture>
       </div>
     </div>
