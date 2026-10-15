@@ -418,6 +418,19 @@
   ],
   "enquiries": [
     {
+      "id": 8,
+      "property_id": null,
+      "property_title": "",
+      "service_id": null,
+      "name": "Saif",
+      "email": "saif@lead.dwarika.ae",
+      "phone": "+91 8840432382",
+      "subject": "AI Concierge Qualified Lead (Noor AI)",
+      "message": "User verified contact during Noor AI Concierge chat on website.",
+      "status": "new",
+      "created_at": "2026-10-15T13:49:57.284Z"
+    },
+    {
       "id": 7,
       "property_id": null,
       "property_title": "",

@@ -606,6 +606,17 @@ ul, ol {
   transform: scale(1.02);
 }
 
+@media (max-width: 768px) {
+  .hero-img {
+    height: 320px;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+  .hero-image-card::before {
+    display: none !important;
+  }
+}
+
 /* ====================================================================
    QUICK PROPERTY SEARCH FLOATING PANEL
    ==================================================================== */

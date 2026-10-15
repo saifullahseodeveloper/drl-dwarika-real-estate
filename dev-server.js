@@ -305,9 +305,10 @@ function renderPage(title, content, activeNav = 'home', extraMeta = {}) {
   <link rel="preload" as="image" href="/assets/images/hero-building.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
   ` : ''}
 
-  <!-- Core Minified Stylesheet -->
+  <!-- Core Minified Stylesheet & Noor AI Concierge CSS -->
   <link rel="preload" as="style" href="/assets/css/styles.min.css">
   <link rel="stylesheet" href="/assets/css/styles.min.css">
+  <link rel="stylesheet" href="/assets/css/chatbot.css">
 
   <!-- Non-blocking Google Fonts -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap">
@@ -503,6 +504,8 @@ function renderPage(title, content, activeNav = 'home', extraMeta = {}) {
 
   <!-- Core JavaScript (Minified & Deferred) -->
   <script src="/assets/js/app.min.js" defer></script>
+  <!-- Noor AI Luxury Property Concierge Script -->
+  <script src="/assets/js/chatbot.js" defer></script>
 </body>
 </html>`;
 }
@@ -645,11 +648,21 @@ const server = http.createServer((req, res) => {
     return res.end(xml);
   }
 
-  // Helper to read POST body
+  // Helper to read POST body (supports JSON & URL-encoded)
   function parseBody(cb) {
     let body = '';
     req.on('data', chunk => body += chunk);
-    req.on('end', () => cb(querystring.parse(body)));
+    req.on('end', () => {
+      const ctype = req.headers['content-type'] || '';
+      if (ctype.includes('application/json')) {
+        try {
+          return cb(JSON.parse(body));
+        } catch (e) {
+          return cb({});
+        }
+      }
+      cb(querystring.parse(body));
+    });
   }
 
   // 3. Lead Inquiry Form Submission (POST)
