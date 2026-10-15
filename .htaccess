@@ -1,5 +1,16 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    RewriteBase /
+
+    # 1. Force HTTPS & Canonical Non-WWW domain in 1 single 301 hop (Avoids redirect chains)
+    RewriteCond %{HTTPS} off [OR]
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ https://dwarikarealestate.ae/$1 [R=301,L]
+
+    # 2. Cleanly route into public directory
+    RewriteCond %{REQUEST_URI} !^/public/
     RewriteRule ^$ public/ [L]
-    RewriteRule (.*) public/$1 [L]
+
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
