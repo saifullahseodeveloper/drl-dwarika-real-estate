@@ -40,16 +40,46 @@ if (!str_starts_with($ogImage, 'http')) {
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
 
-  <!-- Google Fonts: Playfair Display (Serif Headings) & Plus Jakarta Sans (Clean Modern Body) -->
+  <!-- DNS Prefetch & Preconnect for High-Speed Asset Handshake -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
-  <!-- Font Awesome 6 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <?php if (($activeNav ?? '') === 'home'): ?>
+  <!-- Preload LCP Hero Image for Instant Mobile & Desktop Painting -->
+  <link rel="preload" as="image" href="/assets/images/hero-building-mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/assets/images/hero-building.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+  <?php endif; ?>
 
-  <!-- Core Stylesheet -->
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <!-- Inline Critical Above-The-Fold CSS for Instant 0ms Render-Blocking Paint -->
+  <?php 
+  $criticalCssPath = (defined('APP_ROOT') ? APP_ROOT : dirname(__DIR__, 2)) . '/public/assets/css/critical.min.css';
+  if (file_exists($criticalCssPath)): ?>
+    <style id="critical-css"><?= file_get_contents($criticalCssPath) ?></style>
+    <link rel="preload" as="style" href="/assets/css/styles.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/assets/css/styles.min.css"></noscript>
+  <?php else: ?>
+    <link rel="preload" as="style" href="/assets/css/styles.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css">
+  <?php endif; ?>
+
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans (Non-blocking async load) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap">
+  </noscript>
+
+  <!-- Font Awesome 6 (Non-blocking async load) -->
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  </noscript>
 
   <!-- JSON-LD Structured Data: Organization & RealEstateAgent -->
   <script type="application/ld+json">
@@ -119,7 +149,7 @@ if (!str_starts_with($ogImage, 'http')) {
   <!-- Site Footer -->
   <?php \App\Core\View::component('footer', ['settings' => $settings]); ?>
 
-  <!-- Core JavaScript -->
-  <script src="/assets/js/app.js"></script>
+  <!-- Core JavaScript (Minified & Deferred) -->
+  <script src="/assets/js/app.min.js" defer></script>
 </body>
 </html>

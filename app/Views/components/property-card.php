@@ -9,6 +9,7 @@ $badgeText = match($property['listing_type']) {
     default      => 'For Sale'
 };
 $image = !empty($property['featured_image']) ? $property['featured_image'] : '/assets/images/villa-dubai-hills.jpg';
+$webpImage = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $image);
 $beds = (int)($property['bedrooms'] ?? 0);
 $baths = (int)($property['bathrooms'] ?? 0);
 $locationName = $property['location_name'] ?? 'Dubai, UAE';
@@ -17,7 +18,10 @@ $locationName = $property['location_name'] ?? 'Dubai, UAE';
   <!-- Card Media -->
   <div class="property-card-media">
     <a href="/property/<?= e($property['slug']) ?>" class="property-card-link" aria-label="<?= e($property['title']) ?>">
-      <img src="<?= e($image) ?>" alt="<?= e($property['title']) ?>" loading="lazy" width="380" height="240" class="property-card-img">
+      <picture>
+        <source srcset="<?= e($webpImage) ?>" type="image/webp">
+        <img src="<?= e($image) ?>" alt="<?= e($property['title']) ?>" loading="lazy" decoding="async" width="380" height="240" class="property-card-img">
+      </picture>
     </a>
     <span class="property-badge"><?= e($badgeText) ?></span>
   </div>

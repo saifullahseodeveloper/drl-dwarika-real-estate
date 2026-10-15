@@ -59,7 +59,11 @@
     <!-- Right Column: Hero Real Estate Imagery -->
     <div class="hero-media-wrap">
       <div class="hero-image-card">
-        <img src="/assets/images/hero-building.jpg" alt="Luxury Dubai Residences - DRL Dwarika Real Estate" width="620" height="520" class="hero-img">
+        <picture>
+          <source media="(max-width: 768px)" srcset="/assets/images/hero-building-mobile.webp" type="image/webp">
+          <source media="(min-width: 769px)" srcset="/assets/images/hero-building.webp" type="image/webp">
+          <img src="/assets/images/hero-building.jpg" alt="Luxury Dubai Residences - DRL Dwarika Real Estate" width="620" height="520" class="hero-img" fetchpriority="high" decoding="async">
+        </picture>
       </div>
     </div>
 
@@ -127,7 +131,10 @@
     <!-- Left Column: Dubai Skyline Image with Handwritten Sticker -->
     <div class="about-media-col">
       <div class="about-image-card">
-        <img src="/assets/images/burj-skyline.jpg" alt="Dubai Downtown Skyline - Burj Khalifa" width="560" height="380" class="about-img">
+        <picture>
+          <source srcset="/assets/images/burj-skyline.webp" type="image/webp">
+          <img src="/assets/images/burj-skyline.jpg" alt="Dubai Downtown Skyline - Burj Khalifa" width="560" height="380" class="about-img" loading="lazy" decoding="async">
+        </picture>
         <div class="handwritten-sticker">
           <span>Your Trusted<br>Real Estate Partner<br>in Dubai</span>
         </div>

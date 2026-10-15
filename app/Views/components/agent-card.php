@@ -10,6 +10,7 @@ $cleanPhone = preg_replace('/[^0-9+]/', '', $phone);
 $whatsapp = $agent['whatsapp'] ?? '971501234567';
 $email = $agent['email'] ?? 'info@dwarikarealestate.ae';
 $photo = !empty($agent['photo_url']) ? $agent['photo_url'] : '/assets/images/agents/omar-farooq.jpg';
+$webpPhoto = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $photo);
 $rera = $agent['rera_brn'] ?? '';
 $experience = $agent['experience'] ?? '';
 ?>
@@ -17,7 +18,10 @@ $experience = $agent['experience'] ?? '';
   <!-- Card Header Media -->
   <div class="agent-card-media">
     <a href="/agents/<?= e($agent['slug']) ?>" class="agent-image-link" aria-label="View profile of <?= e($agent['name']) ?>">
-      <img src="<?= e($photo) ?>" alt="<?= e($agent['name']) ?> - <?= e($agent['designation']) ?>" loading="lazy" width="380" height="380" class="agent-card-img">
+      <picture>
+        <source srcset="<?= e($webpPhoto) ?>" type="image/webp">
+        <img src="<?= e($photo) ?>" alt="<?= e($agent['name']) ?> - <?= e($agent['designation']) ?>" loading="lazy" decoding="async" width="380" height="380" class="agent-card-img">
+      </picture>
     </a>
     <?php if ($rera): ?>
       <span class="agent-rera-badge"><i class="fa-solid fa-id-badge"></i> BRN <?= e($rera) ?></span>

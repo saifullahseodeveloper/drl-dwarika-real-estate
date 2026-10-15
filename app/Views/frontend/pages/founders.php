@@ -184,8 +184,13 @@ $foundersList = $founders ?? [];
             <!-- Founder Media Column -->
             <div class="founder-media-col">
               <div class="founder-frame">
-                <?php if ($hasPhoto): ?>
-                  <img src="<?= e($founder['photo_url']) ?>" alt="<?= e($founder['name']) ?>" class="founder-photo">
+                <?php if ($hasPhoto): 
+                  $webpPhoto = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $founder['photo_url']);
+                ?>
+                  <picture>
+                    <source srcset="<?= e($webpPhoto) ?>" type="image/webp">
+                    <img src="<?= e($founder['photo_url']) ?>" alt="<?= e($founder['name']) ?>" class="founder-photo" loading="lazy" decoding="async" width="600" height="750">
+                  </picture>
                 <?php else: ?>
                   <div class="founder-placeholder-crest">
                     <div class="crest-monogram">

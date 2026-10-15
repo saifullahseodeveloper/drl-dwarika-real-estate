@@ -8,6 +8,7 @@ class Session
     public static function start(): void
     {
         if (session_status() === PHP_SESSION_NONE) {
+            session_cache_limiter('');
             ini_set('session.cookie_httponly', '1');
             ini_set('session.use_only_cookies', '1');
             if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {

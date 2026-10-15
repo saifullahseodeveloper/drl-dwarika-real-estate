@@ -35,6 +35,13 @@ use App\Core\Session;
 // Start session
 Session::start();
 
+// Document latency & CDN Edge Caching for public GET requests
+$requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET' && !str_starts_with($requestUri, '/admin')) {
+    header('Cache-Control: public, max-age=300, s-maxage=3600, stale-while-revalidate=86400');
+    header('X-Content-Type-Options: nosniff');
+}
+
 // Initialize Router
 $router = new Router();
 

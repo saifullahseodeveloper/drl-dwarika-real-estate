@@ -4,9 +4,15 @@
   "description": "Dynamic Real Estate Platform for DRL Dwarika Real Estate LLC",
   "main": "dev-server.js",
   "scripts": {
+    "build": "node build-assets.js && node optimize-images.js",
     "dev": "node dev-server.js",
     "start": "node dev-server.js"
   },
   "author": "DRL Dwarika Real Estate LLC",
-  "license": "Proprietary"
+  "license": "Proprietary",
+  "dependencies": {
+    "clean-css": "^5.3.3",
+    "sharp": "^0.33.5",
+    "terser": "^5.39.0"
+  }
 }
