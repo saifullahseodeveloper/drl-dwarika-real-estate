@@ -68,8 +68,8 @@ if (!str_starts_with($ogImage, 'http')) {
   <?php endif; ?>
 
   <!-- Chatbot CSS deferred (non-blocking) -->
-  <link rel="stylesheet" href="/assets/css/chatbot.css" media="print" onload="this.media='all'; this.onload=null;">
-  <noscript><link rel="stylesheet" href="/assets/css/chatbot.css"></noscript>
+  <link rel="stylesheet" href="/assets/css/chatbot.css?v=2.2" media="print" onload="this.media='all'; this.onload=null;">
+  <noscript><link rel="stylesheet" href="/assets/css/chatbot.css?v=2.2"></noscript>
 
   <!-- Font Awesome: preload then swap to all — avoids render-blocking -->
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.rel='stylesheet'; this.onload=null;" crossorigin="anonymous">
