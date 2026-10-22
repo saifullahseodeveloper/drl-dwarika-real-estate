@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 /**
  * Header Component — Exact match to DRL Dwarika reference design
  */
-$phone = $settings['company_phone'] ?? '+971 50 123 4567';
+$phone = $settings['company_phone'] ?? '+971 542202920';
 $cleanPhone = preg_replace('/[^0-9+]/', '', $phone);
 $currentNav = $activeNav ?? 'home';
 ?>
@@ -100,7 +100,7 @@ $currentNav = $activeNav ?? 'home';
       <a href="tel:<?= $cleanPhone ?>" class="btn-call full-width">
         <i class="fa-solid fa-phone"></i> Call <?= e($phone) ?>
       </a>
-      <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $settings['company_whatsapp'] ?? '971501234567') ?>" class="btn-whatsapp full-width" target="_blank" rel="noopener">
+      <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $settings['company_whatsapp'] ?? '971542202920') ?>" class="btn-whatsapp full-width" target="_blank" rel="noopener">
         <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
       </a>
     </div>

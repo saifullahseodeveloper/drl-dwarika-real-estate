@@ -1,12 +1,12 @@
-<?php
+﻿<?php
 /**
  * Contact Us Page View — DRL Dwarika Real Estate LLC
  */
-$phone = $settings['company_phone'] ?? '+971 50 123 4567';
+$phone = $settings['company_phone'] ?? '+971 542202920';
 $cleanPhone = preg_replace('/[^0-9+]/', '', $phone);
-$waPhone = preg_replace('/[^0-9]/', '', $settings['company_whatsapp'] ?? '971501234567');
-$email = $settings['company_email'] ?? 'info@dwarikarealestate.ae';
-$address = $settings['company_address'] ?? 'Office 702, Prime Tower, Business Bay, Dubai, UAE';
+$waPhone = preg_replace('/[^0-9]/', '', $settings['company_whatsapp'] ?? '971542202920');
+$email = $settings['company_email'] ?? 'admin@dwarikarealestate.ae';
+$address = $settings['company_address'] ?? 'Office No. 65-0, El Shaye - 4, 28th Street, Port Saeed, Deira, Dubai, UAE';
 ?>
 
 <div class="page-banner">
@@ -60,7 +60,7 @@ $address = $settings['company_address'] ?? 'Office 702, Prime Tower, Business Ba
           <div class="info-details">
             <h3>Brokerage Office</h3>
             <p><?= e($address) ?></p>
-            <span class="rera-info">RERA ORN: <?= e($settings['rera_orn'] ?? '29482') ?> | DLD License: <?= e($settings['dld_license'] ?? '1092831') ?></span>
+            <span class="rera-info">RERA ORN: <?= e($settings['rera_orn'] ?? '29482') ?> | DLD License: <?= e($settings['dld_license'] ?? '1637547') ?></span>
           </div>
         </div>
       </div>
@@ -84,7 +84,7 @@ $address = $settings['company_address'] ?? 'Office 702, Prime Tower, Business Ba
 
               <div class="form-group half-width">
                 <label for="contactPhone">Phone / WhatsApp *</label>
-                <input type="tel" name="phone" id="contactPhone" class="form-input" placeholder="+971 50 123 4567" required>
+                <input type="tel" name="phone" id="contactPhone" class="form-input" placeholder="+971 542202920" required>
               </div>
             </div>
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Founder Edit Profile Form View
  */
@@ -78,7 +78,7 @@
     </div>
     <div class="form-group">
       <label>Headquarters Phone</label>
-      <input type="tel" name="phone" value="<?= e($founder['phone'] ?? '') ?>" class="admin-input" placeholder="+971 50 123 4567">
+      <input type="tel" name="phone" value="<?= e($founder['phone'] ?? '') ?>" class="admin-input" placeholder="+971 542202920">
     </div>
     <div class="form-group">
       <label>Executive LinkedIn URL</label>

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 declare(strict_types=1);
 
 namespace App\Controllers\Frontend;
@@ -24,7 +24,7 @@ class PageController extends Controller
     {
         $this->render('frontend/pages/contact', [
             'meta_title'       => 'Contact Us | DRL Dwarika Real Estate LLC Dubai',
-            'meta_description' => 'Get in touch with DRL Dwarika Real Estate LLC. Visit our office in Business Bay, call +971 50 123 4567, or send us a message online.',
+            'meta_description' => 'Get in touch with DRL Dwarika Real Estate LLC. Visit our office in Business Bay, call +971 542202920, or send us a message online.',
             'activeNav'        => 'contact'
         ]);
     }

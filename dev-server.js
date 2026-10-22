@@ -1,4 +1,4 @@
-/**
+﻿/**
  * DRL DWARIKA REAL ESTATE LLC — HIGH-PERFORMANCE STANDALONE DEV SERVER
  * Zero-dependency Node.js engine providing 100% full-stack functionality:
  * - Dynamic SSR routing matching PHP MVC
@@ -31,12 +31,12 @@ const INITIAL_DATA = {
   settings: {
     site_name: 'DRL Dwarika Real Estate LLC',
     site_tagline: 'Opening Doors To Prosperity',
-    company_phone: '+971 50 123 4567',
-    company_whatsapp: '971501234567',
-    company_email: 'info@dwarikarealestate.ae',
-    company_address: 'Office 702, Prime Tower, Business Bay, Dubai, United Arab Emirates',
+    company_phone: '+971 542202920',
+    company_whatsapp: '971542202920',
+    company_email: 'admin@dwarikarealestate.ae',
+    company_address: 'Office No. 65-0, El Shaye - 4, 28th Street, Port Saeed, Deira Dubai, UAE',
     rera_orn: '29482',
-    dld_license: '1092831',
+    dld_license: '1637547',
     stat_properties_sold: '100+',
     stat_happy_clients: '50+',
     stat_years_experience: '5+',
@@ -324,10 +324,10 @@ function renderPage(title, content, activeNav = 'home', extraMeta = {}) {
     "legalName": "DRL Dwarika Real Estate LLC",
     "url": "https://dwarikarealestate.ae",
     "logo": "https://dwarikarealestate.ae/assets/images/logo.svg",
-    "telephone": "+971501234567",
+    "telephone": "+971542202920",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Office 702, Prime Tower, Business Bay",
+      "streetAddress": "Office No. 65-0, El Shaye - 4, 28th Street, Port Saeed, Deira",
       "addressLocality": "Dubai",
       "addressCountry": "AE"
     }
@@ -551,7 +551,13 @@ function renderAdmin(title, content, activeNav = 'dashboard') {
         <a href="/admin/locations" class="nav-item ${activeNav === 'locations' ? 'active' : ''}">
           <i class="fa-solid fa-location-dot"></i> <span>Locations</span>
         </a>
-        <div class="nav-group-title">SYSTEM</div>
+        <a href="/admin/blogs" class="nav-item ${activeNav === 'blogs' ? 'active' : ''}">
+          <i class="fa-solid fa-newspaper"></i> <span>Market Blogs &amp; Guides</span>
+        </a>
+        <div class="nav-group-title">SYSTEM &amp; GROWTH</div>
+        <a href="/admin/tools" class="nav-item ${activeNav === 'tools' ? 'active' : ''}">
+          <i class="fa-solid fa-calculator"></i> <span>Tools &amp; Calculators</span>
+        </a>
         <a href="/admin/seo" class="nav-item ${activeNav === 'seo' ? 'active' : ''}">
           <i class="fa-solid fa-magnifying-glass-chart"></i> <span>SEO Management</span>
         </a>
@@ -642,9 +648,9 @@ const server = http.createServer((req, res) => {
   // 2.5 Live AI Concierge Knowledge Base API (Real-Time Synchronized)
   if (pathname === '/api/chatbot-knowledge') {
     const db = getDB();
-    const publishedProps = db.properties.filter(p => p.status === 'published').map(p => {
-      const loc = db.locations.find(l => l.id == p.location_id) || {};
-      const type = db.property_types.find(t => t.id == p.property_type_id) || {};
+    const publishedProps = (db.properties || []).filter(p => p.status === 'published').map(p => {
+      const loc = (db.locations || []).find(l => l.id == p.location_id) || {};
+      const type = (db.property_types || []).find(t => t.id == p.property_type_id) || {};
       return {
         id: p.id,
         title: p.title,
@@ -669,9 +675,22 @@ const server = http.createServer((req, res) => {
       };
     });
 
+    const publishedBlogs = (db.blogs || []).filter(b => b.status === 'published').map(b => ({
+      id: b.id,
+      title: b.title,
+      slug: b.slug,
+      category: b.category || 'Market Insights',
+      author: b.author || 'DRL Research Team',
+      published_at: b.published_at || new Date().toISOString().split('T')[0],
+      excerpt: b.excerpt || '',
+      content: b.content || '',
+      featured_image: b.featured_image || '/assets/images/villa-dubai-hills.jpg',
+      tags: b.tags || []
+    }));
+
     res.writeHead(200, {
       'Content-Type': 'application/json; charset=utf-8',
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0',
       'Pragma': 'no-cache',
       'Expires': '0'
     });
@@ -679,9 +698,28 @@ const server = http.createServer((req, res) => {
       success: true,
       updated_at: new Date().toISOString(),
       properties: publishedProps,
-      locations: db.locations,
-      services: db.services,
-      settings: db.settings
+      blogs: publishedBlogs,
+      locations: db.locations || [],
+      services: db.services || [],
+      agents: (db.agents || []).map(a => ({
+        id: a.id,
+        name: a.name,
+        slug: a.slug,
+        designation: a.designation,
+        rera_brn: a.rera_brn,
+        phone: a.phone,
+        email: a.email,
+        languages: a.languages,
+        specializations: a.specializations,
+        photo_url: a.photo_url
+      })),
+      founders: (db.founders || []).map(f => ({
+        id: f.id,
+        name: f.name,
+        title: f.title,
+        bio: f.bio
+      })),
+      settings: db.settings || {}
     }));
   }
 
@@ -1199,6 +1237,10 @@ const server = http.createServer((req, res) => {
           lead.status = data.status;
           saveDB(db);
         }
+        if (req.headers['x-requested-with'] === 'XMLHttpRequest' || (req.headers.accept && req.headers.accept.includes('application/json'))) {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          return res.end(JSON.stringify({ success: true, lead_id: leadId, status: data.status }));
+        }
         res.writeHead(302, { 'Location': '/admin/leads' });
         return res.end();
       });
@@ -1341,8 +1383,8 @@ const server = http.createServer((req, res) => {
           <div class="form-section-title">2. Contact Channels &amp; Portrait</div>
           <div class="form-row">
             <div class="form-group third-width"><label>Official Email *</label><input type="email" name="email" class="form-input" required placeholder="agent@dwarikarealestate.ae"></div>
-            <div class="form-group third-width"><label>Phone Number *</label><input type="text" name="phone" class="form-input" required placeholder="+971 50 123 4567"></div>
-            <div class="form-group third-width"><label>WhatsApp (digits only)</label><input type="text" name="whatsapp" class="form-input" placeholder="971501234567"></div>
+            <div class="form-group third-width"><label>Phone Number *</label><input type="text" name="phone" class="form-input" required placeholder="+971 542202920"></div>
+            <div class="form-group third-width"><label>WhatsApp (digits only)</label><input type="text" name="whatsapp" class="form-input" placeholder="971542202920"></div>
           </div>
           <div class="form-group"><label>Portrait Photo URL</label><input type="text" name="photo_url" class="form-input" placeholder="/assets/images/agents/omar-farooq.jpg"></div>
 
@@ -1699,6 +1741,291 @@ const server = http.createServer((req, res) => {
       return res.end(renderAdmin('Locations', content, 'locations'));
     }
 
+    // Admin Market Blogs & Insights Management
+    if (pathname === '/admin/blogs') {
+      const blogs = db.blogs || [];
+      const rows = blogs.map(b => `
+        <tr>
+          <td>
+            <div class="table-prop-info">
+              <img src="${b.featured_image || '/assets/images/villa-dubai-hills.jpg'}" alt="" class="table-prop-thumb">
+              <div>
+                <strong>${escapeHtml(b.title)}</strong><br>
+                <small class="text-muted"><i class="fa-solid fa-folder"></i> ${escapeHtml(b.category)} &bull; ${escapeHtml(b.author)}</small>
+              </div>
+            </div>
+          </td>
+          <td><span class="agent-tag">${escapeHtml(b.category)}</span></td>
+          <td>${escapeHtml(b.author)}</td>
+          <td><small>${escapeHtml(b.published_at || '')}</small></td>
+          <td><span class="status-pill status-${b.status}">${(b.status || 'published').toUpperCase()}</span></td>
+          <td>
+            <div class="action-buttons-group">
+              <a href="/blog/${b.slug}" target="_blank" class="btn-icon" title="View Public Article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <a href="/admin/blogs/edit/${b.id}" class="btn-icon" title="Edit Article"><i class="fa-solid fa-pen-to-square"></i></a>
+              <form action="/admin/blogs/delete/${b.id}" method="POST" style="display:inline;" onsubmit="return confirm('Delete this blog post?');">
+                <button type="submit" class="btn-icon delete-btn" title="Delete Article"><i class="fa-solid fa-trash"></i></button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+
+      const content = `
+        <div class="admin-page-header">
+          <div class="header-titles">
+            <h1 class="page-title">Market Blogs, Insights &amp; Guides (${blogs.length})</h1>
+            <p class="page-subtitle">Publish and curate Dubai real estate intelligence, market trends, and investment guides.</p>
+          </div>
+          <div class="header-actions">
+            <a href="/admin/blogs/create" class="btn-admin-primary"><i class="fa-solid fa-plus"></i> Add New Blog Post</a>
+          </div>
+        </div>
+
+        <div class="dash-card">
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Article &amp; Topic</th>
+                  <th>Category</th>
+                  <th>Author</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rows || '<tr><td colspan="6" class="text-center text-muted">No blog posts available. Click "Add New Blog Post" to publish one.</td></tr>'}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      return res.end(renderAdmin('Market Blogs', content, 'blogs'));
+    }
+
+    // Admin Create Blog
+    if (pathname === '/admin/blogs/create') {
+      if (req.method === 'POST') {
+        parseBody(data => {
+          const blogs = db.blogs || [];
+          const newId = blogs.length > 0 ? Math.max(...blogs.map(b => b.id)) + 1 : 1;
+          const slug = (data.slug || data.title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') + '-' + Math.floor(Math.random() * 900 + 100);
+          const newBlog = {
+            id: newId,
+            title: data.title || 'Untitled Article',
+            slug: slug,
+            category: data.category || 'Market Insights',
+            author: data.author || 'DRL Research Team',
+            published_at: data.published_at || new Date().toISOString().split('T')[0],
+            status: data.status || 'published',
+            is_featured: data.is_featured ? 1 : 0,
+            featured_image: data.featured_image || '/assets/images/apartment-downtown.jpg',
+            excerpt: data.excerpt || '',
+            content: data.content || '',
+            tags: (data.tags || '').split(',').map(s => s.trim()).filter(Boolean)
+          };
+          db.blogs.unshift(newBlog);
+          saveDB(db);
+          res.writeHead(302, { 'Location': '/admin/blogs' });
+          return res.end();
+        });
+        return;
+      }
+
+      const content = `
+        <div class="admin-page-header">
+          <div class="header-titles">
+            <h1 class="page-title">Create New Market Blog / Guide</h1>
+            <p class="page-subtitle">Draft a research article or investment guide for investors and buyers.</p>
+          </div>
+          <div class="header-actions">
+            <a href="/admin/blogs" class="btn-admin-outline"><i class="fa-solid fa-arrow-left"></i> Back to Blogs</a>
+          </div>
+        </div>
+
+        <form action="/admin/blogs/create" method="POST" class="admin-form-card">
+          <div class="form-section-title">1. Article Headline &amp; Metadata</div>
+          <div class="form-group">
+            <label>Article Title *</label>
+            <input type="text" name="title" class="form-input" required placeholder="e.g. Dubai Real Estate Market Outlook 2026: Capital Growth & Rental Yields">
+          </div>
+          <div class="form-row">
+            <div class="form-group third-width">
+              <label>Category *</label>
+              <select name="category" class="form-select">
+                <option value="Market Insights">Market Insights</option>
+                <option value="Golden Visa">Golden Visa</option>
+                <option value="Investment Advisory">Investment Advisory</option>
+                <option value="Communities">Communities & Areas</option>
+                <option value="Legal & RERA">Legal & RERA Guides</option>
+              </select>
+            </div>
+            <div class="form-group third-width">
+              <label>Author *</label>
+              <input type="text" name="author" class="form-input" value="Vikram Dwarika">
+            </div>
+            <div class="form-group third-width">
+              <label>Status</label>
+              <select name="status" class="form-select">
+                <option value="published">Published (Live)</option>
+                <option value="draft">Draft (Hidden)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group half-width">
+              <label>Featured Image URL</label>
+              <input type="text" name="featured_image" class="form-input" value="/assets/images/apartment-downtown.jpg">
+            </div>
+            <div class="form-group half-width">
+              <label>Tags (comma-separated)</label>
+              <input type="text" name="tags" class="form-input" placeholder="Dubai, Investment, ROI, Golden Visa">
+            </div>
+          </div>
+
+          <div class="form-section-title">2. Excerpt &amp; Full Body</div>
+          <div class="form-group">
+            <label>Short Summary / Excerpt *</label>
+            <textarea name="excerpt" rows="2" class="form-textarea" required placeholder="Brief 1-2 sentence overview shown in search results and AI summary..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Full Content Body *</label>
+            <textarea name="content" rows="8" class="form-textarea" required placeholder="Detailed guide content, analysis, statistical yields, community highlights..."></textarea>
+          </div>
+
+          <div class="form-actions-bar">
+            <button type="submit" class="btn-admin-primary"><i class="fa-solid fa-check"></i> Publish Article</button>
+            <a href="/admin/blogs" class="btn-admin-outline">Cancel</a>
+          </div>
+        </form>
+      `;
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      return res.end(renderAdmin('Add Blog Post', content, 'blogs'));
+    }
+
+    // Admin Edit Blog
+    if (pathname.startsWith('/admin/blogs/edit/')) {
+      const blogId = Number(pathname.split('/').pop());
+      const blog = (db.blogs || []).find(b => b.id === blogId);
+      if (!blog) {
+        res.writeHead(302, { 'Location': '/admin/blogs' });
+        return res.end();
+      }
+
+      if (req.method === 'POST') {
+        parseBody(data => {
+          blog.title = data.title || blog.title;
+          blog.category = data.category || blog.category;
+          blog.author = data.author || blog.author;
+          blog.status = data.status || blog.status;
+          blog.featured_image = data.featured_image || blog.featured_image;
+          blog.excerpt = data.excerpt || blog.excerpt;
+          blog.content = data.content || blog.content;
+          blog.tags = (data.tags || '').split(',').map(s => s.trim()).filter(Boolean);
+          saveDB(db);
+          res.writeHead(302, { 'Location': '/admin/blogs' });
+          return res.end();
+        });
+        return;
+      }
+
+      const content = `
+        <div class="admin-page-header">
+          <div class="header-titles">
+            <h1 class="page-title">Edit Blog: ${escapeHtml(blog.title)}</h1>
+            <p class="page-subtitle">Update article analysis, category, and publication status.</p>
+          </div>
+          <div class="header-actions">
+            <a href="/admin/blogs" class="btn-admin-outline"><i class="fa-solid fa-arrow-left"></i> Back to Blogs</a>
+          </div>
+        </div>
+
+        <form action="/admin/blogs/edit/${blog.id}" method="POST" class="admin-form-card">
+          <div class="form-section-title">1. Article Headline &amp; Metadata</div>
+          <div class="form-group">
+            <label>Article Title *</label>
+            <input type="text" name="title" class="form-input" required value="${escapeHtml(blog.title)}">
+          </div>
+          <div class="form-row">
+            <div class="form-group third-width">
+              <label>Category *</label>
+              <select name="category" class="form-select">
+                <option value="Market Insights" ${blog.category === 'Market Insights' ? 'selected' : ''}>Market Insights</option>
+                <option value="Golden Visa" ${blog.category === 'Golden Visa' ? 'selected' : ''}>Golden Visa</option>
+                <option value="Investment Advisory" ${blog.category === 'Investment Advisory' ? 'selected' : ''}>Investment Advisory</option>
+                <option value="Communities" ${blog.category === 'Communities' ? 'selected' : ''}>Communities & Areas</option>
+                <option value="Legal & RERA" ${blog.category === 'Legal & RERA' ? 'selected' : ''}>Legal & RERA Guides</option>
+              </select>
+            </div>
+            <div class="form-group third-width">
+              <label>Author *</label>
+              <input type="text" name="author" class="form-input" value="${escapeHtml(blog.author)}">
+            </div>
+            <div class="form-group third-width">
+              <label>Status</label>
+              <select name="status" class="form-select">
+                <option value="published" ${blog.status === 'published' ? 'selected' : ''}>Published (Live)</option>
+                <option value="draft" ${blog.status === 'draft' ? 'selected' : ''}>Draft (Hidden)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group half-width">
+              <label>Featured Image URL</label>
+              <input type="text" name="featured_image" class="form-input" value="${escapeHtml(blog.featured_image || '')}">
+            </div>
+            <div class="form-group half-width">
+              <label>Tags (comma-separated)</label>
+              <input type="text" name="tags" class="form-input" value="${escapeHtml((blog.tags || []).join(', '))}">
+            </div>
+          </div>
+
+          <div class="form-section-title">2. Excerpt &amp; Full Body</div>
+          <div class="form-group">
+            <label>Short Summary / Excerpt *</label>
+            <textarea name="excerpt" rows="2" class="form-textarea" required>${escapeHtml(blog.excerpt || '')}</textarea>
+          </div>
+          <div class="form-group">
+            <label>Full Content Body *</label>
+            <textarea name="content" rows="8" class="form-textarea" required>${escapeHtml(blog.content || '')}</textarea>
+          </div>
+
+          <div class="form-actions-bar">
+            <button type="submit" class="btn-admin-primary"><i class="fa-solid fa-check"></i> Update Article</button>
+            <a href="/admin/blogs" class="btn-admin-outline">Cancel</a>
+          </div>
+        </form>
+      `;
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      return res.end(renderAdmin('Edit Blog', content, 'blogs'));
+    }
+
+    // Admin Delete Blog
+    if (pathname.startsWith('/admin/blogs/delete/')) {
+      const blogId = Number(pathname.split('/').pop());
+      db.blogs = (db.blogs || []).filter(b => b.id !== blogId);
+      saveDB(db);
+      res.writeHead(302, { 'Location': '/admin/blogs' });
+      return res.end();
+    }
+
+    // Admin Growth Tools Hub (Saifullah Developer Repos: SEO ROI, PageSpeed, Scorecard, Schema, Palette)
+    if (pathname === '/admin/tools') {
+      const curTab = query.tab || 'seo-roi';
+      let toolsHtml = fs.readFileSync(path.join(ROOT_DIR, 'app/Views/admin/tools/index.php'), 'utf8');
+      toolsHtml = toolsHtml.replace(/<\?php[\s\S]*?\?>/g, '');
+      // Mark active tab
+      toolsHtml = toolsHtml.replace(new RegExp(`data-tab="tab-${curTab}"`, 'g'), `data-tab="tab-${curTab}" class="tool-tab-btn active"`);
+      toolsHtml = toolsHtml.replace(new RegExp(`id="tab-${curTab}" class="tool-tab-content"`, 'g'), `id="tab-${curTab}" class="tool-tab-content active"`);
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      return res.end(renderAdmin('Growth Tools & Intelligence Hub', toolsHtml, 'tools'));
+    }
+
     // Admin SEO
     if (pathname === '/admin/seo') {
       const content = `
@@ -1807,8 +2134,8 @@ const server = http.createServer((req, res) => {
     const specs = (a.specializations || []).map(s => `<span class="spec-pill"><i class="fa-solid fa-check"></i> ${escapeHtml(s.charAt(0).toUpperCase() + s.slice(1))}</span>`).join('');
     const langs = (a.languages || []).join(', ');
     const locs = (a.locations || []).slice(0, 2).join(', ');
-    const cleanPhone = (a.phone || '+971 50 123 4567').replace(/[^0-9+]/g, '');
-    const wa = (a.whatsapp || '971501234567').replace(/[^0-9]/g, '');
+    const cleanPhone = (a.phone || '+971 542202920').replace(/[^0-9+]/g, '');
+    const wa = (a.whatsapp || '971542202920').replace(/[^0-9]/g, '');
 
     return `
       <article class="agent-card" data-agent-id="${a.id}">
@@ -2224,7 +2551,7 @@ const server = http.createServer((req, res) => {
                   <input type="hidden" name="property_id" value="${prop.id}">
                   <input type="hidden" name="subject" value="Inquiry: ${escapeHtml(prop.title)}">
                   <div class="form-group"><label>Full Name *</label><input type="text" name="name" class="form-input" required placeholder="John Doe"></div>
-                  <div class="form-group"><label>Phone / WhatsApp *</label><input type="tel" name="phone" class="form-input" required placeholder="+971 50 123 4567"></div>
+                  <div class="form-group"><label>Phone / WhatsApp *</label><input type="tel" name="phone" class="form-input" required placeholder="+971 542202920"></div>
                   <div class="form-group"><label>Email Address</label><input type="email" name="email" class="form-input" placeholder="john@example.com"></div>
                   <div class="form-group"><label>Message</label><textarea name="message" rows="3" class="form-textarea" placeholder="I am interested in scheduling a viewing..."></textarea></div>
                   <button type="submit" class="btn-primary-pill full-width"><span>Send Inquiry</span> <i class="fa-solid fa-paper-plane"></i></button>
@@ -2335,7 +2662,7 @@ const server = http.createServer((req, res) => {
                   <input type="hidden" name="service_id" value="${srv.id}">
                   <input type="hidden" name="subject" value="Service Inquiry: ${escapeHtml(srv.title)}">
                   <div class="form-group"><label>Full Name *</label><input type="text" name="name" class="form-input" required placeholder="John Doe"></div>
-                  <div class="form-group"><label>Phone / WhatsApp *</label><input type="tel" name="phone" class="form-input" required placeholder="+971 50 123 4567"></div>
+                  <div class="form-group"><label>Phone / WhatsApp *</label><input type="tel" name="phone" class="form-input" required placeholder="+971 542202920"></div>
                   <div class="form-group"><label>Email Address</label><input type="email" name="email" class="form-input" placeholder="john@example.com"></div>
                   <div class="form-group"><label>Requirements</label><textarea name="message" rows="3" class="form-textarea" placeholder="Tell us about your requirements..."></textarea></div>
                   <button type="submit" class="btn-primary-pill full-width"><span>Submit Request</span> <i class="fa-solid fa-paper-plane"></i></button>
@@ -2799,8 +3126,8 @@ const server = http.createServer((req, res) => {
     const assignedCards = assignedProps.map(renderPropertyCard).join('');
 
     const photo = agent.photo_url || '/assets/images/agents/omar-farooq.jpg';
-    const cleanPhone = (agent.phone || '+971 50 123 4567').replace(/[^0-9+]/g, '');
-    const wa = (agent.whatsapp || '971501234567').replace(/[^0-9]/g, '');
+    const cleanPhone = (agent.phone || '+971 542202920').replace(/[^0-9+]/g, '');
+    const wa = (agent.whatsapp || '971542202920').replace(/[^0-9]/g, '');
 
     const specsPills = (agent.specializations || []).map(s => `
       <div class="spec-tag-card">
@@ -2946,7 +3273,7 @@ const server = http.createServer((req, res) => {
                 <form action="/enquiry/submit" method="POST" id="agentInquiryForm">
                   <input type="hidden" name="subject" value="Inquiry for Agent: ${escapeHtml(agent.name)}">
                   <div class="form-group"><label>Full Name *</label><input type="text" name="name" class="form-input" required placeholder="John Doe"></div>
-                  <div class="form-group"><label>Phone / WhatsApp *</label><input type="tel" name="phone" class="form-input" required placeholder="+971 50 123 4567"></div>
+                  <div class="form-group"><label>Phone / WhatsApp *</label><input type="tel" name="phone" class="form-input" required placeholder="+971 542202920"></div>
                   <div class="form-group"><label>Email Address</label><input type="email" name="email" class="form-input" placeholder="john@example.com"></div>
                   <div class="form-group"><label>Your Message / Requirements *</label><textarea name="message" rows="3" class="form-textarea" required placeholder="I am interested in exploring properties with ${escapeHtml(agent.name)}..."></textarea></div>
                   <button type="submit" class="btn-primary-pill full-width"><span>Send Request to Agent</span> <i class="fa-solid fa-paper-plane"></i></button>
@@ -3050,7 +3377,7 @@ const server = http.createServer((req, res) => {
                 <form action="/enquiry/submit" method="POST" id="mainContactForm">
                   <div class="form-row">
                     <div class="form-group half-width"><label>Full Name *</label><input type="text" name="name" class="form-input" required placeholder="e.g. Sarah Jenkins"></div>
-                    <div class="form-group half-width"><label>Phone / WhatsApp *</label><input type="tel" name="phone" class="form-input" required placeholder="+971 50 123 4567"></div>
+                    <div class="form-group half-width"><label>Phone / WhatsApp *</label><input type="tel" name="phone" class="form-input" required placeholder="+971 542202920"></div>
                   </div>
                   <div class="form-group"><label>Email Address</label><input type="email" name="email" class="form-input" placeholder="sarah@example.com"></div>
                   <div class="form-group"><label>Subject</label><input type="text" name="subject" class="form-input" value="General Inquiry"></div>
@@ -3150,6 +3477,117 @@ const server = http.createServer((req, res) => {
     `;
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     return res.end(renderPage(`${type.name}s in Dubai | DRL Dwarika`, html, 'properties'));
+  }
+
+  // 6.10 PUBLIC MARKET BLOGS & INSIGHTS (/blogs & /blog/:slug)
+  if (pathname === '/blogs' || pathname === '/blog') {
+    const blogs = (db.blogs || []).filter(b => b.status === 'published');
+    const categoryFilter = query.category || '';
+    const filteredBlogs = categoryFilter ? blogs.filter(b => b.category === categoryFilter) : blogs;
+
+    const cards = filteredBlogs.map(b => `
+      <article class="property-card" style="display:flex; flex-direction:column;">
+        <div class="property-card-media">
+          <a href="/blog/${b.slug}">
+            <img src="${b.featured_image || '/assets/images/villa-dubai-hills.jpg'}" alt="${escapeHtml(b.title)}" class="property-card-img" style="height:220px; object-fit:cover;">
+          </a>
+          <span class="property-badge" style="background:#0F1E2E;">${escapeHtml(b.category)}</span>
+        </div>
+        <div class="property-card-body" style="flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="font-size:0.8rem; color:#64748B; margin-bottom:6px;">
+              <i class="fa-regular fa-calendar"></i> ${escapeHtml(b.published_at)} &bull; <i class="fa-solid fa-user-pen"></i> ${escapeHtml(b.author)}
+            </div>
+            <h3 class="property-card-title" style="font-size:1.15rem; line-height:1.4; margin-bottom:10px;">
+              <a href="/blog/${b.slug}">${escapeHtml(b.title)}</a>
+            </h3>
+            <p style="font-size:0.9rem; color:#475569; line-height:1.5; margin-bottom:16px;">
+              ${escapeHtml(b.excerpt)}
+            </p>
+          </div>
+          <div style="border-top:1px solid #E2E8F0; padding-top:12px; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:0.8rem; font-weight:600; color:#1689CC;">Read Full Guide</span>
+            <a href="/blog/${b.slug}" class="property-arrow-link" aria-label="Read article"><i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </article>
+    `).join('');
+
+    const html = `
+      <div class="page-banner">
+        <div class="container">
+          <nav class="breadcrumb-nav"><ol class="breadcrumb-list"><li><a href="/">Home</a></li><li aria-current="page">Market Insights &amp; Blogs</li></ol></nav>
+          <h1 class="page-banner-title">Dubai Real Estate Insights &amp; Investment Guides</h1>
+          <p class="page-banner-subtitle">In-depth research, Golden Visa analysis, rental yield breakdowns, and regulatory updates from certified Dubai property advisors.</p>
+        </div>
+      </div>
+      <section class="section-padding">
+        <div class="container">
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px;">
+            <a href="/blogs" class="btn-outline-pill ${!categoryFilter ? 'active' : ''}" style="${!categoryFilter ? 'background:#0F1E2E; color:#fff;' : ''}">All Insights (${blogs.length})</a>
+            <a href="/blogs?category=Golden+Visa" class="btn-outline-pill ${categoryFilter === 'Golden Visa' ? 'active' : ''}" style="${categoryFilter === 'Golden Visa' ? 'background:#0F1E2E; color:#fff;' : ''}">Golden Visa</a>
+            <a href="/blogs?category=Market+Insights" class="btn-outline-pill ${categoryFilter === 'Market Insights' ? 'active' : ''}" style="${categoryFilter === 'Market Insights' ? 'background:#0F1E2E; color:#fff;' : ''}">Market Trends</a>
+            <a href="/blogs?category=Investment+Advisory" class="btn-outline-pill ${categoryFilter === 'Investment Advisory' ? 'active' : ''}" style="${categoryFilter === 'Investment Advisory' ? 'background:#0F1E2E; color:#fff;' : ''}">ROI &amp; Yields</a>
+            <a href="/blogs?category=Communities" class="btn-outline-pill ${categoryFilter === 'Communities' ? 'active' : ''}" style="${categoryFilter === 'Communities' ? 'background:#0F1E2E; color:#fff;' : ''}">Communities</a>
+          </div>
+          <div class="properties-grid" style="grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));">
+            ${cards}
+          </div>
+        </div>
+      </section>
+    `;
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    return res.end(renderPage('Dubai Real Estate Market Blogs & Guides | DRL Dwarika', html, 'blogs'));
+  }
+
+  if (pathname.startsWith('/blog/')) {
+    const slug = pathname.replace('/blog/', '');
+    const blog = (db.blogs || []).find(b => b.slug === slug && b.status === 'published');
+    if (!blog) {
+      res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+      return res.end(renderPage('Article Not Found', '<div class="container section-padding text-center"><h1>Article Not Found</h1><p>The requested blog guide may have been updated or relocated.</p><a href="/blogs" class="btn-primary-pill">View All Blogs</a></div>'));
+    }
+
+    const tagsHtml = (blog.tags || []).map(t => `<span class="badge-tag" style="background:#EEF2F6; color:#0F1E2E; padding:4px 10px; border-radius:12px; font-size:0.8rem; margin-right:6px;">#${escapeHtml(t)}</span>`).join('');
+
+    const html = `
+      <div class="page-banner" style="padding:60px 0 40px;">
+        <div class="container">
+          <nav class="breadcrumb-nav"><ol class="breadcrumb-list"><li><a href="/">Home</a></li><li><a href="/blogs">Market Blogs</a></li><li aria-current="page">${escapeHtml(blog.title)}</li></ol></nav>
+          <div style="display:inline-block; background:#C5A880; color:#fff; font-weight:700; font-size:0.75rem; text-transform:uppercase; padding:4px 12px; border-radius:20px; margin-bottom:12px;">${escapeHtml(blog.category)}</div>
+          <h1 class="page-banner-title" style="font-size:2.4rem; max-width:900px;">${escapeHtml(blog.title)}</h1>
+          <div style="color:rgba(255,255,255,0.8); font-size:0.9rem; margin-top:12px;">
+            <i class="fa-solid fa-user-pen"></i> By <strong>${escapeHtml(blog.author)}</strong> &bull; <i class="fa-regular fa-calendar"></i> ${escapeHtml(blog.published_at)} &bull; Official RERA Licensed Research
+          </div>
+        </div>
+      </div>
+      <section class="section-padding">
+        <div class="container" style="max-width:880px;">
+          <img src="${blog.featured_image || '/assets/images/villa-dubai-hills.jpg'}" alt="${escapeHtml(blog.title)}" style="width:100%; max-height:420px; object-fit:cover; border-radius:16px; margin-bottom:32px; box-shadow:0 12px 30px rgba(0,0,0,0.08);">
+          <div style="font-size:1.15rem; line-height:1.7; color:#1E293B; font-weight:500; margin-bottom:24px; padding-bottom:24px; border-bottom:1px solid #E2E8F0;">
+            ${escapeHtml(blog.excerpt)}
+          </div>
+          <div style="font-size:1.05rem; line-height:1.8; color:#334155; margin-bottom:40px;">
+            <p>${escapeHtml(blog.content)}</p>
+          </div>
+          <div style="margin-bottom:32px;">
+            ${tagsHtml}
+          </div>
+          <div style="background:#0F1E2E; color:#fff; padding:32px; border-radius:16px; display:flex; flex-direction:column; gap:16px; align-items:center; text-align:center;">
+            <h3 style="color:#C5A880; font-size:1.5rem; margin:0;">Consult With Our Dubai Property Specialists</h3>
+            <p style="color:#E2E8F0; max-width:600px; margin:0;">Have questions about this guide, Golden Visa qualification, or current developer payment plans? Speak directly with our verified RERA advisors.</p>
+            <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+              <a href="https://wa.me/971542202920?text=Hello%20DRL%20Dwarika,%20I%20read%20your%20article%20'${encodeURIComponent(blog.title)}'%20and%20would%20like%20more%20information" target="_blank" rel="noopener" class="btn-primary-pill" style="background:#25D366; color:#fff;">
+                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+              </a>
+              <a href="/contact-us" class="btn-outline-pill" style="border-color:#fff; color:#fff;">Request Advisory Callback</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    `;
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    return res.end(renderPage(`${blog.title} | DRL Dwarika Real Estate`, html, 'blogs'));
   }
 
   // Fallback 404

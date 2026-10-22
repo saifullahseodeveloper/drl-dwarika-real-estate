@@ -1,4 +1,4 @@
-/**
+﻿/**
  * DRL DWARIKA REAL ESTATE LLC — AI LUXURY PROPERTY CONCIERGE (NOOR AI)
  * ====================================================================
  * Conversational profiling engine:
@@ -160,60 +160,96 @@
 
   // LIVE REAL-TIME KNOWLEDGE BASE (Synchronized with Website Database & Admin Panel)
   let liveProperties = [...DWARIKA_PROPERTIES];
+  let liveBlogs = [];
   let liveLocations = [];
   let liveServices = [];
+  let liveAgents = [];
   let liveSettings = {};
   let lastSyncTime = 0;
 
   /**
    * Fetches real-time knowledge base from the website database (/api/chatbot-knowledge).
-   * Instantly reflects any newly added, edited, or deleted properties, blogs, or services.
+   * Instantly reflects any newly added, edited, or deleted properties, blogs, communities, or services.
    */
   function syncKnowledgeBase(force = false) {
     const now = Date.now();
-    // Cache for 15s unless forced
-    if (!force && lastSyncTime && (now - lastSyncTime < 15000) && liveProperties.length > 0) {
-      return Promise.resolve(liveProperties);
+    // Cache for 2 seconds maximum to guarantee near-instant reflection of database updates
+    if (!force && lastSyncTime && (now - lastSyncTime < 2000) && liveProperties.length > 0) {
+      return Promise.resolve({ properties: liveProperties, blogs: liveBlogs });
     }
 
-    return fetch('/api/chatbot-knowledge?t=' + now)
+    return fetch('/api/chatbot-knowledge?t=' + now, {
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache'
+      }
+    })
       .then(res => {
         if (!res.ok) throw new Error('Network error');
         return res.json();
       })
       .then(data => {
-        if (data && data.success && Array.isArray(data.properties)) {
-          liveProperties = data.properties.map(p => ({
-            id: p.id,
-            title: p.title,
-            slug: p.slug,
-            category: (p.category || 'apartment').toLowerCase(),
-            location: p.location || 'Dubai',
-            price: p.priceFormatted || `AED ${Number(p.price).toLocaleString()}`,
-            priceNum: Number(p.price) || 0,
-            beds: p.bedrooms ? `${p.bedrooms} Beds` : 'Luxury Suite',
-            baths: p.bathrooms ? `${p.bathrooms} Baths` : 'Fitted Baths',
-            area: p.area_sqft ? `${Number(p.area_sqft).toLocaleString()} sq.ft` : '',
-            image: p.featured_image || '/assets/images/apartment-downtown.jpg',
-            badge: p.badge || 'Verified Listing',
-            rera: p.rera_permit || 'DLD-VERIFIED',
-            description: p.description || '',
-            listing_type: p.listing_type || 'sale'
-          }));
+        if (data && data.success) {
+          if (Array.isArray(data.properties)) {
+            liveProperties = data.properties.map(p => ({
+              id: p.id,
+              title: p.title,
+              slug: p.slug,
+              category: (p.category || 'apartment').toLowerCase(),
+              location: p.location || 'Dubai',
+              price: p.priceFormatted || `AED ${Number(p.price).toLocaleString()}`,
+              priceNum: Number(p.price) || 0,
+              beds: p.bedrooms ? `${p.bedrooms} Beds` : 'Luxury Suite',
+              baths: p.bathrooms ? `${p.bathrooms} Baths` : 'Fitted Baths',
+              area: p.area_sqft ? `${Number(p.area_sqft).toLocaleString()} sq.ft` : '',
+              image: p.featured_image || '/assets/images/apartment-downtown.jpg',
+              badge: p.badge || 'Verified Listing',
+              rera: p.rera_permit || 'DLD-VERIFIED',
+              description: p.description || '',
+              listing_type: p.listing_type || 'sale'
+            }));
+          }
+          if (Array.isArray(data.blogs)) {
+            liveBlogs = data.blogs.map(b => ({
+              id: b.id,
+              title: b.title,
+              slug: b.slug,
+              category: b.category || 'Market Insights',
+              author: b.author || 'DRL Research Team',
+              published_at: b.published_at || '',
+              excerpt: b.excerpt || '',
+              content: b.content || '',
+              featured_image: b.featured_image || '/assets/images/villa-dubai-hills.jpg',
+              tags: b.tags || []
+            }));
+          }
           if (data.locations) liveLocations = data.locations;
           if (data.services) liveServices = data.services;
+          if (data.agents) liveAgents = data.agents;
           if (data.settings) liveSettings = data.settings;
           lastSyncTime = now;
         }
-        return liveProperties;
+        return { properties: liveProperties, blogs: liveBlogs };
       })
       .catch(err => {
         // Fallback to current memory cache if offline
-        return liveProperties;
+        return { properties: liveProperties, blogs: liveBlogs };
       });
   }
 
-  // Initial silent background sync on script load
+  // Cross-tab real-time synchronization via BroadcastChannel
+  try {
+    if ('BroadcastChannel' in window) {
+      const bc = new BroadcastChannel('drl_knowledge_sync');
+      bc.onmessage = (ev) => {
+        if (ev.data === 'sync' || (ev.data && ev.data.action === 'sync')) {
+          syncKnowledgeBase(true);
+        }
+      };
+    }
+  } catch (e) {}
+
+  // Initial silent sync on script load
   syncKnowledgeBase(true);
 
   /* ============================================================
@@ -781,17 +817,54 @@
 
     // 1. WhatsApp / Contact human
     if (/whatsapp|call|phone|talk|speak|human|agent|broker|advisor|consultant|number|contact/i.test(text)) {
-      const waUrl = `https://wa.me/971501234567?text=Hello%20DRL%20Dwarika,%20my%20name%20is%20${encodeURIComponent(userData.name || 'Client')}%20and%20I%20am%20interested%20in%20Dubai%20properties`;
+      const waUrl = `https://wa.me/971542202920?text=Hello%20DRL%20Dwarika,%20my%20name%20is%20${encodeURIComponent(userData.name || 'Client')}%20and%20I%20am%20interested%20in%20Dubai%20properties`;
       return {
-        text: `I'm immediately connecting you with our **Senior Dubai Property Advisors**! 🤝\n\nOur brokerage is licensed by RERA under **ORN 29482**.\n\n• **Direct Phone**: [+971 50 123 4567](tel:+971501234567)\n• **Office**: Office 702, Prime Tower, Business Bay, Dubai\n\nClick below to open a private WhatsApp consultation right now:`,
+        text: `I'm immediately connecting you with our **Senior Dubai Property Advisors**! 🤝\n\nOur brokerage is licensed by RERA under **ORN 63750**.\n\n• **Direct Phone**: [+971 542202920](tel:+971542202920)\n• **Office**: Office No. 65-0, El Shaye - 4, 28th Street, Port Saeed, Deira, Dubai\n\nClick below to open a private WhatsApp consultation right now:`,
         chips: [
           { label: '💬 Open WhatsApp Chat', href: waUrl, gold: true },
-          { label: '📞 Call Now: +971 50 123 4567', href: 'tel:+971501234567' }
+          { label: '📞 Call Now: +971 542202920', href: 'tel:+971542202920' }
         ]
       };
     }
 
-    // 2. Show All / Full Live Portfolio Query
+    // 2. LIVE MARKET BLOGS & RESEARCH GUIDES INTELLIGENCE
+    const isBlogExplicit = /blog|article|post|guide|news|insight|outlook|research|report/i.test(text);
+    const matchedBlogs = liveBlogs.filter(b => {
+      const bTitle = (b.title || '').toLowerCase();
+      const bCat = (b.category || '').toLowerCase();
+      const bExcerpt = (b.excerpt || '').toLowerCase();
+      const bTags = (b.tags || []).map(t => t.toLowerCase());
+
+      if (text.includes(b.slug.replace(/-/g, ' '))) return true;
+      if (bTags.some(t => text.includes(t))) return true;
+      if (text.includes(bCat)) return true;
+      const words = text.split(/\s+/).filter(w => w.length > 3 && !['show', 'find', 'what', 'have', 'about'].includes(w));
+      const titleMatches = words.filter(w => bTitle.includes(w)).length;
+      return titleMatches >= 2 || (isBlogExplicit && (titleMatches >= 1 || words.some(w => bExcerpt.includes(w))));
+    });
+
+    if (isBlogExplicit || matchedBlogs.length > 0) {
+      const blogsToShow = matchedBlogs.length > 0 ? matchedBlogs : liveBlogs;
+      if (blogsToShow.length > 0) {
+        const blogList = blogsToShow.slice(0, 3).map(b => 
+          `• **[${b.title}](/blog/${b.slug})** (${b.category})\n  *${b.excerpt.slice(0, 140)}...*`
+        ).join('\n\n');
+
+        const blogChips = blogsToShow.slice(0, 2).map(b => ({
+          label: `📖 ${b.title.slice(0, 24)}...`,
+          href: `/blog/${b.slug}`,
+          gold: true
+        }));
+        blogChips.push({ label: '📰 View All Insights', href: '/blogs' });
+
+        return {
+          text: `Here are verified **Dubai Market Insights & Guides** directly from our live knowledge base:\n\n${blogList}\n\nWould you like more details or want to speak with our author/advisor directly?`,
+          chips: blogChips
+        };
+      }
+    }
+
+    // 3. Show All / Full Live Portfolio Query
     if (/show all|all properties|full portfolio|all projects|list (all|properties)/i.test(text)) {
       return {
         text: `Here is our current live verified portfolio of **${liveProperties.length} active properties** across Dubai:`,
@@ -804,29 +877,61 @@
       };
     }
 
-    // 3. UAE Golden Visa (Live Filtered)
-    if (/golden\s*visa|visa|residency|10\s*year/i.test(text)) {
-      const gvProps = liveProperties.filter(p => p.priceNum >= 2000000);
+    // 4. Dynamic Property Title or Reference Code Match (Direct Live Search)
+    const directPropMatch = liveProperties.filter(p => {
+      const pTitle = (p.title || '').toLowerCase();
+      const pRef = (p.reference_code || '').toLowerCase();
+      return (pRef && text.includes(pRef)) || 
+             text.includes(pTitle) || 
+             (text.length > 8 && pTitle.split(/\s+/).filter(w => w.length > 4).every(w => text.includes(w)));
+    });
+
+    if (directPropMatch.length > 0 && !(/golden|visa|whatsapp|call|human|broker|site\s*visit/i.test(text))) {
       return {
-        text: `**UAE 10-Year Golden Visa via Real Estate** 🇦🇪\n\nUnder Dubai Land Department regulations, you qualify for the 10-Year Renewable Golden Visa when purchasing property valued at **AED 2,000,000 (~$545,000 USD)** or more.\n\n**Key Investor Benefits:**\n• 100% foreign ownership with 0% personal income & capital gains tax.\n• Sponsor your spouse, children of any age, and domestic staff.\n• No physical residency requirement (stay outside UAE without losing visa).\n• Available for both ready and off-plan properties (minimum AED 2M valuation).\n\nHere are prime **Golden Visa eligible properties** currently available:`,
-        properties: gvProps.slice(0, 4),
+        text: `Found **${directPropMatch.length} active property listing(s)** matching your direct search:`,
+        properties: directPropMatch,
         chips: [
-          { label: '🏙️ Luxury Apartments', query: 'show luxury apartments' },
-          { label: '🏖️ Private Villas', query: 'show villas in dubai' },
-          { label: '💬 Consult Golden Visa Advisor', query: 'talk to advisor', gold: true }
+          { label: '🏙️ Show All Properties', query: 'show all properties' },
+          { label: '💬 Inquire with Advisor', query: 'talk to advisor', gold: true }
         ]
       };
     }
 
-    // 4. ROI & Rental Yields / Investment
+    // 5. UAE Golden Visa (Live Filtered + Live Blog Citation)
+    if (/golden\s*visa|visa|residency|10\s*year/i.test(text)) {
+      const gvProps = liveProperties.filter(p => p.priceNum >= 2000000);
+      const gvBlog = liveBlogs.find(b => b.category === 'Golden Visa' || b.slug.includes('golden-visa'));
+      let extraBlogNote = '';
+      if (gvBlog) {
+        extraBlogNote = `\n\n📖 **Verified Knowledge Guide**: [${gvBlog.title}](/blog/${gvBlog.slug})`;
+      }
+      return {
+        text: `**UAE 10-Year Golden Visa via Real Estate** 🇦🇪\n\nUnder Dubai Land Department regulations, you qualify for the 10-Year Renewable Golden Visa when purchasing property valued at **AED 2,000,000 (~$545,000 USD)** or more.\n\n**Key Investor Benefits:**\n• 100% foreign ownership with 0% personal income & capital gains tax.\n• Sponsor your spouse, children of any age, and domestic staff.\n• No physical residency requirement (stay outside UAE without losing visa).\n• Available for both ready and off-plan properties (minimum AED 2M valuation).${extraBlogNote}\n\nHere are prime **Golden Visa eligible properties** currently available:`,
+        properties: gvProps.slice(0, 4),
+        chips: [
+          ...(gvBlog ? [{ label: '📖 Read Golden Visa Guide', href: `/blog/${gvBlog.slug}`, gold: true }] : []),
+          { label: '🏙️ Luxury Apartments', query: 'show luxury apartments' },
+          { label: '🏖️ Private Villas', query: 'show villas in dubai' },
+          { label: '💬 Consult Golden Visa Advisor', query: 'talk to advisor' }
+        ]
+      };
+    }
+
+    // 6. ROI & Rental Yields / Investment (Live Filtered + Live Blog Citation)
     if (/roi|yield|investment|return|rental|invest|capital appreciation/i.test(text)) {
       const invProps = liveProperties.filter(p => p.category === 'commercial' || p.category === 'apartment' || (p.badge && p.badge.includes('Yield')));
+      const roiBlog = liveBlogs.find(b => b.slug.includes('outlook') || b.slug.includes('roi') || b.category === 'Market Insights');
+      let extraBlogNote = '';
+      if (roiBlog) {
+        extraBlogNote = `\n\n📖 **Live Research Article**: [${roiBlog.title}](/blog/${roiBlog.slug})`;
+      }
       return {
-        text: `**Dubai Real Estate Investment & ROI Analysis** 📈\n\nDubai consistently outperforms London, New York, and Singapore in net rental yields:\n\n• **Average Net Yield**: **7% to 10% tax-free** net annual return.\n• **High Capital Growth**: Master communities like Dubai Hills Estate and Dubai Creek Harbour have witnessed **18% - 25% YoY capital growth**.\n• **Zero Tax**: 0% property tax, 0% capital gains tax, and 0% tax on rental income.\n• **Escrow Protection**: All payments are safeguarded in DLD-regulated Escrow accounts.\n\nHere are our top investment picks with strong cash flow potential:`,
+        text: `**Dubai Real Estate Investment & ROI Analysis** 📈\n\nDubai consistently outperforms London, New York, and Singapore in net rental yields:\n\n• **Average Net Yield**: **7% to 10% tax-free** net annual return.\n• **High Capital Growth**: Master communities like Dubai Hills Estate and Dubai Creek Harbour have witnessed **18% - 25% YoY capital growth**.\n• **Zero Tax**: 0% property tax, 0% capital gains tax, and 0% tax on rental income.\n• **Escrow Protection**: All payments are safeguarded in DLD-regulated Escrow accounts.${extraBlogNote}\n\nHere are our top investment picks with strong cash flow potential:`,
         properties: (invProps.length > 0 ? invProps : liveProperties).slice(0, 3),
         chips: [
+          ...(roiBlog ? [{ label: '📈 2026 Market Report', href: `/blog/${roiBlog.slug}`, gold: true }] : []),
           { label: '🏢 High Yield Opportunities', query: 'show commercial properties' },
-          { label: '💬 Request ROI Breakdown PDF', query: 'talk to advisor', gold: true }
+          { label: '💬 Request ROI Breakdown PDF', query: 'talk to advisor' }
         ]
       };
     }
@@ -923,7 +1028,7 @@
     // 11. RERA / Legality / Safety
     if (/rera|legal|safe|permit|developer|trust|scam|dld/i.test(text)) {
       return {
-        text: `**Official Regulatory Security & RERA Compliance** 🛡️\n\nDRL Dwarika Real Estate LLC is an officially registered brokerage under:\n• **RERA Office Registration Number (ORN)**: **29482**\n• **Dubai Land Department (DLD) License**: **1092831**\n\nEvery listing on our platform undergoes strict title deed authentication. Furthermore, all buyer payments for off-plan transactions are deposited strictly into Central Bank-monitored escrow accounts, guaranteeing 100% legal security.`,
+        text: `**Official Regulatory Security & RERA Compliance** 🛡️\n\nDRL Dwarika Real Estate LLC is an officially registered brokerage under:\n• **RERA Office Registration Number (ORN)**: **29482**\n• **Dubai Land Department (DLD) License**: **1637547**\n\nEvery listing on our platform undergoes strict title deed authentication. Furthermore, all buyer payments for off-plan transactions are deposited strictly into Central Bank-monitored escrow accounts, guaranteeing 100% legal security.`,
         chips: [
           { label: '🏠 View Verified Properties', query: 'show all properties' },
           { label: '💬 Speak with Licensed Broker', query: 'talk to advisor' }
@@ -1021,7 +1126,7 @@
     props.forEach(p => {
       const card = document.createElement('div');
       card.className = 'drl-prop-card-chat';
-      const waLink = `https://wa.me/971501234567?text=Hello%20DRL%20Dwarika,%20my%20name%20is%20${encodeURIComponent(userData.name || 'Client')}%20and%20I%20am%20interested%20in%20${encodeURIComponent(p.title)}%20(${encodeURIComponent(p.price)})`;
+      const waLink = `https://wa.me/971542202920?text=Hello%20DRL%20Dwarika,%20my%20name%20is%20${encodeURIComponent(userData.name || 'Client')}%20and%20I%20am%20interested%20in%20${encodeURIComponent(p.title)}%20(${encodeURIComponent(p.price)})`;
 
       card.innerHTML = `
         <div class="drl-prop-chat-thumb">
@@ -1118,5 +1223,26 @@
   } else {
     window.addEventListener('load', scheduleInit, { once: true });
   }
+
+  /* ============================================================
+     12. PUBLIC API CONTROLS (GLOBAL WINDOW EXPORTS)
+  ============================================================ */
+  window.refreshChatbotKnowledge = function (force = true) {
+    return syncKnowledgeBase(force);
+  };
+
+  window.drlChat = {
+    open: () => { if (!chatOpen) toggleChat(); },
+    close: () => { if (chatOpen) toggleChat(); },
+    toggle: toggleChat,
+    restart: restartChat,
+    refreshKnowledge: (force = true) => syncKnowledgeBase(force),
+    getLiveProperties: () => liveProperties,
+    getLiveBlogs: () => liveBlogs,
+    getLiveLocations: () => liveLocations,
+    getLiveServices: () => liveServices,
+    getLiveAgents: () => liveAgents,
+    getLiveSettings: () => liveSettings
+  };
 
 })();

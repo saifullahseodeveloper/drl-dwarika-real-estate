@@ -76,6 +76,10 @@ $curNav = $activeNav ?? 'dashboard';
         </a>
 
         <div class="nav-group-title">SYSTEM & SEO</div>
+        <a href="/admin/tools" class="nav-item <?= $curNav === 'tools' ? 'active' : '' ?>">
+          <i class="fa-solid fa-calculator"></i>
+          <span>Tools &amp; Calculators</span>
+        </a>
         <a href="/admin/seo" class="nav-item <?= $curNav === 'seo' ? 'active' : '' ?>">
           <i class="fa-solid fa-magnifying-glass-chart"></i>
           <span>SEO Management</span>

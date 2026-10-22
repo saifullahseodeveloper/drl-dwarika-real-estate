@@ -1,10 +1,10 @@
-<?php
+﻿<?php
 /**
  * Single Service Detail View
  */
 $benefits = json_decode($service['benefits'] ?? '[]', true) ?: [];
 $process = json_decode($service['process'] ?? '[]', true) ?: [];
-$cleanPhone = preg_replace('/[^0-9+]/', '', $settings['company_phone'] ?? '+971501234567');
+$cleanPhone = preg_replace('/[^0-9+]/', '', $settings['company_phone'] ?? '+971542202920');
 ?>
 
 <div class="page-banner">
@@ -106,7 +106,7 @@ $cleanPhone = preg_replace('/[^0-9+]/', '', $settings['company_phone'] ?? '+9715
 
           <div class="sidebar-call-box">
             <span>Or call us directly at:</span>
-            <a href="tel:<?= $cleanPhone ?>" class="phone-link"><?= e($settings['company_phone'] ?? '+971 50 123 4567') ?></a>
+            <a href="tel:<?= $cleanPhone ?>" class="phone-link"><?= e($settings['company_phone'] ?? '+971 542202920') ?></a>
           </div>
         </div>
 

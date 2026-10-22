@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Master Frontend Layout
  * DRL Dwarika Real Estate LLC
@@ -17,7 +17,7 @@ if (!str_starts_with($ogImage, 'http')) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  
+
   <title><?= e($pageTitle) ?></title>
   <meta name="description" content="<?= e($pageDesc) ?>">
   <meta name="robots" content="index, follow">
@@ -37,41 +37,45 @@ if (!str_starts_with($ogImage, 'http')) {
   <meta name="twitter:description" content="<?= e($pageDesc) ?>">
   <meta name="twitter:image" content="<?= e($ogImage) ?>">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/assets/images/logo.png">
+  <!-- Favicon (SVG - zero cost) -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/logo.svg">
+  <link rel="icon" type="image/png" href="/assets/images/logo.png" sizes="32x32">
+
+  <!-- DNS Prefetch + Preconnect for external resources -->
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
   <!-- Preload Local WOFF2 Webfonts for Instant 0ms Paint -->
   <link rel="preload" href="/assets/fonts/playfair-display.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
 
   <?php if (($activeNav ?? '') === 'home'): ?>
-  <!-- Preload LCP Hero Image for Instant Mobile & Desktop Painting -->
+  <!-- Preload LCP Hero Image — highest priority -->
   <link rel="preload" as="image" href="/assets/images/hero-building-mobile-v3.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
   <link rel="preload" as="image" href="/assets/images/hero-building-v3.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
   <?php endif; ?>
 
-  <!-- Inline Critical Above-The-Fold CSS for Instant 0ms Render-Blocking Paint -->
-  <?php 
+  <!-- Inline Critical CSS (zero render-blocking) -->
+  <?php
   $criticalCssPath = (defined('APP_ROOT') ? APP_ROOT : dirname(__DIR__, 2)) . '/public/assets/css/critical.min.css';
   if (file_exists($criticalCssPath)): ?>
     <style id="critical-css"><?= file_get_contents($criticalCssPath) ?></style>
-    <link rel="stylesheet" href="/assets/css/styles.min.css" media="print" onload="this.media='all'">
+    <!-- Load full CSS non-blocking via print trick -->
+    <link rel="stylesheet" href="/assets/css/styles.min.css" media="print" onload="this.media='all'; this.onload=null;">
     <noscript><link rel="stylesheet" href="/assets/css/styles.min.css"></noscript>
   <?php else: ?>
     <link rel="stylesheet" href="/assets/css/styles.min.css">
   <?php endif; ?>
 
-  <!-- AI Concierge Stylesheet (Non-blocking) -->
-  <link rel="stylesheet" href="/assets/css/chatbot.css" media="print" onload="this.media='all'">
+  <!-- Chatbot CSS deferred (non-blocking) -->
+  <link rel="stylesheet" href="/assets/css/chatbot.css" media="print" onload="this.media='all'; this.onload=null;">
   <noscript><link rel="stylesheet" href="/assets/css/chatbot.css"></noscript>
 
-  <!-- Font Awesome 6 (Non-blocking async load) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  </noscript>
+  <!-- Font Awesome: preload then swap to all — avoids render-blocking -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.rel='stylesheet'; this.onload=null;" crossorigin="anonymous">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous"></noscript>
 
-  <!-- JSON-LD Structured Data: Organization & RealEstateAgent -->
+  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -79,13 +83,13 @@ if (!str_starts_with($ogImage, 'http')) {
     "name": "DRL Dwarika Real Estate LLC",
     "legalName": "DRL Dwarika Real Estate LLC",
     "url": "https://dwarikarealestate.ae",
-    "logo": "https://dwarikarealestate.ae/assets/images/logo.png",
-    "image": "https://dwarikarealestate.ae/assets/images/design-reference.jpg",
-    "telephone": "+971501234567",
-    "email": "info@dwarikarealestate.ae",
+    "logo": "https://dwarikarealestate.ae/assets/images/logo.svg",
+    "image": "https://dwarikarealestate.ae/assets/images/design-reference.webp",
+    "telephone": "+971542202920",
+    "email": "admin@dwarikarealestate.ae",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Office 702, Prime Tower, Business Bay",
+      "streetAddress": "Office No. 65-0, El Shaye - 4, 28th Street, Port Saeed, Deira",
       "addressLocality": "Dubai",
       "addressRegion": "Dubai",
       "addressCountry": "AE"
@@ -141,7 +145,27 @@ if (!str_starts_with($ogImage, 'http')) {
 
   <!-- Core JavaScript (Minified & Deferred) -->
   <script src="/assets/js/app.min.js" defer></script>
-  <!-- Noor AI Luxury Property Concierge Script -->
-  <script src="/assets/js/chatbot.js" defer></script>
+
+  <!-- Noor AI Chatbot: Lazy-load ONLY after first user interaction -->
+  <!-- This saves ~52KB from initial page load, improving LCP & TTI -->
+  <script>
+  (function() {
+    var chatbotLoaded = false;
+    function loadChatbot() {
+      if (chatbotLoaded) return;
+      chatbotLoaded = true;
+      var s = document.createElement('script');
+      s.src = '/assets/js/chatbot.min.js';
+      s.defer = true;
+      document.head.appendChild(s);
+    }
+    // Load on first meaningful interaction
+    ['mousedown','touchstart','keydown','scroll','mousemove'].forEach(function(evt) {
+      document.addEventListener(evt, loadChatbot, { once: true, passive: true });
+    });
+    // Fallback: load after 5 seconds regardless
+    setTimeout(loadChatbot, 5000);
+  })();
+  </script>
 </body>
 </html>

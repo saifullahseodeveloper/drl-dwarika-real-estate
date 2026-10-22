@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 declare(strict_types=1);
 
 /**
@@ -24,11 +24,11 @@ return [
         'logo'        => 'https://dwarikarealestate.ae/assets/images/logo.png',
         'image'       => 'https://dwarikarealestate.ae/assets/images/design-reference.jpg',
         'description' => 'Premier Dubai real estate brokerage assisting clients in buying, selling, and investing in luxury UAE properties.',
-        'telephone'   => '+971501234567',
-        'email'       => 'info@dwarikarealestate.ae',
+        'telephone'   => '+971542202920',
+        'email'       => 'admin@dwarikarealestate.ae',
         'address'     => [
             '@type'           => 'PostalAddress',
-            'streetAddress'   => 'Office 702, Prime Tower, Business Bay',
+            'streetAddress'   => 'Office No. 65-0, El Shaye - 4, 28th Street, Port Saeed, Deira',
             'addressLocality' => 'Dubai',
             'addressRegion'   => 'Dubai',
             'postalCode'      => '00000',

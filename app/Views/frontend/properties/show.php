@@ -1,10 +1,10 @@
-<?php
+﻿<?php
 /**
  * Single Property Detail View
  * DRL Dwarika Real Estate LLC
  */
-$cleanPhone = preg_replace('/[^0-9+]/', '', $settings['company_phone'] ?? '+971501234567');
-$waPhone = preg_replace('/[^0-9]/', '', $settings['company_whatsapp'] ?? '971501234567');
+$cleanPhone = preg_replace('/[^0-9+]/', '', $settings['company_phone'] ?? '+971542202920');
+$waPhone = preg_replace('/[^0-9]/', '', $settings['company_whatsapp'] ?? '971542202920');
 $currentUrl = 'https://dwarikarealestate.ae/property/' . $property['slug'];
 ?>
 

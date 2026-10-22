@@ -2,12 +2,12 @@
   "settings": {
     "site_name": "DRL Dwarika Real Estate LLC",
     "site_tagline": "Opening Doors To Prosperity",
-    "company_phone": "+971 50 123 4567",
-    "company_whatsapp": "971501234567",
-    "company_email": "info@dwarikarealestate.ae",
-    "company_address": "Office 702, Prime Tower, Business Bay, Dubai, United Arab Emirates",
-    "rera_orn": "29482",
-    "dld_license": "1092831",
+    "company_phone": "+971 542202920",
+    "company_whatsapp": "971542202920",
+    "company_email": "admin@dwarikarealestate.ae",
+    "company_address": "Office No. 65-0, El Shaye - 4, 28th Street, Port Saeed, Deira Dubai, UAE",
+    "rera_orn": "63750",
+    "dld_license": "1637547",
     "stat_properties_sold": "100+",
     "stat_happy_clients": "50+",
     "stat_years_experience": "5+",
@@ -749,7 +749,7 @@
       "leadership_areas": "Strategic Vision, Institutional Alliances, Corporate Governance, Market Expansion",
       "quote": "Opening doors to prosperity through uncompromising transparency, ethical counsel, and enduring value creation for our clients.",
       "email": "rajesh.dwarika@dwarikarealestate.ae",
-      "phone": "+971 50 123 4567",
+      "phone": "+971 542202920",
       "linkedin_url": "https://linkedin.com",
       "status": "published",
       "missing_fields": "",
@@ -772,6 +772,84 @@
       "status": "published",
       "missing_fields": "",
       "sort_order": 2
+    }
+  ],
+  "blogs": [
+    {
+      "id": 1,
+      "title": "UAE Golden Visa via Real Estate Investment: Complete 2026 Guide",
+      "slug": "uae-golden-visa-property-guide-2026",
+      "category": "Golden Visa",
+      "author": "Vikram Dwarika",
+      "published_at": "2026-02-15",
+      "status": "published",
+      "is_featured": 1,
+      "featured_image": "/assets/images/villa-dubai-hills.jpg",
+      "excerpt": "Comprehensive step-by-step breakdown of how investors qualify for the renewable 10-year UAE Golden Visa by acquiring freehold property worth AED 2,000,000+.",
+      "content": "The UAE Golden Visa residency program enables foreign investors, entrepreneurs, and high-net-worth individuals to obtain a renewable 10-year residency permit without needing a national sponsor. Under Dubai Land Department (DLD) regulations, real estate investors purchasing one or more freehold properties with a total minimum equity value of AED 2,000,000 (~$545,000 USD) are eligible. Investors enjoy 100% company ownership, 0% personal tax, family sponsorship including spouse and children of any age, and the right to stay outside the UAE without voiding the visa.",
+      "tags": [
+        "Golden Visa",
+        "Dubai Real Estate",
+        "Tax Free",
+        "Investment"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Dubai Real Estate Market Outlook 2026: Capital Growth & Rental Yields",
+      "slug": "dubai-real-estate-market-outlook-2026",
+      "category": "Market Insights",
+      "author": "Rajesh Dwarika",
+      "published_at": "2026-03-01",
+      "status": "published",
+      "is_featured": 1,
+      "featured_image": "/assets/images/apartment-downtown.jpg",
+      "excerpt": "Analysis of key market drivers, master community price indices, and why Dubai yields 7% to 10% net tax-free returns outperforming London and New York.",
+      "content": "Dubai real estate in 2026 continues its exceptional upward trajectory driven by robust population inflows, transparent regulatory safeguards, and international capital flight. Prime districts including Downtown Dubai, Dubai Hills Estate, and Palm Jumeirah have seen sustained annual capital appreciation of 14% to 22%. Net rental yields consistently average between 7% and 9.5%, backed by zero municipal taxes and strict DLD escrow accounts safeguarding buyer capital.",
+      "tags": [
+        "Market Outlook",
+        "Rental Yields",
+        "ROI",
+        "Downtown Dubai"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Off-Plan vs Ready Properties in Dubai: Which Delivers Higher ROI?",
+      "slug": "off-plan-vs-ready-properties-dubai-roi",
+      "category": "Investment Advisory",
+      "author": "Elena Rostova",
+      "published_at": "2026-03-10",
+      "status": "published",
+      "is_featured": 0,
+      "featured_image": "/assets/images/offplan-creek.jpg",
+      "excerpt": "Strategic comparison of post-handover payment plans, capital growth potential, and immediate rental yields for off-plan versus secondary market properties.",
+      "content": "Deciding between off-plan and ready properties in Dubai depends on your capital strategy. Off-plan properties by tier-1 master developers like Emaar, Nakheel, and Sobha offer flexible 80/20 or post-handover payment plans, lower entry costs, and significant capital gains upon completion. On the other hand, ready properties in established communities like JVC and Business Bay provide instant rental yield from day one, ideal for immediate cash flow investors.",
+      "tags": [
+        "Off-Plan",
+        "Ready Property",
+        "Payment Plans",
+        "Emaar"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Top 5 Master Communities for Luxury Villa Living in Dubai",
+      "slug": "top-5-luxury-villa-communities-dubai",
+      "category": "Communities",
+      "author": "Vikram Dwarika",
+      "published_at": "2026-03-20",
+      "status": "published",
+      "is_featured": 0,
+      "featured_image": "/assets/images/penthouse-palm.jpg",
+      "excerpt": "Explore the most prestigious villa addresses in the emirate, from the golf greens of Dubai Hills Estate to the beachfront fronds of Palm Jumeirah.",
+      "content": "For discerning families and global executives seeking privacy, security, and world-class amenities, Dubai offers unmatched master-planned villa communities. Dubai Hills Estate features championship 18-hole golf courses, while Palm Jumeirah provides private beachfront mansions. Other elite enclaves like Jumeirah Golf Estates, Arabian Ranches, and District One offer verdant parks, international schools, and seamless commute to DIFC and Downtown.",
+      "tags": [
+        "Luxury Villas",
+        "Dubai Hills",
+        "Palm Jumeirah",
+        "Communities"
+      ]
     }
   ]
 }

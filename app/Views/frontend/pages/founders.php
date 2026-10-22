@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Founders & Corporate Leadership Page — DRL Dwarika Real Estate LLC
  */
@@ -304,8 +304,8 @@ $foundersList = $founders ?? [];
             <span>Connect with Executive Leadership</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
-          <a href="tel:<?= preg_replace('/[^0-9+]/', '', $settings['company_phone'] ?? '+971501234567') ?>" class="btn-call-subtle">
-            <i class="fa-solid fa-phone"></i> Call Corporate Office: <?= e($settings['company_phone'] ?? '+971 50 123 4567') ?>
+          <a href="tel:<?= preg_replace('/[^0-9+]/', '', $settings['company_phone'] ?? '+971542202920') ?>" class="btn-call-subtle">
+            <i class="fa-solid fa-phone"></i> Call Corporate Office: <?= e($settings['company_phone'] ?? '+971 542202920') ?>
           </a>
         </div>
       </div>

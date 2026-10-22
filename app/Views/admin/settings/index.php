@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin Settings Management View
  */
@@ -30,22 +30,22 @@
   <div class="form-row">
     <div class="form-group third-width">
       <label for="compPhone">Official Phone Number</label>
-      <input type="text" name="company_phone" id="compPhone" class="form-input" value="<?= e($settings['company_phone'] ?? '+971 50 123 4567') ?>" required>
+      <input type="text" name="company_phone" id="compPhone" class="form-input" value="<?= e($settings['company_phone'] ?? '+971 542202920') ?>" required>
     </div>
     <div class="form-group third-width">
-      <label for="compWa">WhatsApp Number (e.g. 971501234567)</label>
-      <input type="text" name="company_whatsapp" id="compWa" class="form-input" value="<?= e($settings['company_whatsapp'] ?? '971501234567') ?>" required>
+      <label for="compWa">WhatsApp Number (e.g. 971542202920)</label>
+      <input type="text" name="company_whatsapp" id="compWa" class="form-input" value="<?= e($settings['company_whatsapp'] ?? '971542202920') ?>" required>
     </div>
     <div class="form-group third-width">
       <label for="compEmail">Contact Email</label>
-      <input type="email" name="company_email" id="compEmail" class="form-input" value="<?= e($settings['company_email'] ?? 'info@dwarikarealestate.ae') ?>" required>
+      <input type="email" name="company_email" id="compEmail" class="form-input" value="<?= e($settings['company_email'] ?? 'admin@dwarikarealestate.ae') ?>" required>
     </div>
   </div>
 
   <div class="form-row">
     <div class="form-group full-width">
       <label for="compAddr">Office Address (Business Bay, Dubai)</label>
-      <input type="text" name="company_address" id="compAddr" class="form-input" value="<?= e($settings['company_address'] ?? 'Office 702, Prime Tower, Business Bay, Dubai, United Arab Emirates') ?>" required>
+      <input type="text" name="company_address" id="compAddr" class="form-input" value="<?= e($settings['company_address'] ?? 'Office No. 65-0, El Shaye - 4, 28th Street, Port Saeed, Deira Dubai, UAE') ?>" required>
     </div>
   </div>
 
@@ -57,7 +57,7 @@
     </div>
     <div class="form-group half-width">
       <label for="dldLic">DLD Commercial License</label>
-      <input type="text" name="dld_license" id="dldLic" class="form-input" value="<?= e($settings['dld_license'] ?? '1092831') ?>">
+      <input type="text" name="dld_license" id="dldLic" class="form-input" value="<?= e($settings['dld_license'] ?? '1637547') ?>">
     </div>
   </div>
 

@@ -10,6 +10,9 @@
     <p class="page-subtitle">Welcome back. Here is an overview of property performance, leads, and catalog status.</p>
   </div>
   <div class="header-actions">
+    <a href="/admin/tools" class="btn-admin-outline" id="btnAdminTools">
+      <i class="fa-solid fa-calculator"></i> SEO &amp; Growth Tools
+    </a>
     <a href="/admin/properties/create" class="btn-admin-primary" id="btnAdminAddProp">
       <i class="fa-solid fa-plus"></i> Add New Property
     </a>
@@ -67,6 +70,23 @@
   </div>
 </div>
 
+<!-- Interactive Growth & Inquiries Trend Chart -->
+<div class="admin-chart-container">
+  <div class="chart-header">
+    <div class="card-title-wrap">
+      <i class="fa-solid fa-chart-area text-primary"></i>
+      <h3>Inquiries &amp; Customer Acquisition Velocity</h3>
+    </div>
+    <div class="chart-time-toggle">
+      <button type="button" class="chart-time-btn active">Last 12 Months</button>
+      <a href="/admin/tools?tab=seo-roi" class="chart-time-btn"><i class="fa-solid fa-calculator"></i> Forecast ROI</a>
+    </div>
+  </div>
+  <div class="svg-chart-wrap" id="dashboardTrendsChart">
+    <!-- Rendered interactively by admin.js -->
+  </div>
+</div>
+
 <!-- Dashboard Two-Column Grid: Recent Inquiries & Properties -->
 <div class="dashboard-tables-grid">
   
@@ -88,7 +108,7 @@
             <th>Contact</th>
             <th>Property / Subject</th>
             <th>Status</th>
-            <th>Received</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -114,7 +134,16 @@
                     <?= ucfirst(e($lead['status'])) ?>
                   </span>
                 </td>
-                <td><small><?= date('M j, H:i', strtotime($lead['created_at'])) ?></small></td>
+                <td>
+                  <?php $cleanPhone = preg_replace('/[^0-9]/', '', $lead['phone'] ?? ''); ?>
+                  <?php if ($cleanPhone): ?>
+                    <a href="https://wa.me/<?= e($cleanPhone) ?>?text=Hello%20<?= urlencode($lead['name'] ?? 'Client') ?>,%20thank%20you%20for%20contacting%20DRL%20Dwarika%20Real%20Estate." target="_blank" rel="noopener" class="quick-wa-btn" title="Chat on WhatsApp">
+                      <i class="fa-brands fa-whatsapp"></i> Chat
+                    </a>
+                  <?php else: ?>
+                    <small class="text-muted">—</small>
+                  <?php endif; ?>
+                </td>
               </tr>
             <?php endforeach; ?>
           <?php else: ?>

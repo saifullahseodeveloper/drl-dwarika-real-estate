@@ -137,7 +137,8 @@ $router->get('/admin/founders', 'Admin\\FounderController@index', ['auth']);
 $router->get('/admin/founders/edit/{id}', 'Admin\\FounderController@edit', ['auth']);
 $router->post('/admin/founders/edit/{id}', 'Admin\\FounderController@update', ['auth']);
 
-// Admin SEO & Settings
+// Admin SEO, Tools & Settings
+$router->get('/admin/tools', 'Admin\\ToolsController@index', ['auth']);
 $router->get('/admin/seo', 'Admin\\SeoController@index', ['auth']);
 $router->get('/admin/settings', 'Admin\\SettingsController@index', ['auth']);
 $router->post('/admin/settings', 'Admin\\SettingsController@update', ['auth']);

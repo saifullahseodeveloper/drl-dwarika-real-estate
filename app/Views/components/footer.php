@@ -1,10 +1,10 @@
-<?php
+﻿<?php
 /**
  * Footer Component — Exact match to DRL Dwarika reference design
  */
-$phone = $settings['company_phone'] ?? '+971 50 123 4567';
+$phone = $settings['company_phone'] ?? '+971 542202920';
 $cleanPhone = preg_replace('/[^0-9+]/', '', $phone);
-$email = $settings['company_email'] ?? 'info@dwarikarealestate.ae';
+$email = $settings['company_email'] ?? 'admin@dwarikarealestate.ae';
 $address = $settings['company_address'] ?? 'Dubai, UAE';
 ?>
 <footer class="site-footer">

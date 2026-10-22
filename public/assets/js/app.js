@@ -25,13 +25,20 @@ document.addEventListener('DOMContentLoaded', () => {
   mobileDrawerClose?.addEventListener('click', closeMobileMenu);
   mobileBackdrop?.addEventListener('click', closeMobileMenu);
 
-  // 2. Header Scroll Shadow
+  // 2. Header Scroll Shadow (Optimized with requestAnimationFrame to eliminate Forced Reflow)
   const header = document.getElementById('siteHeader');
+  let scrollTicking = false;
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      header?.classList.add('scrolled');
-    } else {
-      header?.classList.remove('scrolled');
+    if (!scrollTicking) {
+      window.requestAnimationFrame(() => {
+        if (window.scrollY > 20) {
+          header?.classList.add('scrolled');
+        } else {
+          header?.classList.remove('scrolled');
+        }
+        scrollTicking = false;
+      });
+      scrollTicking = true;
     }
   }, { passive: true });
 

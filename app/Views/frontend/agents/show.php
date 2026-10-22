@@ -1,14 +1,14 @@
-<?php
+﻿<?php
 /**
  * Individual Agent Profile View — DRL Dwarika Real Estate LLC
  */
 $languages = $agent['languages'] ?? [];
 $specializations = $agent['specializations'] ?? [];
 $locations = $agent['locations'] ?? [];
-$phone = $agent['phone'] ?? '+971 50 123 4567';
+$phone = $agent['phone'] ?? '+971 542202920';
 $cleanPhone = preg_replace('/[^0-9+]/', '', $phone);
-$whatsapp = $agent['whatsapp'] ?? '971501234567';
-$email = $agent['email'] ?? 'info@dwarikarealestate.ae';
+$whatsapp = $agent['whatsapp'] ?? '971542202920';
+$email = $agent['email'] ?? 'admin@dwarikarealestate.ae';
 $photo = !empty($agent['photo_url']) ? $agent['photo_url'] : '/assets/images/agents/omar-farooq.jpg';
 $rera = $agent['rera_brn'] ?? '';
 $experience = $agent['experience'] ?? '';
@@ -231,7 +231,7 @@ $experience = $agent['experience'] ?? '';
 
             <div class="form-group">
               <label for="leadPhone">Phone / WhatsApp *</label>
-              <input type="tel" name="phone" id="leadPhone" class="form-input" required placeholder="+971 50 123 4567">
+              <input type="tel" name="phone" id="leadPhone" class="form-input" required placeholder="+971 542202920">
             </div>
 
             <div class="form-group">

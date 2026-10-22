@@ -1,14 +1,14 @@
-<?php
+﻿<?php
 /**
  * Agent Profile Card Component — DRL Dwarika Real Estate LLC
  */
 $languages = $agent['languages'] ?? [];
 $specializations = $agent['specializations'] ?? [];
 $locations = $agent['locations'] ?? [];
-$phone = $agent['phone'] ?? '+971 50 123 4567';
+$phone = $agent['phone'] ?? '+971 542202920';
 $cleanPhone = preg_replace('/[^0-9+]/', '', $phone);
-$whatsapp = $agent['whatsapp'] ?? '971501234567';
-$email = $agent['email'] ?? 'info@dwarikarealestate.ae';
+$whatsapp = $agent['whatsapp'] ?? '971542202920';
+$email = $agent['email'] ?? 'admin@dwarikarealestate.ae';
 $photo = !empty($agent['photo_url']) ? $agent['photo_url'] : '/assets/images/agents/omar-farooq.jpg';
 $webpPhoto = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $photo);
 $rera = $agent['rera_brn'] ?? '';
