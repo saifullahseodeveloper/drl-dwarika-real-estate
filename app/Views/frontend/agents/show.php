@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Individual Agent Profile View — DRL Dwarika Real Estate LLC
  */

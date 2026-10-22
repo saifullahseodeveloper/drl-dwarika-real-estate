@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Single Service Detail View
  */

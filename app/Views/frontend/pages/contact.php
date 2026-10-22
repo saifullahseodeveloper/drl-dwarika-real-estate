@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Contact Us Page View — DRL Dwarika Real Estate LLC
  */

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Founders & Corporate Leadership Page — DRL Dwarika Real Estate LLC
  */

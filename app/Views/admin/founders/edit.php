@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Admin Founder Edit Profile Form View
  */

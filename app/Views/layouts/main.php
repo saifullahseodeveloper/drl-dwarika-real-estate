@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Master Frontend Layout
  * DRL Dwarika Real Estate LLC

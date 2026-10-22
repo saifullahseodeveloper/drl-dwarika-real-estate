@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Single Property Detail View
  * DRL Dwarika Real Estate LLC

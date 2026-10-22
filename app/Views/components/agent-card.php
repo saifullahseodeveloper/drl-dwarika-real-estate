@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Agent Profile Card Component — DRL Dwarika Real Estate LLC
  */

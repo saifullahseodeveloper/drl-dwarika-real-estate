@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Admin Tools & Calculators View
  * Powered by Saifullah SEO Developer Utilities:

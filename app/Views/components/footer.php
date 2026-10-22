@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Footer Component — Exact match to DRL Dwarika reference design
  */

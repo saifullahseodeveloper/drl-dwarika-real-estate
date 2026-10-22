@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Header Component — Exact match to DRL Dwarika reference design
  */
