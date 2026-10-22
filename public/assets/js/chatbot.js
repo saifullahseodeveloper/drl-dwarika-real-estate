@@ -456,7 +456,7 @@
     setTimeout(() => {
       removeTypingIndicator();
       appendBotMessage(
-        `Marhaban & Welcome to **DRL Dwarika Real Estate LLC**, Dubai! ✨\n\nI am **Noor**, your personal AI Luxury Property Concierge.\n\nWhether you are looking for high-yield investment properties, beachfront villas on Palm Jumeirah, or Dubai Golden Visa opportunities, I'm here to assist you privately.\n\n**May I know who I have the pleasure of speaking with today?**`
+        `Marhaban & Welcome to **DRL Dwarika Real Estate LLC**, Dubai! ✨\n\nI am **Noor**, your personal AI Luxury Property Concierge.\n\nPlease enter your name`
       );
       chatInput.placeholder = 'Please enter your name... (e.g. Rahul, Aman, Sarah)';
       userData.stage = 'ASK_NAME';
