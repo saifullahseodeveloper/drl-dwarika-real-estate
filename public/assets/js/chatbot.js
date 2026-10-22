@@ -300,14 +300,16 @@
       const style = document.createElement('style');
       style.id = 'drlChatbotMobileStyles';
       style.textContent = `
+        /* Hide floating launcher completely on all devices when chat is open */
+        #drlChatLauncher.drl-chat-open,
+        .drl-chat-launcher.drl-chat-open {
+          display: none !important;
+          visibility: hidden !important;
+          pointer-events: none !important;
+          opacity: 0 !important;
+        }
+
         @media (max-width: 768px) {
-          #drlChatLauncher.drl-chat-open,
-          .drl-chat-launcher.drl-chat-open {
-            display: none !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-            opacity: 0 !important;
-          }
           #drlChatCallout,
           .drl-chat-callout {
             display: none !important;
@@ -469,9 +471,7 @@
       chatPanel.classList.add('active');
       if (launcher) {
         launcher.classList.add('drl-chat-open');
-        if (window.innerWidth <= 768) {
-          launcher.style.display = 'none';
-        }
+        launcher.style.display = 'none';
       }
       if (calloutEl) calloutEl.style.display = 'none';
       setTimeout(() => chatInput.focus(), 300);

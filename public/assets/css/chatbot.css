@@ -128,14 +128,13 @@
   transform: rotate(-90deg) scale(0.6);
 }
 
-.drl-chat-open .drl-launcher-icon-chat {
-  opacity: 0;
-  transform: rotate(90deg) scale(0.6);
-}
-
-.drl-chat-open .drl-launcher-icon-close {
-  opacity: 1;
-  transform: rotate(0) scale(1);
+/* When chat is open, hide the launcher button completely so it never overlaps the chat window, input box or send button */
+.drl-chat-launcher.drl-chat-open,
+.drl-chat-open {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 /* 2. Main Chat Panel Window */

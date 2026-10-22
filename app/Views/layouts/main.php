@@ -155,7 +155,7 @@ if (!str_starts_with($ogImage, 'http')) {
       if (chatbotLoaded) return;
       chatbotLoaded = true;
       var s = document.createElement('script');
-      s.src = '/assets/js/chatbot.min.js?v=3.0';
+      s.src = '/assets/js/chatbot.min.js?v=3.1';
       s.defer = true;
       document.head.appendChild(s);
     }
