@@ -285,7 +285,7 @@ function renderPage(title, content, activeNav = 'home', extraMeta = {}) {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, interactive-widget=resizes-content">
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(extraMeta.description || settings.site_name + ' - Luxury Real Estate in Dubai')}">
   <link rel="canonical" href="${canonical}">

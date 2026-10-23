@@ -15,7 +15,7 @@ if (!str_starts_with($ogImage, 'http')) {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, interactive-widget=resizes-content">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <title><?= e($pageTitle) ?></title>
