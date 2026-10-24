@@ -197,7 +197,7 @@
         8,
         9
       ],
-      "agent_id": 1
+      "agent_id": 7
     },
     {
       "id": 2,
@@ -260,7 +260,7 @@
         8,
         9
       ],
-      "agent_id": 3
+      "agent_id": 8
     },
     {
       "id": 4,
@@ -321,7 +321,7 @@
         7,
         10
       ],
-      "agent_id": 5
+      "agent_id": 9
     },
     {
       "id": 6,
@@ -546,22 +546,21 @@
   ],
   "agents": [
     {
-      "id": 1,
-      "name": "Omar Farooq",
-      "slug": "omar-farooq",
-      "designation": "Senior Luxury Property Consultant",
-      "rera_brn": "42918",
-      "experience": "9+ Years Experience",
-      "photo_url": "/assets/images/agents/omar-farooq.jpg",
-      "email": "omar.farooq@dwarikarealestate.ae",
-      "phone": "+971 50 234 5671",
-      "whatsapp": "971502345671",
-      "short_bio": "Specializing in prime villa communities across Dubai Hills Estate and luxury enclaves, Omar brings nearly a decade of high-end advisory experience to discerning home buyers and private investors.",
-      "full_bio": "Omar Farooq is a Senior Luxury Property Consultant at DRL Dwarika Real Estate LLC, licensed under Dubai Land Department (RERA BRN: 42918). Over nine years of distinguished service in Dubai's prime residential market, Omar has advised ultra-high-net-worth families, expatriate executives, and international institutional clients on acquiring trophy properties across master-planned developments.\n\nHis core advisory portfolio includes luxury standalone villas, golf course estates, and off-plan turnkey acquisitions in Dubai Hills Estate, Emirates Hills, and Downtown Dubai. Renowned for his analytical precision and transparent negotiation demeanor, Omar manages every transaction with uncompromising discretion and regulatory diligence.",
+      "id": 7,
+      "name": "Jeet Chande",
+      "slug": "jeet-chande",
+      "designation": "Portfolio Manager, Dubai Real Estate",
+      "rera_brn": "58214",
+      "experience": "Close to 3 Years",
+      "photo_url": "/assets/images/agents/jeet-chande.jpg",
+      "email": "jeet.chande@dwarikarealestate.ae",
+      "phone": "+971 54 220 2920",
+      "whatsapp": "971542202920",
+      "short_bio": "With close to three years in Dubai real estate, Jeet specialises in luxury and prime properties. He works with high-value clients to identify investments in sought-after communities, combining sharp market knowledge with a strategic eye for capital appreciation and long-term wealth creation.",
+      "full_bio": "With close to three years in Dubai real estate, Jeet specialises in luxury and prime properties. He works with high-value clients to identify investments in sought-after communities, combining sharp market knowledge with a strategic eye for capital appreciation and long-term wealth creation.\n\nJeet focuses on high-yield opportunities, off-plan portfolio allocations, and secondary market prime residences across Dubai's most desirable master-planned developments. His analytical approach and client-first commitment ensure tailored investment strategies aligned with long-term financial prosperity.",
       "languages": [
         "English",
-        "Arabic",
-        "Urdu"
+        "Hindi"
       ],
       "specializations": [
         "luxury",
@@ -569,209 +568,98 @@
         "off-plan"
       ],
       "locations": [
+        "Downtown Dubai",
         "Dubai Hills Estate",
-        "Downtown Dubai"
+        "Palm Jumeirah"
       ],
-      "testimonial_quote": "Omar's deep understanding of Dubai Hills Estate was invaluable. He negotiated the best possible price for our family villa and navigated the DLD paperwork seamlessly.",
-      "testimonial_client": "Amit Sharma, Homeowner",
+      "testimonial_quote": "Jeet understood our investment goals from day one and secured a prime luxury unit with strong capital growth potential.",
+      "testimonial_client": "Hassan Al-Nuaimi, Private Investor",
       "status": "active",
       "sort_order": 1
     },
     {
-      "id": 2,
-      "name": "Elena Rostova",
-      "slug": "elena-rostova",
-      "designation": "Downtown & Waterfront Specialist",
-      "rera_brn": "51820",
-      "experience": "7+ Years Experience",
-      "photo_url": "/assets/images/agents/elena-rostova.jpg",
-      "email": "elena.rostova@dwarikarealestate.ae",
-      "phone": "+971 50 345 6782",
-      "whatsapp": "971503456782",
-      "short_bio": "Elena is an authority on luxury high-rise residences, serviced penthouses, and waterfront apartments in Downtown Dubai and Palm Jumeirah, serving international private wealth clients.",
-      "full_bio": "Elena Rostova joined DRL Dwarika Real Estate LLC with an established reputation across European and CIS investor networks. With over 7 years in the Dubai real estate ecosystem, Elena focuses exclusively on high-yielding Downtown Dubai apartments, luxury sky residences, and branded beachfront developments.\n\nShe holds extensive expertise in rental yield optimization, corporate tenant placement, and cross-border currency conveyancing under UAE banking frameworks. Fluent in English, Russian, and conversational French, Elena provides tailored concierge advisory for international buyers seeking safe-haven capital deployment and Golden Visa qualifying assets.",
+      "id": 8,
+      "name": "Pragati Pandey",
+      "slug": "pragati-pandey",
+      "designation": "Portfolio Manager, Dubai Real Estate",
+      "rera_brn": "59432",
+      "experience": "2.5 Years Experience",
+      "photo_url": "/assets/images/agents/pragati-pandey.jpg",
+      "email": "pragati.pandey@dwarikarealestate.ae",
+      "phone": "+971 54 220 2920",
+      "whatsapp": "971542202920",
+      "short_bio": "Pragati brings two and a half years of sales experience and a client-first approach to Dubai's evolving property market. She focuses on emerging communities with strong growth potential, guiding investors with clear, tailored advice so they can make confident decisions and build lasting value.",
+      "full_bio": "Pragati brings two and a half years of sales experience and a client-first approach to Dubai's evolving property market. She focuses on emerging communities with strong growth potential, guiding investors with clear, tailored advice so they can make confident decisions and build lasting value.\n\nHer advisory practice centers on end-user families and first-time investors looking for emerging growth corridors, strong rental yields, and seamless transaction management under Dubai Land Department frameworks.",
       "languages": [
         "English",
-        "Russian",
-        "French"
+        "Hindi"
       ],
       "specializations": [
-        "luxury",
         "residential",
+        "off-plan",
         "rental"
       ],
       "locations": [
-        "Downtown Dubai",
-        "Palm Jumeirah"
+        "Jumeirah Village Circle (JVC)",
+        "Dubai Hills Estate",
+        "Dubai Creek Harbour"
       ],
-      "testimonial_quote": "Elena found our Downtown apartment within three days of our arrival in Dubai. Her insight into rental yield forecasts was spot on.",
-      "testimonial_client": "Sophie Laurent, Paris Investor",
+      "testimonial_quote": "Pragati's tailored advice gave us the confidence to invest in Dubai. She guided us transparently through every single step.",
+      "testimonial_client": "Rohan & Ananya Verma, Investors",
       "status": "active",
       "sort_order": 2
     },
     {
-      "id": 3,
-      "name": "Sarah Al-Mansoori",
-      "slug": "sarah-al-mansoori",
-      "designation": "Senior Residential Consultant",
-      "rera_brn": "49102",
-      "experience": "6+ Years Experience",
-      "photo_url": "/assets/images/agents/sarah-al-mansoori.jpg",
-      "email": "sarah.almansoori@dwarikarealestate.ae",
-      "phone": "+971 50 567 8904",
-      "whatsapp": "971505678904",
-      "short_bio": "Specializing in family-centric communities, modern townhouses, and high-yield suburban developments, Sarah delivers warm, dedicated guidance for first-time buyers and growing families.",
-      "full_bio": "Sarah Al-Mansoori is a certified Dubai real estate consultant specializing in master-planned communities including Jumeirah Village Circle (JVC), Dubai Hills Estate, and Arabian Ranches. With six years of client-centric practice, Sarah has helped hundreds of local and expatriate families secure their dream homes.\n\nHer thorough knowledge of community amenities, international school catchments, park networks, and service charges makes her the go-to advisor for end-user buyers. Sarah is renowned for her patience, transparent guidance on mortgage pre-approvals, and post-handover utility setups.",
+      "id": 9,
+      "name": "Dheera Saxena",
+      "slug": "dheera-saxena",
+      "designation": "Portfolio Manager, Dubai Real Estate",
+      "rera_brn": "57891",
+      "experience": "Nearly 3 Years Experience",
+      "photo_url": "/assets/images/agents/dheera-saxena.jpg",
+      "email": "dheera.saxena@dwarikarealestate.ae",
+      "phone": "+971 54 220 2920",
+      "whatsapp": "971542202920",
+      "short_bio": "With nearly three years in the industry, Dheera builds every investment strategy around the client's goals. She is known for her personalised approach, matching investors with properties that fit their budget, timeline and vision, and supporting them at every step from shortlisting to purchase.",
+      "full_bio": "With nearly three years in the industry, Dheera builds every investment strategy around the client's goals. She is known for her personalised approach, matching investors with properties that fit their budget, timeline and vision, and supporting them at every step from shortlisting to purchase.\n\nFrom initial shortlisting and developer comparative analysis to conveyancing and post-handover property asset management, Dheera provides dedicated guidance ensuring every investment delivers maximum peace of mind and enduring value.",
       "languages": [
         "English",
-        "Arabic"
+        "Hindi"
       ],
       "specializations": [
         "residential",
-        "rental",
+        "luxury",
         "off-plan"
       ],
       "locations": [
-        "Jumeirah Village Circle (JVC)",
+        "Business Bay",
+        "Downtown Dubai",
         "Dubai Hills Estate"
       ],
-      "testimonial_quote": "Sarah helped our family navigate our first home purchase in JVC with genuine care. She made what felt daunting into a joyful experience.",
-      "testimonial_client": "Priya Nair, Homeowner",
+      "testimonial_quote": "Dheera matched us with a property that perfectly matched our budget and vision. Truly exceptional and personalized service.",
+      "testimonial_client": "Kavita Mehrotra, Homebuyer",
       "status": "active",
       "sort_order": 3
-    },
-    {
-      "id": 4,
-      "name": "Leila Hadid",
-      "slug": "leila-hadid",
-      "designation": "Ultra-Luxury & Penthouse Specialist",
-      "rera_brn": "47812",
-      "experience": "8+ Years Experience",
-      "photo_url": "/assets/images/agents/leila-hadid.jpg",
-      "email": "leila.hadid@dwarikarealestate.ae",
-      "phone": "+971 50 789 0126",
-      "whatsapp": "971507890126",
-      "short_bio": "Representing elite architectural masterpieces, beachfront estates on Palm Jumeirah, and bespoke sky penthouses, Leila offers private clients unparalleled access to off-market luxury listings.",
-      "full_bio": "Leila Hadid is one of Dubai's most respected luxury residential advisors, specializing in ultra-prime beachfront properties on Palm Jumeirah, waterfront mansions, and crown penthouses. Leila operates at the pinnacle of the Dubai luxury market, representing international ultra-high-net-worth clients, celebrity buyers, and royal family offices.\n\nKnown for her impeccable taste, discretion, and access to private pocket listings never advertised publicly, Leila provides white-glove advisory from initial confidential consultation through to title deed escrow settlement.",
-      "languages": [
-        "English",
-        "Arabic",
-        "French"
-      ],
-      "specializations": [
-        "luxury",
-        "residential",
-        "off-plan"
-      ],
-      "locations": [
-        "Palm Jumeirah",
-        "Dubai Creek Harbour"
-      ],
-      "testimonial_quote": "Leila's access to off-market Palm Jumeirah residences was unmatched. She handled our transaction with the highest level of confidentiality.",
-      "testimonial_client": "Tariq Mansoor, Private Investor",
-      "status": "active",
-      "sort_order": 4
-    },
-    {
-      "id": 5,
-      "name": "Marcus Vance",
-      "slug": "marcus-vance",
-      "designation": "Commercial Real Estate Director",
-      "rera_brn": "36219",
-      "experience": "14+ Years Experience",
-      "photo_url": "/assets/images/agents/marcus-vance.jpg",
-      "email": "marcus.vance@dwarikarealestate.ae",
-      "phone": "+971 50 678 9015",
-      "whatsapp": "971506789015",
-      "short_bio": "With 14 years of commercial brokerage experience in the UK and UAE, Marcus advises multinational corporations, tech firms, and private funds on Grade-A office acquisitions and commercial leases.",
-      "full_bio": "Marcus Vance leads the Commercial Brokerage division at DRL Dwarika Real Estate LLC. Prior to joining the Dubai market eight years ago, Marcus advised FTSE 100 corporations on office relocations across London's financial district. In Dubai, he has transacted over 350,000 square feet of prime commercial real estate in Business Bay, DIFC, and Downtown Dubai.\n\nHis expertise encompasses commercial lease negotiations, corporate fit-out feasibility, freezone versus mainland licensing considerations, and sale-and-leaseback transactions for institutional property holders.",
-      "languages": [
-        "English"
-      ],
-      "specializations": [
-        "commercial",
-        "investment",
-        "luxury"
-      ],
-      "locations": [
-        "Business Bay",
-        "Downtown Dubai"
-      ],
-      "testimonial_quote": "Marcus negotiated our corporate headquarters lease in Business Bay with total professionalism. We secured excellent terms and saved weeks of administrative delay.",
-      "testimonial_client": "David K., Regional Managing Director",
-      "status": "active",
-      "sort_order": 5
-    },
-    {
-      "id": 6,
-      "name": "Rahul Kapoor",
-      "slug": "rahul-kapoor",
-      "designation": "Off-Plan & Investment Advisory Director",
-      "rera_brn": "38945",
-      "experience": "11+ Years Experience",
-      "photo_url": "/assets/images/agents/rahul-kapoor.jpg",
-      "email": "rahul.kapoor@dwarikarealestate.ae",
-      "phone": "+971 50 456 7893",
-      "whatsapp": "971504567893",
-      "short_bio": "A veteran real estate financial analyst and off-plan strategist, Rahul guides global portfolio investors in securing early-stage launch allocations with optimal capital appreciation trajectories.",
-      "full_bio": "Rahul Kapoor brings over eleven years of structured investment experience across Dubai's capital markets and top-tier master developers including Emaar, Nakheel, and Meraas. At DRL Dwarika Real Estate LLC, Rahul spearheads off-plan portfolio advisory, developer allotment negotiations, and ROI modeling for high-net-worth individuals and family offices.\n\nHis analytical approach breaks down construction milestones, escrow account protections, secondary market liquidity cycles, and tax-efficient UAE structuring. Rahul is a frequent market commentator and trusted advisor to investors seeking 8-12% target annualized returns.",
-      "languages": [
-        "English",
-        "Hindi",
-        "Urdu"
-      ],
-      "specializations": [
-        "off-plan",
-        "commercial",
-        "residential"
-      ],
-      "locations": [
-        "Dubai Creek Harbour",
-        "Business Bay",
-        "Downtown Dubai"
-      ],
-      "testimonial_quote": "Rahul's investment models for Dubai Creek Harbour gave us total confidence. His pre-launch access saved us significant capital.",
-      "testimonial_client": "Rajesh Patel, TechCorp India",
-      "status": "active",
-      "sort_order": 6
     }
   ],
   "founders": [
     {
       "id": 1,
-      "name": "Rajesh Dwarika",
-      "slug": "rajesh-dwarika",
-      "designation": "Founder & Managing Director",
-      "photo_url": "/assets/images/founders/founder-rajesh-dwarika.jpg",
-      "short_bio": "Founding visionary steering DRL Dwarika Real Estate LLC. Oversees strategic institutional vision, high-net-worth portfolio advisory, and corporate governance.",
-      "full_bio": "Rajesh Dwarika founded DRL Dwarika Real Estate LLC with a steadfast commitment to market transparency, professional governance, and sustainable investor prosperity across the United Arab Emirates.\n\nWith over two decades of capital markets and real estate advisory experience, Rajesh has cemented strategic alliances with Dubai's premier master developers including Emaar, Nakheel, Meraas, and Damac. Headquartered in Business Bay, he leads an international team delivering institutional-grade advisory, off-market acquisitions, and luxury residential conveyance under Dubai Land Department regulatory frameworks.\n\nHis guiding philosophy—Opening Doors to Prosperity—reflects an unyielding dedication to safeguarding investor capital and building enduring generational value.",
-      "background": "Real Estate Brokerage Leadership, Institutional Capital Markets, Dubai Land Department Regulatory Frameworks",
-      "leadership_areas": "Strategic Vision, Institutional Alliances, Corporate Governance, Market Expansion",
-      "quote": "Opening doors to prosperity through uncompromising transparency, ethical counsel, and enduring value creation for our clients.",
-      "email": "rajesh.dwarika@dwarikarealestate.ae",
-      "phone": "+971 542202920",
+      "name": "Nitin Saxena",
+      "slug": "nitin-saxena",
+      "designation": "Founder",
+      "photo_url": "/assets/images/founders/founder-nitin-saxena.jpg",
+      "short_bio": "At DRL – Dwarika Real Estate LLC, our vision goes beyond property transactions. We strive to create lasting relationships, build trust, and open doors to opportunities that help our clients achieve their dreams.",
+      "full_bio": "At DRL – Dwarika Real Estate LLC, our vision goes beyond property transactions. We strive to create lasting relationships, build trust, and open doors to opportunities that help our clients achieve their dreams.\n\nWe believe that real estate is not just about buying or selling properties; it is about finding the right place to build a future, make investments with confidence, and create lasting value. Every client deserves transparency, professionalism, and a personalized approach, and these principles remain at the heart of everything we do.\n\nAs we continue to grow, our commitment remains the same: to deliver excellence, uphold integrity, and provide real estate solutions that inspire confidence and peace of mind.\n\nThank you to our clients, partners, and team for being an integral part of our journey. Your trust motivates us to aim higher and achieve more every day.\n\nTogether, let us build opportunities, create value, and turn aspirations into reality.\n\nWarm Regards,\nNitin Saxena, Founder\nDRL – Dwarika Real Estate LLC\nOpening Doors to Prosperity.",
+      "background": "Real Estate Leadership, Client Advisory, Strategic Investment Governance",
+      "leadership_areas": "Corporate Vision, Client Trust & Integrity, Strategic Growth, Value Creation",
+      "quote": "Together, let us build opportunities, create value, and turn aspirations into reality.",
+      "email": "nitin.saxena@dwarikarealestate.ae",
+      "phone": "+971 54 220 2920",
       "linkedin_url": "https://linkedin.com",
       "status": "published",
       "missing_fields": "",
       "sort_order": 1
-    },
-    {
-      "id": 2,
-      "name": "Vikram Singhania",
-      "slug": "vikram-singhania",
-      "designation": "Co-Founder & Chief Operating Officer",
-      "photo_url": "/assets/images/founders/founder-vikram-singhania.jpg",
-      "short_bio": "Directs brokerage operations, developer relations, transaction integrity, and digital property intelligence systems.",
-      "full_bio": "Vikram Singhania leads operational execution and transaction integrity at DRL Dwarika Real Estate LLC, overseeing end-to-end conveyance, escrow compliance, and advanced property intelligence operations.\n\nWith extensive background in multinational property brokerage administration and developer relations, Vikram ensures that every transaction—from prime off-plan allocation to turnkey freehold conveyance—is executed with frictionless accuracy and stringent RERA compliance.\n\nHe oversees Dwarika's specialized advisory desks across Downtown Dubai, Dubai Hills Estate, and Palm Jumeirah.",
-      "background": "Real Estate Operations, Developer Portfolios, Escrow & Conveyance Governance, Client Experience",
-      "leadership_areas": "Brokerage Operations, Developer Alliances, CRM Systems, RERA Regulatory Compliance",
-      "quote": "Excellence in real estate is built upon trust, operational rigor, and relentless dedication to our investors.",
-      "email": "vikram.singhania@dwarikarealestate.ae",
-      "phone": "+971 50 123 4568",
-      "linkedin_url": "https://linkedin.com",
-      "status": "published",
-      "missing_fields": "",
-      "sort_order": 2
     }
   ],
   "blogs": [

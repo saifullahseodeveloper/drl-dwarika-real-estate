@@ -152,10 +152,10 @@ $foundersList = $founders ?? [];
   <div class="container quote-container">
     <div class="quote-symbol"><i class="fa-solid fa-quote-left"></i></div>
     <blockquote class="editorial-quote">
-      &ldquo;Our vision for DRL Dwarika Real Estate LLC was built on a simple yet unyielding principle: that genuine real estate success is rooted in client trust, regulatory transparency, and unwavering long-term dedication.&rdquo;
+      &ldquo;Together, let us build opportunities, create value, and turn aspirations into reality.&rdquo;
     </blockquote>
     <div class="quote-attribution">
-      — Executive Leadership Team, DRL Dwarika Real Estate LLC
+      — Nitin Saxena, Founder &bull; DRL – Dwarika Real Estate LLC
     </div>
   </div>
 </section>
@@ -165,9 +165,9 @@ $foundersList = $founders ?? [];
   <div class="container">
     
     <div class="section-header">
-      <span class="section-badge">— EXECUTIVE LEADERSHIP —</span>
-      <h2 class="section-title">Founders &amp; Leadership Directorate</h2>
-      <p class="section-subtitle">Meet the leadership steering strategy, strategic alliances, and governance for DRL Dwarika Real Estate LLC.</p>
+      <span class="section-badge">— A MESSAGE FROM THE FOUNDER —</span>
+      <h2 class="section-title">Leadership &amp; Corporate Vision</h2>
+      <p class="section-subtitle">A message from Nitin Saxena, Founder of DRL – Dwarika Real Estate LLC.</p>
     </div>
 
     <!-- Dynamic Founders List -->

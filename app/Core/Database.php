@@ -194,6 +194,49 @@ class Database
             setting_value TEXT,
             setting_group TEXT DEFAULT 'general'
         );
+        CREATE TABLE IF NOT EXISTS agents (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            slug TEXT NOT NULL UNIQUE,
+            designation TEXT NOT NULL,
+            rera_brn TEXT,
+            experience TEXT,
+            photo_url TEXT NOT NULL,
+            email TEXT NOT NULL,
+            phone TEXT NOT NULL,
+            whatsapp TEXT NOT NULL,
+            short_bio TEXT NOT NULL,
+            full_bio TEXT NOT NULL,
+            languages TEXT,
+            specializations TEXT,
+            locations TEXT,
+            testimonial_quote TEXT,
+            testimonial_client TEXT,
+            status TEXT NOT NULL DEFAULT 'active',
+            sort_order INTEGER DEFAULT 0,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+        CREATE TABLE IF NOT EXISTS founders (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            slug TEXT NOT NULL UNIQUE,
+            designation TEXT NOT NULL,
+            photo_url TEXT,
+            short_bio TEXT,
+            full_bio TEXT,
+            background TEXT,
+            leadership_areas TEXT,
+            quote TEXT,
+            email TEXT,
+            phone TEXT,
+            linkedin_url TEXT,
+            status TEXT NOT NULL DEFAULT 'published',
+            missing_fields TEXT,
+            sort_order INTEGER DEFAULT 0,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
 SQL;
         $pdo->exec($schema);
     }
