@@ -46,8 +46,42 @@ class Database
                             self::$instance->exec(file_get_contents($seedFile));
                         }
                     }
+
+                    // Auto-sync agents & Nitin Saxena founder updates into production MySQL database
+                    $agentCheck = self::$instance->query("SELECT id FROM agents WHERE slug = 'jeet-chande' LIMIT 1")->fetch();
+                    if (!$agentCheck) {
+                        self::$instance->exec("UPDATE agents SET sort_order = sort_order + 3 WHERE sort_order > 0");
+                        self::$instance->exec("INSERT INTO agents (id, name, slug, designation, rera_brn, experience, photo_url, email, phone, whatsapp, short_bio, full_bio, languages, specializations, locations, testimonial_quote, testimonial_client, status, sort_order) VALUES
+                        (7, 'Jeet Chande', 'jeet-chande', 'Portfolio Manager, Dubai Real Estate', '58214', 'Close to 3 Years', '/assets/images/agents/jeet-chande.jpg', 'jeet.chande@dwarikarealestate.ae', '+971 54 220 2920', '971542202920', 'With close to three years in Dubai real estate, Jeet specialises in luxury and prime properties. He works with high-value clients to identify investments in sought-after communities, combining sharp market knowledge with a strategic eye for capital appreciation and long-term wealth creation.', 'With close to three years in Dubai real estate, Jeet specialises in luxury and prime properties. He works with high-value clients to identify investments in sought-after communities, combining sharp market knowledge with a strategic eye for capital appreciation and long-term wealth creation.\n\nJeet focuses on high-yield opportunities, off-plan portfolio allocations, and secondary market prime residences across Dubai\'s most desirable master-planned developments. His analytical approach and client-first commitment ensure tailored investment strategies aligned with long-term financial prosperity.', '[\"English\", \"Hindi\"]', '[\"luxury\", \"residential\", \"off-plan\"]', '[\"Downtown Dubai\", \"Dubai Hills Estate\", \"Palm Jumeirah\"]', 'Jeet understood our investment goals from day one and secured a prime luxury unit with strong capital growth potential.', 'Hassan Al-Nuaimi, Private Investor', 'active', 1),
+                        (8, 'Pragati Pandey', 'pragati-pandey', 'Portfolio Manager, Dubai Real Estate', '59432', '2.5 Years Experience', '/assets/images/agents/pragati-pandey.jpg', 'pragati.pandey@dwarikarealestate.ae', '+971 54 220 2920', '971542202920', 'Pragati brings two and a half years of sales experience and a client-first approach to Dubai\'s evolving property market. She focuses on emerging communities with strong growth potential, guiding investors with clear, tailored advice so they can make confident decisions and build lasting value.', 'Pragati brings two and a half years of sales experience and a client-first approach to Dubai\'s evolving property market. She focuses on emerging communities with strong growth potential, guiding investors with clear, tailored advice so they can make confident decisions and build lasting value.\n\nHer advisory practice centers on end-user families and first-time investors looking for emerging growth corridors, strong rental yields, and seamless transaction management under Dubai Land Department frameworks.', '[\"English\", \"Hindi\"]', '[\"residential\", \"off-plan\", \"rental\"]', '[\"Jumeirah Village Circle (JVC)\", \"Dubai Hills Estate\", \"Dubai Creek Harbour\"]', 'Pragati\'s tailored advice gave us the confidence to invest in Dubai. She guided us transparently through every single step.', 'Rohan & Ananya Verma, Investors', 'active', 2),
+                        (9, 'Dheera Saxena', 'dheera-saxena', 'Portfolio Manager, Dubai Real Estate', '57891', 'Nearly 3 Years Experience', '/assets/images/agents/dheera-saxena.jpg', 'dheera.saxena@dwarikarealestate.ae', '+971 54 220 2920', '971542202920', 'With nearly three years in the industry, Dheera builds every investment strategy around the client\'s goals. She is known for her personalised approach, matching investors with properties that fit their budget, timeline and vision, and supporting them at every step from shortlisting to purchase.', 'With nearly three years in the industry, Dheera builds every investment strategy around the client\'s goals. She is known for her personalised approach, matching investors with properties that fit their budget, timeline and vision, and supporting them at every step from shortlisting to purchase.\n\nFrom initial shortlisting and developer comparative analysis to conveyancing and post-handover property asset management, Dheera provides dedicated guidance ensuring every investment delivers maximum peace of mind and enduring value.', '[\"English\", \"Hindi\"]', '[\"residential\", \"luxury\", \"off-plan\"]', '[\"Business Bay\", \"Downtown Dubai\", \"Dubai Hills Estate\"]', 'Dheera matched us with a property that perfectly matched our budget and vision. Truly exceptional and personalized service.', 'Kavita Mehrotra, Homebuyer', 'active', 3)");
+                    }
+
+                    $founderCheck = self::$instance->query("SELECT name FROM founders WHERE id = 1")->fetch();
+                    if ($founderCheck && $founderCheck['name'] !== 'Nitin Saxena') {
+                        $updateFounder = self::$instance->prepare("UPDATE founders SET
+                            name = 'Nitin Saxena',
+                            slug = 'nitin-saxena',
+                            designation = 'Founder',
+                            photo_url = '/assets/images/founders/founder-nitin-saxena.jpg',
+                            short_bio = :short_bio,
+                            full_bio = :full_bio,
+                            background = 'Real Estate Leadership, Client Advisory, Strategic Investment Governance',
+                            leadership_areas = 'Corporate Vision, Client Trust & Integrity, Strategic Growth, Value Creation',
+                            quote = 'Together, let us build opportunities, create value, and turn aspirations into reality.',
+                            email = 'nitin.saxena@dwarikarealestate.ae',
+                            phone = '+971 54 220 2920',
+                            status = 'published',
+                            missing_fields = ''
+                            WHERE id = 1");
+                        $updateFounder->execute([
+                            'short_bio' => 'At DRL – Dwarika Real Estate LLC, our vision goes beyond property transactions. We strive to create lasting relationships, build trust, and open doors to opportunities that help our clients achieve their dreams.',
+                            'full_bio'  => "At DRL – Dwarika Real Estate LLC, our vision goes beyond property transactions. We strive to create lasting relationships, build trust, and open doors to opportunities that help our clients achieve their dreams.\n\nWe believe that real estate is not just about buying or selling properties; it is about finding the right place to build a future, make investments with confidence, and create lasting value. Every client deserves transparency, professionalism, and a personalized approach, and these principles remain at the heart of everything we do.\n\nAs we continue to grow, our commitment remains the same: to deliver excellence, uphold integrity, and provide real estate solutions that inspire confidence and peace of mind.\n\nThank you to our clients, partners, and team for being an integral part of our journey. Your trust motivates us to aim higher and achieve more every day.\n\nTogether, let us build opportunities, create value, and turn aspirations into reality.\n\nWarm Regards,\nNitin Saxena, Founder\nDRL – Dwarika Real Estate LLC\nOpening Doors to Prosperity."
+                        ]);
+                        self::$instance->exec("DELETE FROM founders WHERE id != 1");
+                    }
                 } catch (\Throwable $initErr) {
-                    error_log("Database auto-init notice: " . $initErr->getMessage());
+                    error_log("Database auto-sync notice: " . $initErr->getMessage());
                 }
 
                 return self::$instance;
