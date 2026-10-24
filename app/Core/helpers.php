@@ -14,9 +14,14 @@ if (!function_exists('e')) {
 }
 
 if (!function_exists('format_price')) {
-    function format_price(float|int|string|null $price, string $currency = 'AED'): string
+    function format_price(float|int|string|null $price, string $currency = 'AED', bool $wrap = true): string
     {
         $num = (float)($price ?? 0);
-        return $currency . ' ' . number_format($num);
+        $curr = trim($currency) ?: 'AED';
+        $formatted = $curr . ' ' . number_format($num);
+        if (!$wrap) {
+            return $formatted;
+        }
+        return '<span class="price-val" data-base-price="' . $num . '" data-base-currency="' . e($curr) . '">' . e($formatted) . '</span>';
     }
 }

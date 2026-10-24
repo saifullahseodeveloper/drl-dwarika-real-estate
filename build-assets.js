@@ -37,6 +37,18 @@ async function build() {
     }
   }
 
+  // 3. Minify currency.js -> currency.min.js
+  const currencyJsPath = path.join(__dirname, 'public', 'assets', 'js', 'currency.js');
+  const minCurrencyJsPath = path.join(__dirname, 'public', 'assets', 'js', 'currency.min.js');
+  if (fs.existsSync(currencyJsPath)) {
+    const rawCurrencyJs = fs.readFileSync(currencyJsPath, 'utf8');
+    const minifiedCurrency = await terser.minify(rawCurrencyJs);
+    if (minifiedCurrency.code) {
+      fs.writeFileSync(minCurrencyJsPath, minifiedCurrency.code, 'utf8');
+      console.log(`Currency JS: ${(rawCurrencyJs.length / 1024).toFixed(1)} KB -> ${(minifiedCurrency.code.length / 1024).toFixed(1)} KB`);
+    }
+  }
+
   console.log('--- Assets Built Successfully ---');
 }
 

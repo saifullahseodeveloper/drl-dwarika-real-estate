@@ -143,8 +143,9 @@ if (!str_starts_with($ogImage, 'http')) {
   <!-- Site Footer -->
   <?php \App\Core\View::component('footer', ['settings' => $settings]); ?>
 
-  <!-- Core JavaScript (Minified & Deferred) -->
+  <!-- Core JavaScript & Currency Switcher (Minified & Deferred) -->
   <script src="/assets/js/app.min.js" defer></script>
+  <script src="/assets/js/currency.min.js" defer></script>
 
   <!-- Noor AI Chatbot: Lazy-load ONLY after first user interaction -->
   <!-- This saves ~52KB from initial page load, improving LCP & TTI -->

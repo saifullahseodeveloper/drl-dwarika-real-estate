@@ -96,4 +96,91 @@ class ApiController extends Controller
             ]
         ]);
     }
+
+    /**
+     * Real-time currency exchange rates endpoint with persistent server cache.
+     * Base currency: AED.
+     */
+    public function exchangeRates(): void
+    {
+        header('Content-Type: application/json; charset=utf-8');
+        header('Cache-Control: public, max-age=3600');
+
+        $cacheFile = dirname(__DIR__, 2) . '/storage/exchange-rates.json';
+        $now = time();
+        $cacheDuration = 3600 * 6; // 6 hours
+
+        // Default accurate pegged & current market fallback rates
+        $rates = [
+            'AED' => 1.0,
+            'USD' => 0.272294,
+            'EUR' => 0.243100,
+            'GBP' => 0.203582,
+            'INR' => 25.877873,
+            'RUB' => 22.136607,
+            'SAR' => 1.021103,
+            'CAD' => 0.375000,
+            'AUD' => 0.415000
+        ];
+        $lastUpdated = date('c');
+
+        // Check if cache file exists and is fresh
+        if (file_exists($cacheFile)) {
+            $cacheData = json_decode((string)file_get_contents($cacheFile), true);
+            if (!empty($cacheData['rates']) && !empty($cacheData['timestamp']) && ($now - $cacheData['timestamp']) < $cacheDuration) {
+                $this->jsonResponse($cacheData);
+                return;
+            }
+        }
+
+        // Fetch fresh real-time rates from Open Exchange API
+        try {
+            $context = stream_context_create([
+                'http' => [
+                    'timeout' => 4,
+                    'user_agent' => 'DRL-Dwarika-RealEstate/1.0'
+                ]
+            ]);
+            $response = @file_get_contents('https://open.er-api.com/v6/latest/AED', false, $context);
+            if ($response !== false) {
+                $data = json_decode($response, true);
+                if (!empty($data['rates'])) {
+                    foreach ($rates as $curr => $val) {
+                        if (isset($data['rates'][$curr])) {
+                            $rates[$curr] = (float)$data['rates'][$curr];
+                        }
+                    }
+                    $lastUpdated = $data['time_last_update_utc'] ?? date('c');
+                }
+            }
+        } catch (\Throwable $e) {
+            // Keep fallback
+        }
+
+        $result = [
+            'success'      => true,
+            'base'         => 'AED',
+            'updated_at'   => $lastUpdated,
+            'timestamp'    => $now,
+            'rates'        => $rates,
+            'currencies'   => [
+                'AED' => ['symbol' => 'AED', 'name' => 'UAE Dirham', 'flag' => '🇦🇪', 'prefix' => 'AED '],
+                'USD' => ['symbol' => '$',   'name' => 'US Dollar',   'flag' => '🇺🇸', 'prefix' => '$'],
+                'EUR' => ['symbol' => '€',   'name' => 'Euro',        'flag' => '🇪🇺', 'prefix' => '€'],
+                'GBP' => ['symbol' => '£',   'name' => 'British Pound','flag' => '🇬🇧', 'prefix' => '£'],
+                'INR' => ['symbol' => '₹',   'name' => 'Indian Rupee', 'flag' => '🇮🇳', 'prefix' => '₹'],
+                'RUB' => ['symbol' => '₽',   'name' => 'Russian Ruble','flag' => '🇷🇺', 'prefix' => '₽'],
+                'SAR' => ['symbol' => 'SAR', 'name' => 'Saudi Riyal', 'flag' => '🇸🇦', 'prefix' => 'SAR ']
+            ]
+        ];
+
+        // Save cache
+        $dir = dirname($cacheFile);
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+        @file_put_contents($cacheFile, json_encode($result, JSON_PRETTY_PRINT));
+
+        $this->jsonResponse($result);
+    }
 }

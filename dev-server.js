@@ -261,8 +261,10 @@ const MIME_TYPES = {
   '.txt': 'text/plain; charset=utf-8'
 };
 
-function formatPrice(num, curr = 'AED') {
-  return `${curr} ${Number(num).toLocaleString()}`;
+function formatPrice(num, curr = 'AED', wrap = true) {
+  const formatted = `${curr} ${Number(num).toLocaleString()}`;
+  if (!wrap) return formatted;
+  return `<span class="price-val" data-base-price="${num}" data-base-currency="${curr}">${formatted}</span>`;
 }
 
 function escapeHtml(str) {
@@ -367,6 +369,52 @@ function renderPage(title, content, activeNav = 'home', extraMeta = {}) {
       </nav>
 
       <div class="header-actions">
+        <!-- Currency Switcher Dropdown -->
+        <div class="currency-selector-wrap" id="currencySelectorWrap">
+          <button type="button" class="currency-btn" id="currencyDropdownBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select Currency">
+            <span class="currency-flag" id="currentCurrencyFlag">🇦🇪</span>
+            <span class="currency-code" id="currentCurrencyCode">AED</span>
+            <i class="fa-solid fa-chevron-down currency-chevron" aria-hidden="true"></i>
+          </button>
+          <ul class="currency-dropdown" id="currencyDropdown" role="listbox" aria-label="Currency options">
+            <li class="currency-option active" data-currency="AED" role="option" aria-selected="true">
+              <span class="currency-flag">🇦🇪</span>
+              <span class="currency-name">AED</span>
+              <span class="currency-desc">UAE Dirham</span>
+            </li>
+            <li class="currency-option" data-currency="USD" role="option" aria-selected="false">
+              <span class="currency-flag">🇺🇸</span>
+              <span class="currency-name">USD</span>
+              <span class="currency-desc">US Dollar ($)</span>
+            </li>
+            <li class="currency-option" data-currency="EUR" role="option" aria-selected="false">
+              <span class="currency-flag">🇪🇺</span>
+              <span class="currency-name">EUR</span>
+              <span class="currency-desc">Euro (€)</span>
+            </li>
+            <li class="currency-option" data-currency="GBP" role="option" aria-selected="false">
+              <span class="currency-flag">🇬🇧</span>
+              <span class="currency-name">GBP</span>
+              <span class="currency-desc">British Pound (£)</span>
+            </li>
+            <li class="currency-option" data-currency="INR" role="option" aria-selected="false">
+              <span class="currency-flag">🇮🇳</span>
+              <span class="currency-name">INR</span>
+              <span class="currency-desc">Indian Rupee (₹)</span>
+            </li>
+            <li class="currency-option" data-currency="SAR" role="option" aria-selected="false">
+              <span class="currency-flag">🇸🇦</span>
+              <span class="currency-name">SAR</span>
+              <span class="currency-desc">Saudi Riyal</span>
+            </li>
+            <li class="currency-option" data-currency="RUB" role="option" aria-selected="false">
+              <span class="currency-flag">🇷🇺</span>
+              <span class="currency-name">RUB</span>
+              <span class="currency-desc">Russian Ruble (₽)</span>
+            </li>
+          </ul>
+        </div>
+
         <a href="tel:${settings.company_phone.replace(/[^0-9+]/g, '')}" class="btn-call" id="btnCallUs">
           <i class="fa-solid fa-phone"></i>
           <span>Call Us</span>
@@ -403,6 +451,26 @@ function renderPage(title, content, activeNav = 'home', extraMeta = {}) {
         <li><a href="/testimonials" class="${activeNav === 'testimonials' ? 'active' : ''}">Testimonials</a></li>
         <li><a href="/contact-us" class="${activeNav === 'contact' ? 'active' : ''}">Contact Us</a></li>
       </ul>
+
+      <!-- Mobile Currency Selector -->
+      <div class="mobile-currency-wrap">
+        <label for="mobileCurrencySelect" class="mobile-currency-label">
+          <i class="fa-solid fa-coins"></i> Currency
+        </label>
+        <div class="mobile-currency-select-box">
+          <select id="mobileCurrencySelect" class="mobile-currency-select" aria-label="Select Currency">
+            <option value="AED">🇦🇪 AED — UAE Dirham</option>
+            <option value="USD">🇺🇸 USD — US Dollar ($)</option>
+            <option value="EUR">🇪🇺 EUR — Euro (€)</option>
+            <option value="GBP">🇬🇧 GBP — British Pound (£)</option>
+            <option value="INR">🇮🇳 INR — Indian Rupee (₹)</option>
+            <option value="SAR">🇸🇦 SAR — Saudi Riyal</option>
+            <option value="RUB">🇷🇺 RUB — Russian Ruble (₽)</option>
+          </select>
+          <i class="fa-solid fa-chevron-down mobile-select-arrow" aria-hidden="true"></i>
+        </div>
+      </div>
+
       <div class="mobile-drawer-footer">
         <a href="tel:${settings.company_phone.replace(/[^0-9+]/g, '')}" class="btn-call full-width">
           <i class="fa-solid fa-phone"></i> Call Us
@@ -493,8 +561,9 @@ function renderPage(title, content, activeNav = 'home', extraMeta = {}) {
     </div>
   </footer>
 
-  <!-- Core JavaScript (Minified & Deferred) -->
+  <!-- Core JavaScript & Currency Switcher (Minified & Deferred) -->
   <script src="/assets/js/app.min.js" defer></script>
+  <script src="/assets/js/currency.min.js" defer></script>
   <!-- Noor AI Luxury Property Concierge Script -->
   <script src="/assets/js/chatbot.js" defer></script>
 </body>
@@ -643,6 +712,96 @@ const server = http.createServer((req, res) => {
     xml += `</urlset>`;
     res.writeHead(200, { 'Content-Type': 'application/xml; charset=utf-8' });
     return res.end(xml);
+  }
+
+  // 2.45 Real-Time Exchange Rates API (Cached 6 hours with Fallback)
+  if (pathname === '/api/exchange-rates') {
+    const cacheFile = path.join(STORAGE_DIR, 'exchange-rates.json');
+    const now = Math.floor(Date.now() / 1000);
+    const fallbackRates = {
+      AED: 1.0,
+      USD: 0.272294,
+      EUR: 0.243100,
+      GBP: 0.203582,
+      INR: 25.877873,
+      RUB: 22.136607,
+      SAR: 1.021103,
+      CAD: 0.375000,
+      AUD: 0.415000
+    };
+
+    if (fs.existsSync(cacheFile)) {
+      try {
+        const cached = JSON.parse(fs.readFileSync(cacheFile, 'utf8'));
+        if (cached && cached.timestamp && (now - cached.timestamp) < 21600) {
+          res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=3600' });
+          return res.end(JSON.stringify(cached));
+        }
+      } catch (e) {}
+    }
+
+    // Try fetching fresh rates
+    const https = require('https');
+    const reqEx = https.get('https://open.er-api.com/v6/latest/AED', { timeout: 3500 }, (apiRes) => {
+      let raw = '';
+      apiRes.on('data', chunk => raw += chunk);
+      apiRes.on('end', () => {
+        let liveRates = { ...fallbackRates };
+        let lastUpdated = new Date().toISOString();
+        try {
+          const parsed = JSON.parse(raw);
+          if (parsed && parsed.rates) {
+            Object.keys(liveRates).forEach(k => {
+              if (parsed.rates[k]) liveRates[k] = parsed.rates[k];
+            });
+            lastUpdated = parsed.time_last_update_utc || lastUpdated;
+          }
+        } catch (err) {}
+
+        const payload = {
+          success: true,
+          base: 'AED',
+          updated_at: lastUpdated,
+          timestamp: now,
+          rates: liveRates,
+          currencies: {
+            AED: { symbol: 'AED', name: 'UAE Dirham', flag: '🇦🇪', prefix: 'AED ' },
+            USD: { symbol: '$', name: 'US Dollar', flag: '🇺🇸', prefix: '$' },
+            EUR: { symbol: '€', name: 'Euro', flag: '🇪🇺', prefix: '€' },
+            GBP: { symbol: '£', name: 'British Pound', flag: '🇬🇧', prefix: '£' },
+            INR: { symbol: '₹', name: 'Indian Rupee', flag: '🇮🇳', prefix: '₹' },
+            RUB: { symbol: '₽', name: 'Russian Ruble', flag: '🇷🇺', prefix: '₽' },
+            SAR: { symbol: 'SAR', name: 'Saudi Riyal', flag: '🇸🇦', prefix: 'SAR ' }
+          }
+        };
+
+        try { fs.writeFileSync(cacheFile, JSON.stringify(payload, null, 2), 'utf8'); } catch (err) {}
+        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=3600' });
+        res.end(JSON.stringify(payload));
+      });
+    });
+
+    reqEx.on('error', () => {
+      const fallbackPayload = {
+        success: true,
+        base: 'AED',
+        updated_at: new Date().toISOString(),
+        timestamp: now,
+        rates: fallbackRates,
+        currencies: {
+          AED: { symbol: 'AED', name: 'UAE Dirham', flag: '🇦🇪', prefix: 'AED ' },
+          USD: { symbol: '$', name: 'US Dollar', flag: '🇺🇸', prefix: '$' },
+          EUR: { symbol: '€', name: 'Euro', flag: '🇪🇺', prefix: '€' },
+          GBP: { symbol: '£', name: 'British Pound', flag: '🇬🇧', prefix: '£' },
+          INR: { symbol: '₹', name: 'Indian Rupee', flag: '🇮🇳', prefix: '₹' },
+          RUB: { symbol: '₽', name: 'Russian Ruble', flag: '🇷🇺', prefix: '₽' },
+          SAR: { symbol: 'SAR', name: 'Saudi Riyal', flag: '🇸🇦', prefix: 'SAR ' }
+        }
+      };
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(fallbackPayload));
+    });
+    return;
   }
 
   // 2.5 Live AI Concierge Knowledge Base API (Real-Time Synchronized)

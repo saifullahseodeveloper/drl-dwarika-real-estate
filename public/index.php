@@ -89,6 +89,7 @@ $router->post('/enquiry/submit', 'Frontend\\LeadController@submit');
 
 // Live AI Concierge Knowledge Base API
 $router->get('/api/chatbot-knowledge', 'Frontend\\ApiController@chatbotKnowledge');
+$router->get('/api/exchange-rates', 'Frontend\\ApiController@exchangeRates');
 
 // Technical SEO
 $router->get('/sitemap.xml', 'Frontend\\SeoController@sitemap');

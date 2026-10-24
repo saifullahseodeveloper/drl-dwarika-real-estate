@@ -1,0 +1,61 @@
+{
+  "success": true,
+  "base": "AED",
+  "updated_at": "Sat, 24 Oct 2026 00:02:31 +0000",
+  "timestamp": 1792833522,
+  "rates": {
+    "AED": 1,
+    "USD": 0.272294,
+    "EUR": 0.2431,
+    "GBP": 0.203582,
+    "INR": 25.877873,
+    "RUB": 22.136607,
+    "SAR": 1.021103,
+    "CAD": 0.381331,
+    "AUD": 0.387444
+  },
+  "currencies": {
+    "AED": {
+      "symbol": "AED",
+      "name": "UAE Dirham",
+      "flag": "🇦🇪",
+      "prefix": "AED "
+    },
+    "USD": {
+      "symbol": "$",
+      "name": "US Dollar",
+      "flag": "🇺🇸",
+      "prefix": "$"
+    },
+    "EUR": {
+      "symbol": "€",
+      "name": "Euro",
+      "flag": "🇪🇺",
+      "prefix": "€"
+    },
+    "GBP": {
+      "symbol": "£",
+      "name": "British Pound",
+      "flag": "🇬🇧",
+      "prefix": "£"
+    },
+    "INR": {
+      "symbol": "₹",
+      "name": "Indian Rupee",
+      "flag": "🇮🇳",
+      "prefix": "₹"
+    },
+    "RUB": {
+      "symbol": "₽",
+      "name": "Russian Ruble",
+      "flag": "🇷🇺",
+      "prefix": "₽"
+    },
+    "SAR": {
+      "symbol": "SAR",
+      "name": "Saudi Riyal",
+      "flag": "🇸🇦",
+      "prefix": "SAR "
+    }
+  }
+}
