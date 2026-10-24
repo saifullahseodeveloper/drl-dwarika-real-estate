@@ -546,6 +546,41 @@
   ],
   "agents": [
     {
+      "id": 10,
+      "name": "Yaseen Mughal",
+      "slug": "yaseen-mughal",
+      "designation": "Sales Manager",
+      "rera_brn": "",
+      "experience": "Over 5 Years Experience",
+      "photo_url": "/assets/images/agents/yaseen-mughal.jpg",
+      "email": "yaseen.mughal@dwarikarealestate.ae",
+      "phone": "+971 54 220 2920",
+      "whatsapp": "971542202920",
+      "short_bio": "Yaseen Mughal is a results-driven real estate professional with over five years of experience advising global investors on luxury villas, premium apartments, and high-value commercial properties. With multi-million-dollar transactions to his name, he combines market insight with strong financial expertise to turn complex opportunities into profitable decisions.",
+      "full_bio": "Yaseen Mughal is a results-driven real estate professional with over five years of experience advising global investors on luxury villas, premium apartments, and high-value commercial properties. With multi-million-dollar transactions to his name, he combines market insight with strong financial expertise to turn complex opportunities into profitable decisions.\n\nFrom yield analysis and deal structuring to negotiation and closing, Yaseen Mughal guides every step with discretion, transparency, and a personalized approach, building long-term partnerships with every client.",
+      "languages": [
+        "English",
+        "Urdu",
+        "Hindi"
+      ],
+      "specializations": [
+        "luxury",
+        "commercial",
+        "residential",
+        "investment"
+      ],
+      "locations": [
+        "Downtown Dubai",
+        "Palm Jumeirah",
+        "Business Bay",
+        "Dubai Hills Estate"
+      ],
+      "testimonial_quote": "Yaseen's financial expertise and discreet guidance made our commercial and luxury acquisitions in Dubai completely seamless and highly profitable.",
+      "testimonial_client": "Private Institutional Client",
+      "status": "active",
+      "sort_order": 1
+    },
+    {
       "id": 7,
       "name": "Jeet Chande",
       "slug": "jeet-chande",
@@ -575,7 +610,7 @@
       "testimonial_quote": "Jeet understood our investment goals from day one and secured a prime luxury unit with strong capital growth potential.",
       "testimonial_client": "Hassan Al-Nuaimi, Private Investor",
       "status": "active",
-      "sort_order": 1
+      "sort_order": 2
     },
     {
       "id": 8,
@@ -607,7 +642,7 @@
       "testimonial_quote": "Pragati's tailored advice gave us the confidence to invest in Dubai. She guided us transparently through every single step.",
       "testimonial_client": "Rohan & Ananya Verma, Investors",
       "status": "active",
-      "sort_order": 2
+      "sort_order": 3
     },
     {
       "id": 9,
@@ -639,7 +674,7 @@
       "testimonial_quote": "Dheera matched us with a property that perfectly matched our budget and vision. Truly exceptional and personalized service.",
       "testimonial_client": "Kavita Mehrotra, Homebuyer",
       "status": "active",
-      "sort_order": 3
+      "sort_order": 4
     }
   ],
   "founders": [
