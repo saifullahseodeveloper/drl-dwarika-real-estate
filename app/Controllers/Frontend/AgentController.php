@@ -87,7 +87,7 @@ class AgentController extends Controller
 
         $this->render('frontend/agents/show', [
             'meta_title'         => "{$agent['name']} - {$agent['designation']} | DRL Dwarika Real Estate",
-            'meta_description'   => "Contact {$agent['name']}, {$agent['designation']} at DRL Dwarika Real Estate LLC. RERA BRN: {$agent['rera_brn']}. Expert in Dubai luxury villas, apartments and investments.",
+            'meta_description'   => "Contact {$agent['name']}, {$agent['designation']} at DRL Dwarika Real Estate LLC. Expert in Dubai luxury villas, apartments and investments.",
             'canonical'          => "https://dwarikarealestate.ae/agents/{$agent['slug']}",
             'agent'              => $agent,
             'assignedProperties' => $assignedProperties,

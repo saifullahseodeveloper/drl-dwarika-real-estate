@@ -2302,7 +2302,6 @@ const server = http.createServer((req, res) => {
           <a href="/agents/${a.slug}" class="agent-image-link" aria-label="View profile of ${escapeHtml(a.name)}">
             <img src="${photo}" alt="${escapeHtml(a.name)} - ${escapeHtml(a.designation)}" loading="lazy" width="380" height="380" class="agent-card-img">
           </a>
-          ${a.rera_brn ? `<span class="agent-rera-badge"><i class="fa-solid fa-id-badge"></i> BRN ${escapeHtml(a.rera_brn)}</span>` : ''}
           ${a.experience ? `<span class="agent-exp-badge"><i class="fa-solid fa-award"></i> ${escapeHtml(a.experience)}</span>` : ''}
         </div>
         <div class="agent-card-body">
@@ -2694,7 +2693,7 @@ const server = http.createServer((req, res) => {
                   <div style="flex:1;">
                     <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.5px; color:#1689CC; font-weight:700;"><i class="fa-solid fa-award"></i> Listing Specialist</span>
                     <h4 style="margin:2px 0 4px 0; font-size:1.05rem;"><a href="/agents/${agent.slug}" style="color:#0F1E2E; text-decoration:none;">${escapeHtml(agent.name)}</a></h4>
-                    <p style="margin:0 0 10px 0; font-size:0.8rem; color:#64748B;">${escapeHtml(agent.designation)} ${agent.rera_brn ? `&bull; BRN ${escapeHtml(agent.rera_brn)}` : ''}</p>
+                    <p style="margin:0 0 10px 0; font-size:0.8rem; color:#64748B;">${escapeHtml(agent.designation)}</p>
                     <div style="display:flex; gap:8px;">
                       <a href="tel:${(agent.phone || '').replace(/[^0-9+]/g, '')}" class="btn-icon" title="Call Agent" style="width:34px; height:34px; border-radius:50%; background:#F0F7FC; color:#1689CC; display:inline-flex; align-items:center; justify-content:center;"><i class="fa-solid fa-phone" style="font-size:0.85rem;"></i></a>
                       <a href="https://wa.me/${agent.whatsapp}?text=Hello%20${encodeURIComponent(agent.name)},%20I%20am%20inquiring%20about%20${encodeURIComponent(prop.title)}" target="_blank" rel="noopener" class="btn-icon" title="WhatsApp Agent" style="width:34px; height:34px; border-radius:50%; background:#25D366; color:#fff; display:inline-flex; align-items:center; justify-content:center;"><i class="fa-brands fa-whatsapp" style="font-size:0.9rem;"></i></a>
@@ -3326,13 +3325,12 @@ const server = http.createServer((req, res) => {
             <div class="agent-hero-media">
               <img src="${photo}" alt="${escapeHtml(agent.name)}" width="280" height="280" class="agent-hero-avatar">
               <div class="agent-verified-badge">
-                <i class="fa-solid fa-circle-check"></i> Verified RERA Agent
+                <i class="fa-solid fa-circle-check"></i> Verified Real Estate Specialist
               </div>
             </div>
 
             <div class="agent-hero-details">
               <div class="agent-hero-badges">
-                ${agent.rera_brn ? `<span class="hero-pill-badge"><i class="fa-solid fa-id-badge"></i> RERA BRN: ${escapeHtml(agent.rera_brn)}</span>` : ''}
                 ${agent.experience ? `<span class="hero-pill-badge accent"><i class="fa-solid fa-award"></i> ${escapeHtml(agent.experience)}</span>` : ''}
               </div>
 

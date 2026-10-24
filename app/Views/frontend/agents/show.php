@@ -48,15 +48,12 @@ $experience = $agent['experience'] ?? '';
       <div class="agent-hero-media">
         <img src="<?= e($photo) ?>" alt="<?= e($agent['name']) ?>" width="280" height="280" class="agent-hero-avatar">
         <div class="agent-verified-badge">
-          <i class="fa-solid fa-circle-check"></i> Verified RERA Agent
+          <i class="fa-solid fa-circle-check"></i> Verified Real Estate Specialist
         </div>
       </div>
 
       <div class="agent-hero-details">
         <div class="agent-hero-badges">
-          <?php if ($rera): ?>
-            <span class="hero-pill-badge"><i class="fa-solid fa-id-badge"></i> RERA BRN: <?= e($rera) ?></span>
-          <?php endif; ?>
           <?php if ($experience): ?>
             <span class="hero-pill-badge accent"><i class="fa-solid fa-award"></i> <?= e($experience) ?></span>
           <?php endif; ?>

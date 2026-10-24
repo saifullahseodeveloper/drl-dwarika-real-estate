@@ -23,9 +23,6 @@ $experience = $agent['experience'] ?? '';
         <img src="<?= e($photo) ?>" alt="<?= e($agent['name']) ?> - <?= e($agent['designation']) ?>" loading="lazy" decoding="async" width="380" height="380" class="agent-card-img">
       </picture>
     </a>
-    <?php if ($rera): ?>
-      <span class="agent-rera-badge"><i class="fa-solid fa-id-badge"></i> BRN <?= e($rera) ?></span>
-    <?php endif; ?>
     <?php if ($experience): ?>
       <span class="agent-exp-badge"><i class="fa-solid fa-award"></i> <?= e($experience) ?></span>
     <?php endif; ?>
