@@ -584,7 +584,7 @@
       "id": 7,
       "name": "Jeet Chande",
       "slug": "jeet-chande",
-      "designation": "Portfolio Manager, Dubai Real Estate",
+      "designation": "Portfolio Manager",
       "rera_brn": "",
       "experience": "Close to 3 Years",
       "photo_url": "/assets/images/agents/jeet-chande.jpg",
@@ -616,7 +616,7 @@
       "id": 8,
       "name": "Pragati Pandey",
       "slug": "pragati-pandey",
-      "designation": "Portfolio Manager, Dubai Real Estate",
+      "designation": "Portfolio Manager",
       "rera_brn": "",
       "experience": "2.5 Years Experience",
       "photo_url": "/assets/images/agents/pragati-pandey.jpg",
@@ -648,7 +648,7 @@
       "id": 9,
       "name": "Dheera Saxena",
       "slug": "dheera-saxena",
-      "designation": "Portfolio Manager, Dubai Real Estate",
+      "designation": "Portfolio Manager",
       "rera_brn": "",
       "experience": "Nearly 3 Years Experience",
       "photo_url": "/assets/images/agents/dheera-saxena.jpg",
@@ -675,6 +675,70 @@
       "testimonial_client": "Kavita Mehrotra, Homebuyer",
       "status": "active",
       "sort_order": 4
+    },
+    {
+      "id": 11,
+      "name": "Chirag Srivastava",
+      "slug": "chirag-srivastava",
+      "designation": "Portfolio Manager",
+      "rera_brn": "",
+      "experience": "Banking & Financial Sales Expert",
+      "photo_url": "/assets/images/agents/chirag-srivastava.jpg",
+      "email": "chirag.srivastava@dwarikarealestate.ae",
+      "phone": "+971 54 220 2920",
+      "whatsapp": "971542202920",
+      "short_bio": "Chirag Srivastava brings a strong background in financial solutions, client analysis, and relationship management to DRL Dwarika Real Estate. With extensive experience in banking sales, insurance, and debt management, he excels at identifying client needs and driving financial growth.",
+      "full_bio": "Chirag Srivastava is a Banking Sales expert who brings deep financial acumen and relationship management skills to DRL Dwarika Real Estate LLC. His background spans financial solutions advisory, client portfolio analysis, insurance sales, and debt management — disciplines that translate seamlessly into high-value real estate investment consulting.\n\nHolding a Bachelor of Commerce (B.Com) degree, Chirag combines his financial expertise with a client-first approach to understand investor goals, assess risk profiles, and recommend properties that align with long-term wealth creation strategies. His analytical mindset and strong communication skills ensure every client receives clear, data-driven guidance throughout their Dubai property journey.\n\nChirag specialises in helping first-time investors and NRI clients navigate Dubai's off-plan and ready property market with confidence, leveraging his financial background to provide comprehensive investment analysis and seamless transaction support.",
+      "languages": [
+        "English",
+        "Hindi"
+      ],
+      "specializations": [
+        "off-plan",
+        "residential",
+        "investment"
+      ],
+      "locations": [
+        "Dubai Hills Estate",
+        "Jumeirah Village Circle (JVC)",
+        "Business Bay"
+      ],
+      "testimonial_quote": "Chirag's financial background gave us complete confidence in our investment decision. His analysis was thorough and his guidance truly exceptional.",
+      "testimonial_client": "Rahul Gupta, NRI Investor",
+      "status": "active",
+      "sort_order": 5
+    },
+    {
+      "id": 12,
+      "name": "Aman Bhatnagar",
+      "slug": "aman-bhatnagar",
+      "designation": "Head of HR & People Operations",
+      "rera_brn": "",
+      "experience": "11+ Years in HR & Workforce Management",
+      "photo_url": "/assets/images/agents/aman-bhatnagar.jpg",
+      "email": "aman.bhatnagar@dwarikarealestate.ae",
+      "phone": "+971 54 220 2920",
+      "whatsapp": "971542202920",
+      "short_bio": "Aman Bhatnagar brings over 11 years of comprehensive expertise in human resource management, employee lifecycle operations, and workforce optimization. He has overseen HR infrastructure for workforces exceeding 3,000 employees across multiple domains.",
+      "full_bio": "Aman Bhatnagar brings over 11 years of comprehensive, multi-domain expertise in human resource management, employee lifecycle operations, and workforce optimization to DRL – Dwarika Real Estate LLC.\n\nThroughout his distinguished career, Aman has demonstrated exceptional leadership in managing scale and complexity. He has successfully overseen core HR infrastructure — including payroll integration, statutory compliance, and data administration — for workforces exceeding 3,000 employees. Highly skilled in process improvement, risk mitigation, and workforce productivity enhancement.\n\nIn his leadership capacity at DRL – Dwarika Real Estate LLC, Aman directs our strategic people operations across the UAE and GCC regions. His mandate encompasses full-cycle executive talent acquisition, Wage Protection System (WPS) payroll administration, labor law compliance, and strategic HR Business Partnership (HRBP). By aligning HR frameworks with overarching corporate objectives, Aman plays a pivotal role in strengthening employee relations, minimizing early attrition, and driving organizational efficiency.",
+      "languages": [
+        "English",
+        "Hindi"
+      ],
+      "specializations": [
+        "hr-operations",
+        "workforce-management",
+        "compliance"
+      ],
+      "locations": [
+        "Dubai",
+        "UAE",
+        "GCC"
+      ],
+      "testimonial_quote": "Aman's strategic HR leadership transformed our people operations — his expertise in UAE labor law and WPS compliance gave our team complete confidence.",
+      "testimonial_client": "Internal Leadership, DRL Dwarika Real Estate LLC",
+      "status": "active",
+      "sort_order": 6
     }
   ],
   "founders": [
