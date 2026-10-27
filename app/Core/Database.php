@@ -92,8 +92,20 @@ class Database
                     }
 
                     // Ensure Chirag Srivastava and Aman Bhatnagar are prominently ordered and active
+                    self::$instance->exec("UPDATE agents SET sort_order = 1 WHERE slug = 'yaseen-mughal'");
                     self::$instance->exec("UPDATE agents SET sort_order = 2, status = 'active' WHERE slug = 'chirag-srivastava'");
                     self::$instance->exec("UPDATE agents SET sort_order = 3, status = 'active' WHERE slug = 'aman-bhatnagar'");
+                    self::$instance->exec("UPDATE agents SET sort_order = 4 WHERE slug = 'jeet-chande'");
+                    self::$instance->exec("UPDATE agents SET sort_order = 5 WHERE slug = 'pragati-pandey'");
+                    self::$instance->exec("UPDATE agents SET sort_order = 6 WHERE slug = 'dheera-saxena'");
+
+                    // Fix designations (remove ', Dubai Real Estate')
+                    self::$instance->exec("UPDATE agents SET designation = 'Portfolio Manager' WHERE slug IN ('jeet-chande', 'pragati-pandey', 'dheera-saxena')");
+
+                    // Delete dummy agents requested by user: omar-farooq & elena-rostova
+                    self::$instance->exec("UPDATE properties SET agent_id = 11 WHERE agent_id = 1");
+                    self::$instance->exec("UPDATE properties SET agent_id = 12 WHERE agent_id = 2");
+                    self::$instance->exec("DELETE FROM agents WHERE slug IN ('omar-farooq', 'elena-rostova')");
 
                     // Always ensure all agents have rera_brn cleared as requested
                     self::$instance->exec("UPDATE agents SET rera_brn = '' WHERE rera_brn IS NOT NULL AND rera_brn != ''");
