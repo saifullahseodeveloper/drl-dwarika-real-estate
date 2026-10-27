@@ -102,10 +102,14 @@ class Database
                     // Fix designations (remove ', Dubai Real Estate')
                     self::$instance->exec("UPDATE agents SET designation = 'Portfolio Manager' WHERE slug IN ('jeet-chande', 'pragati-pandey', 'dheera-saxena')");
 
-                    // Delete dummy agents requested by user: omar-farooq & elena-rostova
+                    // Delete all 6 dummy agents requested by user: omar-farooq, elena-rostova, sarah-al-mansoori, leila-hadid, marcus-vance, rahul-kapoor
                     self::$instance->exec("UPDATE properties SET agent_id = 11 WHERE agent_id = 1");
                     self::$instance->exec("UPDATE properties SET agent_id = 12 WHERE agent_id = 2");
-                    self::$instance->exec("DELETE FROM agents WHERE slug IN ('omar-farooq', 'elena-rostova')");
+                    self::$instance->exec("UPDATE properties SET agent_id = 7 WHERE agent_id = 3");
+                    self::$instance->exec("UPDATE properties SET agent_id = 8 WHERE agent_id = 4");
+                    self::$instance->exec("UPDATE properties SET agent_id = 9 WHERE agent_id = 5");
+                    self::$instance->exec("UPDATE properties SET agent_id = 10 WHERE agent_id = 6");
+                    self::$instance->exec("DELETE FROM agents WHERE slug IN ('omar-farooq', 'elena-rostova', 'sarah-al-mansoori', 'leila-hadid', 'marcus-vance', 'rahul-kapoor')");
 
                     // Always ensure all agents have rera_brn cleared as requested
                     self::$instance->exec("UPDATE agents SET rera_brn = '' WHERE rera_brn IS NOT NULL AND rera_brn != ''");

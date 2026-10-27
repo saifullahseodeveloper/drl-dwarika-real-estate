@@ -40,15 +40,15 @@ if (!empty($agent['locations'])) {
   <div class="form-grid-2">
     <div class="form-group">
       <label>Full Name *</label>
-      <input type="text" name="name" value="<?= e($agent['name'] ?? '') ?>" class="admin-input" required placeholder="e.g. Omar Farooq">
+      <input type="text" name="name" value="<?= e($agent['name'] ?? '') ?>" class="admin-input" required placeholder="e.g. Yaseen Mughal">
     </div>
     <div class="form-group">
       <label>Profile Slug (URL)</label>
-      <input type="text" name="slug" value="<?= e($agent['slug'] ?? '') ?>" class="admin-input" placeholder="e.g. omar-farooq">
+      <input type="text" name="slug" value="<?= e($agent['slug'] ?? '') ?>" class="admin-input" placeholder="e.g. yaseen-mughal">
     </div>
     <div class="form-group">
       <label>Designation / Title *</label>
-      <input type="text" name="designation" value="<?= e($agent['designation'] ?? '') ?>" class="admin-input" required placeholder="e.g. Senior Luxury Property Consultant">
+      <input type="text" name="designation" value="<?= e($agent['designation'] ?? '') ?>" class="admin-input" required placeholder="e.g. Senior Portfolio Manager">
     </div>
     <div class="form-group">
       <label>RERA BRN License Number</label>
@@ -60,7 +60,7 @@ if (!empty($agent['locations'])) {
     </div>
     <div class="form-group">
       <label>Photo URL *</label>
-      <input type="text" name="photo_url" value="<?= e($agent['photo_url'] ?? '') ?>" class="admin-input" required placeholder="/assets/images/agents/omar-farooq.jpg">
+      <input type="text" name="photo_url" value="<?= e($agent['photo_url'] ?? '') ?>" class="admin-input" required placeholder="/assets/images/agents/yaseen-mughal.jpg">
     </div>
   </div>
 

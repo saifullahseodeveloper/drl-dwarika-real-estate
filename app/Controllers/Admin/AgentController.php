@@ -40,7 +40,7 @@ class AgentController extends Controller
         $email = trim($_POST['email'] ?? '');
         $phone = trim($_POST['phone'] ?? '');
         $whatsapp = trim($_POST['whatsapp'] ?? '') ?: preg_replace('/[^0-9]/', '', $phone);
-        $photo = trim($_POST['photo_url'] ?? '') ?: '/assets/images/agents/omar-farooq.jpg';
+        $photo = trim($_POST['photo_url'] ?? '') ?: '/assets/images/agents/yaseen-mughal.jpg';
         $shortBio = trim($_POST['short_bio'] ?? '');
         $fullBio = trim($_POST['full_bio'] ?? '');
         $status = $_POST['status'] ?? 'active';
