@@ -706,7 +706,7 @@
       "testimonial_quote": "Chirag's financial background gave us complete confidence in our investment decision. His analysis was thorough and his guidance truly exceptional.",
       "testimonial_client": "Rahul Gupta, NRI Investor",
       "status": "active",
-      "sort_order": 5
+      "sort_order": 2
     },
     {
       "id": 12,
@@ -738,7 +738,7 @@
       "testimonial_quote": "Aman's strategic HR leadership transformed our people operations — his expertise in UAE labor law and WPS compliance gave our team complete confidence.",
       "testimonial_client": "Internal Leadership, DRL Dwarika Real Estate LLC",
       "status": "active",
-      "sort_order": 6
+      "sort_order": 3
     }
   ],
   "founders": [

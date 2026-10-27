@@ -15,7 +15,7 @@ class AgentController extends Controller
         $language = isset($_GET['language']) ? trim((string)$_GET['language']) : 'all';
         $location = isset($_GET['location']) ? trim((string)$_GET['location']) : 'all';
         $page = max(1, (int)($_GET['page'] ?? 1));
-        $perPage = 6;
+        $perPage = 24;
 
         $filters = [
             'search'         => $search,

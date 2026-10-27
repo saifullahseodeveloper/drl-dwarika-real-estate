@@ -91,6 +91,10 @@ class Database
                         ]);
                     }
 
+                    // Ensure Chirag Srivastava and Aman Bhatnagar are prominently ordered and active
+                    self::$instance->exec("UPDATE agents SET sort_order = 2, status = 'active' WHERE slug = 'chirag-srivastava'");
+                    self::$instance->exec("UPDATE agents SET sort_order = 3, status = 'active' WHERE slug = 'aman-bhatnagar'");
+
                     // Always ensure all agents have rera_brn cleared as requested
                     self::$instance->exec("UPDATE agents SET rera_brn = '' WHERE rera_brn IS NOT NULL AND rera_brn != ''");
 

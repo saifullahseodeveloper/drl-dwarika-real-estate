@@ -20,7 +20,7 @@ $experience = $agent['experience'] ?? '';
     <a href="/agents/<?= e($agent['slug']) ?>" class="agent-image-link" aria-label="View profile of <?= e($agent['name']) ?>">
       <picture>
         <source srcset="<?= e($webpPhoto) ?>" type="image/webp">
-        <img src="<?= e($photo) ?>" alt="<?= e($agent['name']) ?> - <?= e($agent['designation']) ?>" loading="lazy" decoding="async" width="380" height="380" class="agent-card-img">
+        <img src="<?= e($photo) ?>" alt="<?= e($agent['name']) ?> - <?= e($agent['designation']) ?>" loading="lazy" decoding="async" width="380" height="380" class="agent-card-img" onerror="this.onerror=null; this.src='/assets/images/agents/yaseen-mughal.jpg';">
       </picture>
     </a>
     <?php if ($experience): ?>
