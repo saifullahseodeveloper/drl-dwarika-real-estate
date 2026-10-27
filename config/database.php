@@ -11,7 +11,7 @@ return [
     'port'      => (int)(getenv('DB_PORT') ?: 3306),
     'database'  => getenv('DB_NAME') ?: 'u178516069_drl_estate',
     'username'  => getenv('DB_USER') ?: 'u178516069_drl_admin',
-    'password'  => getenv('DB_PASS') ?: 'APNA_PASSWORD_YAHAN_LIKHO',  // ← Hostinger DB password
+    'password'  => getenv('DB_PASS') ?: '8x#vP2!zQ9wL5mN',
     'charset'   => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
     
