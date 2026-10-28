@@ -9,15 +9,59 @@ $foundersList = $founders ?? [];
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "AboutPage",
-  "name": "Founders & Executive Leadership | DRL Dwarika Real Estate LLC",
-  "description": "Corporate leadership, vision, mission, and governance of DRL Dwarika Real Estate LLC Dubai.",
-  "publisher": {
-    "@type": "RealEstateAgent",
-    "name": "DRL Dwarika Real Estate LLC",
-    "url": "https://dwarikarealestate.ae",
-    "logo": "https://dwarikarealestate.ae/assets/images/logo.png"
-  }
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "@id": "https://dwarikarealestate.ae/founders#webpage",
+      "name": "Founders & Executive Leadership | DRL Dwarika Real Estate LLC",
+      "description": "Corporate leadership, vision, mission, and governance of DRL Dwarika Real Estate LLC Dubai.",
+      "url": "https://dwarikarealestate.ae/founders",
+      "publisher": {
+        "@type": "RealEstateAgent",
+        "@id": "https://dwarikarealestate.ae/#organization",
+        "name": "DRL Dwarika Real Estate LLC"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://dwarikarealestate.ae/founders#nitin-saxena",
+      "name": "Nitin Saxena",
+      "jobTitle": "Founder",
+      "worksFor": {
+        "@type": "RealEstateAgent",
+        "@id": "https://dwarikarealestate.ae/#organization",
+        "name": "DRL Dwarika Real Estate LLC"
+      },
+      "image": "https://dwarikarealestate.ae/assets/images/founders/founder-nitin-saxena.jpg",
+      "url": "https://dwarikarealestate.ae/founders",
+      "email": "nitin.saxena@dwarikarealestate.ae",
+      "telephone": "+971542202920",
+      "knowsAbout": ["Dubai Real Estate", "Property Investment", "Luxury Real Estate Advisory", "Corporate Governance"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dwarikarealestate.ae"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "About Us",
+          "item": "https://dwarikarealestate.ae/about-us"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Founders & Leadership",
+          "item": "https://dwarikarealestate.ae/founders"
+        }
+      ]
+    }
+  ]
 }
 </script>
 

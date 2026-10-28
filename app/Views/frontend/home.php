@@ -201,3 +201,45 @@
     </div>
   </div>
 </section>
+
+<!-- JSON-LD FAQPage Structured Data (Google Rich Snippets) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can foreign nationals and expats buy freehold property in Dubai?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, non-UAE and foreign nationals can purchase 100% freehold properties in designated investment communities across Dubai, including Dubai Hills Estate, Downtown Dubai, Palm Jumeirah, Business Bay, Jumeirah Village Circle (JVC), and Dubai Creek Harbour."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I obtain a UAE Golden Visa through real estate investment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Investors purchasing properties in Dubai valued at AED 2,000,000 (approx. USD 545,000) or more qualify for the renewable 10-Year UAE Golden Visa for themselves, their spouse, and dependents. DRL Dwarika Real Estate LLC provides end-to-end guidance through the DLD accreditation process."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the standard government and transaction fees when buying Dubai property?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The primary transaction costs in Dubai include the Dubai Land Department (DLD) transfer fee of 4% plus standard administrative fees, a property registration fee (AED 2,000 to AED 4,000 + 5% VAT), and standard real estate agency fees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does DRL Dwarika Real Estate LLC assist with off-plan property launches?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, DRL Dwarika Real Estate LLC partners with premier master developers across Dubai (including Emaar, Nakheel, Meraas, Damac, and Sobha) to secure direct allocations, zero-commission developer payment plans, and early-bird investor pricing."
+      }
+    }
+  ]
+}
+</script>

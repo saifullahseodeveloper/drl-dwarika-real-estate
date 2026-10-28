@@ -33,6 +33,34 @@ $experience = $agent['experience'] ?? '';
 }
 </script>
 
+<!-- BreadcrumbList Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://dwarikarealestate.ae"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Agents",
+      "item": "https://dwarikarealestate.ae/agents"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": <?= json_encode($agent['name']) ?>,
+      "item": <?= json_encode("https://dwarikarealestate.ae/agents/" . $agent['slug']) ?>
+    }
+  ]
+}
+</script>
+
 <!-- Agent Profile Header Hero -->
 <div class="agent-profile-banner">
   <div class="container">

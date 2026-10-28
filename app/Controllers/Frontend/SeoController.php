@@ -8,6 +8,7 @@ use App\Models\Property;
 use App\Models\Location;
 use App\Models\PropertyType;
 use App\Models\Service;
+use App\Models\Agent;
 
 class SeoController extends Controller
 {
@@ -19,6 +20,8 @@ class SeoController extends Controller
         $staticPages = [
             '/'                       => ['priority' => '1.0', 'changefreq' => 'daily'],
             '/about-us'               => ['priority' => '0.8', 'changefreq' => 'monthly'],
+            '/founders'               => ['priority' => '0.8', 'changefreq' => 'monthly'],
+            '/agents'                 => ['priority' => '0.9', 'changefreq' => 'weekly'],
             '/properties'             => ['priority' => '0.9', 'changefreq' => 'daily'],
             '/properties/buy'         => ['priority' => '0.9', 'changefreq' => 'daily'],
             '/properties/rent'        => ['priority' => '0.9', 'changefreq' => 'daily'],
@@ -31,9 +34,10 @@ class SeoController extends Controller
 
         // Fetch dynamic items
         $properties = Property::all("status = 'published'");
-        $locations = Location::all('name ASC');
-        $types = PropertyType::all('name ASC');
-        $services = Service::getActive();
+        $locations  = Location::all('name ASC');
+        $types      = PropertyType::all('name ASC');
+        $services   = Service::getActive();
+        $agents     = Agent::getActive();
 
         header('Content-Type: application/xml; charset=utf-8');
         echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
@@ -83,6 +87,17 @@ class SeoController extends Controller
             echo "    <changefreq>monthly</changefreq>\n";
             echo "    <priority>0.8</priority>\n";
             echo "  </url>\n";
+        }
+
+        // Real Estate Agents
+        foreach ($agents as $agent) {
+            if (!empty($agent['slug'])) {
+                echo "  <url>\n";
+                echo "    <loc>" . htmlspecialchars($baseUrl . '/agents/' . $agent['slug']) . "</loc>\n";
+                echo "    <changefreq>weekly</changefreq>\n";
+                echo "    <priority>0.8</priority>\n";
+                echo "  </url>\n";
+            }
         }
 
         echo '</urlset>';

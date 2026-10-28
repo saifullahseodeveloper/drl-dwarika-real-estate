@@ -25,6 +25,7 @@ if (!str_starts_with($ogImage, 'http')) {
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_AE">
   <meta property="og:url" content="<?= e($canonical) ?>">
   <meta property="og:title" content="<?= e($pageTitle) ?>">
   <meta property="og:description" content="<?= e($pageDesc) ?>">
@@ -36,6 +37,20 @@ if (!str_starts_with($ogImage, 'http')) {
   <meta name="twitter:title" content="<?= e($pageTitle) ?>">
   <meta name="twitter:description" content="<?= e($pageDesc) ?>">
   <meta name="twitter:image" content="<?= e($ogImage) ?>">
+
+  <!-- Local SEO Geo Meta Tags -->
+  <meta name="geo.region" content="AE-DU">
+  <meta name="geo.placename" content="Dubai">
+  <meta name="geo.position" content="25.2532;55.3283">
+  <meta name="ICBM" content="25.2532, 55.3283">
+
+  <!-- Webmaster Verification Tags (if configured) -->
+  <?php if (!empty($settings['google_site_verification'])): ?>
+    <meta name="google-site-verification" content="<?= e($settings['google_site_verification']) ?>">
+  <?php endif; ?>
+  <?php if (!empty($settings['bing_site_verification'])): ?>
+    <meta name="msvalidate.01" content="<?= e($settings['bing_site_verification']) ?>">
+  <?php endif; ?>
 
   <!-- Favicon (SVG - zero cost) -->
   <link rel="icon" type="image/svg+xml" href="/assets/images/logo.svg">
@@ -75,15 +90,21 @@ if (!str_starts_with($ogImage, 'http')) {
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.rel='stylesheet'; this.onload=null;" crossorigin="anonymous">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous"></noscript>
 
-  <!-- JSON-LD Structured Data -->
+  <!-- JSON-LD Structured Data: LocalBusiness & RealEstateAgent -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
+    "@id": "https://dwarikarealestate.ae/#organization",
     "name": "DRL Dwarika Real Estate LLC",
     "legalName": "DRL Dwarika Real Estate LLC",
     "url": "https://dwarikarealestate.ae",
-    "logo": "https://dwarikarealestate.ae/assets/images/logo.svg",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://dwarikarealestate.ae/assets/images/logo.svg",
+      "width": 200,
+      "height": 48
+    },
     "image": "https://dwarikarealestate.ae/assets/images/design-reference.webp",
     "telephone": "+971542202920",
     "email": "admin@dwarikarealestate.ae",
@@ -94,7 +115,39 @@ if (!str_starts_with($ogImage, 'http')) {
       "addressRegion": "Dubai",
       "addressCountry": "AE"
     },
-    "priceRange": "AED 1,000,000 - 50,000,000"
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 25.2532,
+      "longitude": 55.3283
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Nitin Saxena",
+      "jobTitle": "Founder",
+      "url": "https://dwarikarealestate.ae/founders"
+    },
+    "areaServed": [
+      "Dubai",
+      "Dubai Hills Estate",
+      "Downtown Dubai",
+      "Palm Jumeirah",
+      "Business Bay",
+      "Jumeirah Village Circle (JVC)",
+      "Dubai Creek Harbour"
+    ],
+    "priceRange": "AED 1,000,000 - 50,000,000",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "sameAs": [
+      "https://www.instagram.com/drl_dwarikarealestate",
+      "https://www.linkedin.com/company/drl-dwarika-real-estate",
+      "https://www.facebook.com/dwarikarealestate",
+      "https://www.youtube.com/@drldwarikarealestate"
+    ]
   }
   </script>
 </head>

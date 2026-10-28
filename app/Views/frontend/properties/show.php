@@ -264,6 +264,46 @@ $currentUrl = 'https://dwarikarealestate.ae/property/' . $property['slug'];
 }
 </script>
 
+<!-- JSON-LD BreadcrumbList Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://dwarikarealestate.ae"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Properties",
+      "item": "https://dwarikarealestate.ae/properties"
+    }<?php if (!empty($property['location_name'])): ?>,
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": <?= json_encode($property['location_name']) ?>,
+      "item": <?= json_encode("https://dwarikarealestate.ae/locations/" . $property['location_slug']) ?>
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": <?= json_encode($property['title']) ?>,
+      "item": <?= json_encode($currentUrl) ?>
+    }<?php else: ?>,
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": <?= json_encode($property['title']) ?>,
+      "item": <?= json_encode($currentUrl) ?>
+    }<?php endif; ?>
+  ]
+}
+</script>
+
 <script>
 function switchGalleryImg(src, btn) {
   document.getElementById('mainGalleryImg').src = src;
