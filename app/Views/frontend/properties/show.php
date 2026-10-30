@@ -1,14 +1,29 @@
 <?php
 /**
- * Single Property Detail View
- * DRL Dwarika Real Estate LLC
+ * Single Property Detail View — DRL Dwarika Real Estate LLC
+ * Master Luxury Architecture & Optimized Presentation
  */
 $cleanPhone = preg_replace('/[^0-9+]/', '', $settings['company_phone'] ?? '+971542202920');
-$waPhone = preg_replace('/[^0-9]/', '', $settings['company_whatsapp'] ?? '971542202920');
-$currentUrl = 'https://dwarikarealestate.ae/property/' . $property['slug'];
+$waPhone    = preg_replace('/[^0-9]/', '', $settings['whatsapp_number'] ?? '971542202920');
+$currentUrl = 'https://dwarikarealestate.ae/properties/' . $property['slug'];
+
+$statusClass = match(strtolower($property['listing_type'] ?? 'sale')) {
+  'sale'     => 'status-sale',
+  'rent'     => 'status-rent',
+  'off-plan' => 'status-offplan',
+  default    => 'status-sale'
+};
+
+$statusLabel = match(strtolower($property['listing_type'] ?? 'sale')) {
+  'sale'     => 'For Sale',
+  'rent'     => 'For Rent',
+  'off-plan' => 'Off-Plan',
+  default    => 'For Sale'
+};
 ?>
 
-<div class="property-detail-header-bar">
+<!-- Luxury Property Hero Banner -->
+<div class="page-banner property-hero-banner">
   <div class="container">
     <nav class="breadcrumb-nav" aria-label="Breadcrumb">
       <ol class="breadcrumb-list">
@@ -20,48 +35,127 @@ $currentUrl = 'https://dwarikarealestate.ae/property/' . $property['slug'];
         <li aria-current="page"><?= e($property['title']) ?></li>
       </ol>
     </nav>
-  </div>
-</div>
 
-<article class="property-detail-page section-padding">
-  <div class="container">
-    
-    <!-- Top Summary Row: Title & Price -->
-    <div class="property-title-price-row">
-      <div class="property-title-col">
-        <div class="property-badges-meta">
-          <span class="badge-status <?= e($property['listing_type']) ?>">
-            <?= ucfirst(e($property['listing_type'])) ?>
-          </span>
-          <span class="ref-code">Ref: <?= e($property['reference_code']) ?></span>
-          <?php if (!empty($property['rera_permit'])): ?>
-            <span class="rera-badge"><i class="fa-solid fa-certificate"></i> RERA: <?= e($property['rera_permit']) ?></span>
-          <?php endif; ?>
-        </div>
-        <h1 class="single-property-title"><?= e($property['title']) ?></h1>
-        <div class="single-property-location">
+    <!-- Top Status Badges Row -->
+    <div class="property-badges-meta">
+      <span class="badge-status-pill <?= $statusClass ?>"><?= e($statusLabel) ?></span>
+      <span class="badge-pill-outline"><i class="fa-solid fa-hashtag"></i> Ref: <?= e($property['reference_code']) ?></span>
+      <?php if (!empty($property['rera_permit'])): ?>
+        <span class="badge-pill-outline badge-rera"><i class="fa-solid fa-circle-check"></i> RERA: <?= e($property['rera_permit']) ?></span>
+      <?php endif; ?>
+      <?php if (!empty($property['type_name'])): ?>
+        <span class="badge-pill-outline"><?= e($property['type_name']) ?></span>
+      <?php endif; ?>
+    </div>
+
+    <!-- Title & Price Flex Row -->
+    <div class="property-banner-inner-row">
+      <div class="property-banner-info">
+        <h1 class="page-banner-title property-banner-title"><?= e($property['title']) ?></h1>
+        <div class="property-banner-address">
           <i class="fa-solid fa-location-dot"></i>
           <span><?= e($property['address'] ?: ($property['location_name'] . ', ' . ($property['location_city'] ?? 'Dubai'))) ?></span>
         </div>
       </div>
 
-      <div class="property-price-col">
-        <div class="price-label">Asking Price</div>
-        <div class="single-property-price">
+      <div class="property-banner-price-card">
+        <span class="price-eyebrow">OFFICIAL ASKING PRICE</span>
+        <div class="price-value-main" data-price-aed="<?= (float)$property['price'] ?>">
           <?= format_price($property['price'], $property['currency'] ?? 'AED') ?>
+        </div>
+        <div class="price-quick-actions">
+          <a href="#inquirySidebar" class="btn-primary-pill btn-banner-action">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>Schedule Viewing</span>
+          </a>
+          <a href="https://wa.me/<?= $waPhone ?>?text=<?= urlencode('Hello DRL Dwarika, I am interested in ' . $property['title'] . ' (Ref: ' . $property['reference_code'] . '): ' . $currentUrl) ?>" target="_blank" rel="noopener" class="btn-whatsapp btn-banner-action">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>WhatsApp</span>
+          </a>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- Gallery & Media -->
+<!-- Main Property Content Area -->
+<article class="property-detail-page section-padding">
+  <div class="container">
+    
+    <!-- Floating Key Specifications Strip -->
+    <div class="property-specs-strip">
+      <div class="spec-cell">
+        <div class="spec-cell-icon"><i class="fa-solid fa-bed"></i></div>
+        <div class="spec-cell-info">
+          <span class="spec-cell-val"><?= (int)$property['bedrooms'] > 0 ? (int)$property['bedrooms'] . ' Beds' : 'Studio' ?></span>
+          <span class="spec-cell-lbl">Bedrooms</span>
+        </div>
+      </div>
+
+      <div class="spec-cell">
+        <div class="spec-cell-icon"><i class="fa-solid fa-bath"></i></div>
+        <div class="spec-cell-info">
+          <span class="spec-cell-val"><?= (int)$property['bathrooms'] > 0 ? (int)$property['bathrooms'] . ' Baths' : '1 Bath' ?></span>
+          <span class="spec-cell-lbl">Bathrooms</span>
+        </div>
+      </div>
+
+      <div class="spec-cell">
+        <div class="spec-cell-icon"><i class="fa-solid fa-ruler-combined"></i></div>
+        <div class="spec-cell-info">
+          <span class="spec-cell-val"><?= number_format((float)$property['area_sqft']) ?></span>
+          <span class="spec-cell-lbl">Sq. Ft. Built-Up</span>
+        </div>
+      </div>
+
+      <div class="spec-cell">
+        <div class="spec-cell-icon"><i class="fa-solid fa-building"></i></div>
+        <div class="spec-cell-info">
+          <span class="spec-cell-val"><?= e($property['type_name'] ?? 'Residential') ?></span>
+          <span class="spec-cell-lbl">Property Type</span>
+        </div>
+      </div>
+
+      <?php if (!empty($property['completion_year'])): ?>
+        <div class="spec-cell">
+          <div class="spec-cell-icon"><i class="fa-solid fa-calendar-check"></i></div>
+          <div class="spec-cell-info">
+            <span class="spec-cell-val"><?= e($property['completion_year']) ?></span>
+            <span class="spec-cell-lbl">Handover Year</span>
+          </div>
+        </div>
+      <?php elseif (!empty($property['furnished_status'])): ?>
+        <div class="spec-cell">
+          <div class="spec-cell-icon"><i class="fa-solid fa-couch"></i></div>
+          <div class="spec-cell-info">
+            <span class="spec-cell-val"><?= ucfirst(e($property['furnished_status'])) ?></span>
+            <span class="spec-cell-lbl">Furnishing</span>
+          </div>
+        </div>
+      <?php else: ?>
+        <div class="spec-cell">
+          <div class="spec-cell-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="spec-cell-info">
+            <span class="spec-cell-val">Freehold</span>
+            <span class="spec-cell-lbl">Ownership</span>
+          </div>
+        </div>
+      <?php endif; ?>
+    </div>
+
+    <!-- Gallery & Media Stage -->
     <div class="property-gallery-wrap">
       <div class="main-gallery-viewport">
-        <img id="mainGalleryImg" src="<?= e($property['featured_image']) ?>" alt="<?= e($property['title']) ?>" class="main-featured-photo">
+        <img id="mainGalleryImg" src="<?= e($property['featured_image']) ?>" alt="<?= e($property['title']) ?>" class="main-featured-photo" loading="eager">
+        <div class="gallery-verified-badge">
+          <i class="fa-solid fa-shield-check"></i>
+          <span>Verified Listing &amp; Title</span>
+        </div>
       </div>
       <?php if (!empty($property['gallery']) && count($property['gallery']) > 1): ?>
         <div class="gallery-thumbs-row">
           <?php foreach ($property['gallery'] as $idx => $gImg): ?>
-            <button type="button" class="thumb-btn <?= $idx === 0 ? 'active' : '' ?>" onclick="switchGalleryImg('<?= e($gImg['image_url']) ?>', this)">
+            <button type="button" class="thumb-btn <?= $idx === 0 ? 'active' : '' ?>" onclick="switchGalleryImg('<?= e($gImg['image_url']) ?>', this)" aria-label="View photo <?= $idx + 1 ?>">
               <img src="<?= e($gImg['image_url']) ?>" alt="<?= e($gImg['alt_text'] ?? $property['title']) ?>">
             </button>
           <?php endforeach; ?>
@@ -75,145 +169,144 @@ $currentUrl = 'https://dwarikarealestate.ae/property/' . $property['slug'];
       <!-- Left Column: Details -->
       <div class="property-main-col">
         
-        <!-- Specs Bar -->
-        <div class="property-specs-grid">
-          <div class="spec-box">
-            <i class="fa-solid fa-bed spec-icon"></i>
-            <div class="spec-data">
-              <span class="spec-value"><?= (int)$property['bedrooms'] > 0 ? (int)$property['bedrooms'] : 'N/A' ?></span>
-              <span class="spec-name">Bedrooms</span>
-            </div>
-          </div>
-
-          <div class="spec-box">
-            <i class="fa-solid fa-bath spec-icon"></i>
-            <div class="spec-data">
-              <span class="spec-value"><?= (int)$property['bathrooms'] > 0 ? (int)$property['bathrooms'] : 'N/A' ?></span>
-              <span class="spec-name">Bathrooms</span>
-            </div>
-          </div>
-
-          <div class="spec-box">
-            <i class="fa-solid fa-ruler-combined spec-icon"></i>
-            <div class="spec-data">
-              <span class="spec-value"><?= number_format((float)$property['area_sqft']) ?></span>
-              <span class="spec-name">Sq. Ft.</span>
-            </div>
-          </div>
-
-          <div class="spec-box">
-            <i class="fa-solid fa-building spec-icon"></i>
-            <div class="spec-data">
-              <span class="spec-value"><?= e($property['type_name'] ?? 'Residential') ?></span>
-              <span class="spec-name">Property Type</span>
-            </div>
-          </div>
-
-          <?php if (!empty($property['completion_year'])): ?>
-            <div class="spec-box">
-              <i class="fa-solid fa-calendar-check spec-icon"></i>
-              <div class="spec-data">
-                <span class="spec-value"><?= e($property['completion_year']) ?></span>
-                <span class="spec-name">Completion</span>
-              </div>
-            </div>
-          <?php endif; ?>
-        </div>
-
-        <!-- Description -->
+        <!-- Description Block -->
         <div class="property-section-block">
-          <h2 class="block-title">Overview &amp; Property Details</h2>
+          <div class="block-badge-row">
+            <span class="block-badge"><i class="fa-solid fa-circle-info"></i> OVERVIEW &amp; DETAILS</span>
+          </div>
+          <h2 class="block-title">About This Residence</h2>
           <div class="property-desc-text">
             <?= nl2br(e($property['description'])) ?>
           </div>
         </div>
 
-        <!-- Amenities -->
+        <!-- Amenities Block -->
         <?php if (!empty($property['amenities'])): ?>
           <div class="property-section-block">
-            <h2 class="block-title">Amenities &amp; Features</h2>
+            <div class="block-badge-row">
+              <span class="block-badge"><i class="fa-solid fa-star"></i> FEATURES &amp; LIFESTYLE</span>
+            </div>
+            <h2 class="block-title">Premium Amenities &amp; Facilities</h2>
             <div class="amenities-badge-grid">
               <?php foreach ($property['amenities'] as $am): ?>
                 <div class="amenity-item">
-                  <i class="fa-solid <?= e($am['icon'] ?? 'fa-check') ?>"></i>
-                  <span><?= e($am['name']) ?></span>
+                  <div class="amenity-item-icon">
+                    <i class="fa-solid <?= e($am['icon'] ?? 'fa-check') ?>"></i>
+                  </div>
+                  <span class="amenity-item-name"><?= e($am['name']) ?></span>
                 </div>
               <?php endforeach; ?>
             </div>
           </div>
         <?php endif; ?>
 
+        <!-- Location Highlights Card -->
+        <?php if (!empty($property['location_name'])): ?>
+          <div class="property-section-block community-context-card">
+            <div class="community-context-header">
+              <div>
+                <span class="block-badge"><i class="fa-solid fa-compass"></i> LOCATION &amp; COMMUNITY</span>
+                <h3 class="community-context-title"><?= e($property['location_name']) ?></h3>
+              </div>
+              <a href="/locations/<?= e($property['location_slug']) ?>" class="btn-outline-pill btn-sm">
+                <span>Explore Community</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+            <p class="community-context-desc">
+              <?= e($property['location_description'] ?? 'One of Dubai\'s most prestigious freehold residential and investment destinations, offering unmatched capital growth, luxury lifestyle amenities, and prime connectivity.') ?>
+            </p>
+          </div>
+        <?php endif; ?>
+
         <!-- Regulatory & Trust Assurance -->
         <div class="property-assurance-card">
-          <div class="assurance-icon"><i class="fa-solid fa-shield-check"></i></div>
+          <div class="assurance-icon"><i class="fa-solid fa-certificate"></i></div>
           <div class="assurance-content">
             <h4>Verified by DRL Dwarika Real Estate LLC</h4>
-            <p>This property has been vetted through official title deeds and conforms to Dubai Land Department regulations. RERA ORN: <?= e($settings['rera_orn'] ?? '29482') ?>.</p>
+            <p>
+              This listing has been verified with authentic Dubai Land Department title deeds. All purchase and escrow settlements are strictly governed under RERA regulations. <strong>RERA ORN: <?= e($settings['rera_orn'] ?? '29482') ?></strong>.
+            </p>
           </div>
         </div>
 
       </div>
 
       <!-- Right Column: Enquiry Form & Agent Card -->
-      <div class="property-sidebar-col">
+      <div class="property-sidebar-col" id="inquirySidebar">
         <div class="sticky-sidebar-card">
+          
           <?php if (!empty($property['agent_name'])): ?>
-            <div class="property-assigned-agent-badge" style="display:flex; align-items:center; gap:14px; background:#F0F7FC; padding:12px 16px; border-radius:12px; margin-bottom:18px; border:1px solid #E2EBF2;">
-              <a href="/agents/<?= e($property['agent_slug']) ?>" style="flex-shrink:0;">
-                <img src="<?= e($property['agent_photo']) ?>" alt="<?= e($property['agent_name']) ?>" style="width:52px; height:52px; border-radius:50%; object-fit:cover; border:2px solid #1689CC;">
+            <div class="property-assigned-agent-badge">
+              <a href="/agents/<?= e($property['agent_slug']) ?>" class="agent-avatar-wrap">
+                <img src="<?= e($property['agent_photo']) ?>" alt="<?= e($property['agent_name']) ?>">
               </a>
-              <div style="flex:1; min-width:0;">
-                <div style="font-size:0.75rem; font-weight:700; color:#1689CC; text-transform:uppercase; letter-spacing:0.5px;">Listing Specialist</div>
-                <a href="/agents/<?= e($property['agent_slug']) ?>" style="font-weight:700; color:#0F1E2E; text-decoration:none; display:block; font-size:0.95rem; line-height:1.2;"><?= e($property['agent_name']) ?></a>
-                <span style="font-size:0.8rem; color:#64748B;"><?= e($property['agent_designation']) ?></span>
+              <div class="agent-badge-meta">
+                <span class="agent-tag">LISTING SPECIALIST</span>
+                <a href="/agents/<?= e($property['agent_slug']) ?>" class="agent-badge-name"><?= e($property['agent_name']) ?></a>
+                <span class="agent-badge-desig"><?= e($property['agent_designation']) ?></span>
               </div>
             </div>
           <?php endif; ?>
 
-          <h3 class="inquiry-title">Inquire About This Property</h3>
-          <p class="inquiry-subtitle">Book a private viewing or request floor plans with our luxury specialist.</p>
+          <h3 class="inquiry-title">Schedule a Private Viewing</h3>
+          <p class="inquiry-subtitle">Directly contact our certified specialist for floor plans, video walkthroughs, and private viewings.</p>
 
           <form action="/enquiry/submit" method="POST" class="property-inquiry-form" id="propertyInquiryForm">
             <input type="hidden" name="csrf_token" value="<?= e($csrf_token ?? '') ?>">
             <input type="hidden" name="property_id" value="<?= e((string)$property['id']) ?>">
-            <input type="hidden" name="subject" value="Inquiry: <?= e($property['title']) ?> (<?= e($property['reference_code']) ?>)">
+            <input type="hidden" name="subject" value="Inquiry: <?= e($property['title']) ?> (Ref: <?= e($property['reference_code']) ?>)">
             
             <!-- Honeypot -->
             <input type="text" name="website_hp" style="display:none;" tabindex="-1" autocomplete="off">
 
             <div class="form-group">
-              <label for="leadName">Full Name *</label>
-              <input type="text" name="name" id="leadName" class="form-input" placeholder="e.g. John Doe" required>
+              <label for="leadName" class="form-label">Full Name <span class="req">*</span></label>
+              <div class="input-with-icon">
+                <i class="fa-regular fa-user input-icon"></i>
+                <input type="text" name="name" id="leadName" class="form-input" placeholder="e.g. John Doe" required>
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="leadPhone">Phone / WhatsApp *</label>
-              <input type="tel" name="phone" id="leadPhone" class="form-input" placeholder="+971 50 000 0000" required>
+              <label for="leadPhone" class="form-label">Phone / WhatsApp <span class="req">*</span></label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-phone input-icon"></i>
+                <input type="tel" name="phone" id="leadPhone" class="form-input" placeholder="+971 50 000 0000" required>
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="leadEmail">Email Address</label>
-              <input type="email" name="email" id="leadEmail" class="form-input" placeholder="john@example.com">
+              <label for="leadEmail" class="form-label">Email Address</label>
+              <div class="input-with-icon">
+                <i class="fa-regular fa-envelope input-icon"></i>
+                <input type="email" name="email" id="leadEmail" class="form-input" placeholder="john@example.com">
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="leadMsg">Message</label>
+              <label for="leadMsg" class="form-label">Your Viewing Requirements</label>
               <textarea name="message" id="leadMsg" rows="3" class="form-textarea" placeholder="I am interested in scheduling a viewing for <?= e($property['title']) ?>..."></textarea>
             </div>
 
             <button type="submit" class="btn-primary-pill full-width btn-submit-lead" id="btnSubmitPropertyInquiry">
-              <span>Send Inquiry</span>
-              <i class="fa-solid fa-paper-plane"></i>
+              <span>Send Inquiry &amp; Book Viewing</span>
+              <i class="fa-solid fa-arrow-right"></i>
             </button>
           </form>
 
-          <div class="quick-direct-contacts">
-            <a href="https://wa.me/<?= $waPhone ?>?text=Hello%20Dwarika%20Real%20Estate,%20I%20am%20interested%20in%20<?= urlencode($property['title']) ?>%20(<?= $property['reference_code'] ?>):%20<?= urlencode($currentUrl) ?>" target="_blank" rel="noopener" class="btn-whatsapp-direct">
-              <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
-            </a>
-            <a href="tel:<?= $cleanPhone ?>" class="btn-call-direct">
-              <i class="fa-solid fa-phone"></i> Call Brokerage
-            </a>
+          <div class="sidebar-direct-connect">
+            <span class="direct-label">Or connect instantly via:</span>
+            <div class="direct-buttons-row">
+              <a href="https://wa.me/<?= $waPhone ?>?text=<?= urlencode('Hello DRL Dwarika, I am interested in ' . $property['title'] . ' (' . $property['reference_code'] . '): ' . $currentUrl) ?>" target="_blank" rel="noopener" class="direct-btn direct-wa">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>WhatsApp</span>
+              </a>
+              <a href="tel:<?= $cleanPhone ?>" class="direct-btn direct-call">
+                <i class="fa-solid fa-phone"></i>
+                <span>Call Desk</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -223,9 +316,15 @@ $currentUrl = 'https://dwarikarealestate.ae/property/' . $property['slug'];
     <!-- Similar Properties Section -->
     <?php if (!empty($similar)): ?>
       <div class="similar-properties-block section-padding-top">
-        <div class="section-header">
-          <span class="section-badge">— SIMILAR LISTINGS —</span>
-          <h2 class="section-title">Properties You May Also Like</h2>
+        <div class="section-header-row">
+          <div>
+            <span class="section-badge">— CURATED RECOMMENDATIONS —</span>
+            <h2 class="section-title">Similar Properties You May Like</h2>
+          </div>
+          <a href="/properties" class="btn-outline-pill">
+            <span>View All Properties</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
         </div>
         <div class="properties-grid">
           <?php foreach ($similar as $simProp): ?>
@@ -264,50 +363,13 @@ $currentUrl = 'https://dwarikarealestate.ae/property/' . $property['slug'];
 }
 </script>
 
-<!-- JSON-LD BreadcrumbList Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://dwarikarealestate.ae"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Properties",
-      "item": "https://dwarikarealestate.ae/properties"
-    }<?php if (!empty($property['location_name'])): ?>,
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": <?= json_encode($property['location_name']) ?>,
-      "item": <?= json_encode("https://dwarikarealestate.ae/locations/" . $property['location_slug']) ?>
-    },
-    {
-      "@type": "ListItem",
-      "position": 4,
-      "name": <?= json_encode($property['title']) ?>,
-      "item": <?= json_encode($currentUrl) ?>
-    }<?php else: ?>,
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": <?= json_encode($property['title']) ?>,
-      "item": <?= json_encode($currentUrl) ?>
-    }<?php endif; ?>
-  ]
-}
-</script>
-
 <script>
 function switchGalleryImg(src, btn) {
-  document.getElementById('mainGalleryImg').src = src;
+  const mainImg = document.getElementById('mainGalleryImg');
+  if (mainImg) {
+    mainImg.src = src;
+  }
   document.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
 }
 </script>
