@@ -335,6 +335,24 @@ $statusLabel = match(strtolower($property['listing_type'] ?? 'sale')) {
     <?php endif; ?>
 
   </div>
+
+  <!-- Mobile Sticky Floating Contact Bar (Only visible on mobile screens) -->
+  <div class="property-mobile-sticky-bar" id="propMobileStickyBar">
+    <div class="sticky-bar-price-col">
+      <span class="sticky-bar-eyebrow">Price</span>
+      <span class="sticky-bar-price-num"><?= format_price($property['price'], $property['currency'] ?? 'AED') ?></span>
+    </div>
+    <div class="sticky-bar-btn-group">
+      <a href="https://wa.me/<?= $waPhone ?>?text=<?= urlencode('Hello DRL Dwarika, I am interested in ' . $property['title'] . ' (' . $property['reference_code'] . '): ' . $currentUrl) ?>" target="_blank" rel="noopener" class="btn-sticky-action btn-sticky-wa" aria-label="WhatsApp Us">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>WhatsApp</span>
+      </a>
+      <a href="tel:<?= $cleanPhone ?>" class="btn-sticky-action btn-sticky-call" aria-label="Call Brokerage">
+        <i class="fa-solid fa-phone"></i>
+        <span>Call</span>
+      </a>
+    </div>
+  </div>
 </article>
 
 <!-- JSON-LD SingleFamilyResidence Structured Data -->
