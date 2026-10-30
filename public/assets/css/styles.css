@@ -212,6 +212,7 @@ ul, ol {
 .btn-call {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   background-color: var(--color-primary);
   color: var(--color-white);
@@ -219,12 +220,28 @@ ul, ol {
   font-size: 0.9rem;
   font-weight: 600;
   border-radius: var(--radius-pill);
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  text-decoration: none;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(22, 137, 204, 0.22);
   transition: all var(--transition-fast);
 }
 
 .btn-call:hover {
   background-color: var(--color-primary-hover);
-  transform: scale(1.02);
+  color: var(--color-white);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(22, 137, 204, 0.35);
+}
+
+.btn-call svg,
+.btn-call i {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .btn-whatsapp {
@@ -267,12 +284,16 @@ ul, ol {
 .brand-logo {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
 }
 
 .logo-img {
   height: 52px;
   width: auto;
+  max-width: 100%;
   object-fit: contain;
+  display: block;
 }
 
 .main-nav {
@@ -6158,6 +6179,133 @@ ul, ol {
 }
 
 @media (max-width: 768px) {
+  /* ====================================================================
+     MOBILE HEADER OVERHAUL: Visible, Crisp Logo + Pristine Call Button
+     ==================================================================== */
+  .site-header {
+    height: 70px !important;
+    padding: 0 !important;
+  }
+
+  .header-inner {
+    height: 100% !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+
+  /* Make sure brand logo cannot be squeezed, squished, or shrunk */
+  .brand-logo {
+    display: flex !important;
+    align-items: center !important;
+    flex: 0 0 auto !important;
+    max-width: calc(100% - 150px) !important;
+    text-decoration: none !important;
+  }
+
+  .logo-img {
+    height: 44px !important;
+    max-height: 44px !important;
+    width: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+
+  .header-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
+  }
+
+  /* Hide the top header currency dropdown on mobile:
+     The full touch-friendly currency picker is seamlessly available in the mobile drawer */
+  .currency-selector-wrap {
+    display: none !important;
+  }
+
+  /* Sleek, unbreakable luxury Call Us button */
+  .btn-call {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    padding: 8px 15px !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    border-radius: 9999px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    height: 38px !important;
+    line-height: 1 !important;
+    box-shadow: 0 2px 8px rgba(22, 137, 204, 0.28) !important;
+    background-color: var(--color-primary, #1689CC) !important;
+    color: #FFFFFF !important;
+    text-decoration: none !important;
+  }
+
+  .btn-call i,
+  .btn-call svg {
+    width: 13px !important;
+    height: 13px !important;
+    font-size: 13px !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    display: inline-block !important;
+  }
+
+  .btn-call span {
+    white-space: nowrap !important;
+    display: inline-block !important;
+    line-height: 1 !important;
+  }
+
+  /* Hamburger Toggle Button */
+  .mobile-toggle-btn {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 0 !important;
+    background: #F1F6FA !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .mobile-toggle-btn:hover {
+    background: #E2ECF5 !important;
+    border-color: #CBD5E1 !important;
+  }
+
+  .mobile-toggle-btn .bar {
+    width: 18px !important;
+    height: 2px !important;
+    background-color: var(--color-navy, #0F1E2E) !important;
+    border-radius: 2px !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  /* Mobile Drawer header logo */
+  .mobile-drawer-header img {
+    height: 38px !important;
+    width: auto !important;
+    object-fit: contain !important;
+  }
+
   /* Prevent iOS zoom on inputs & ensure touch responsiveness */
   input, select, textarea, .form-input, .form-textarea, .form-select {
     font-size: 16px !important;
@@ -6758,6 +6906,46 @@ ul, ol {
     gap: 0 !important;
   }
 }
+
+/* Extra Small Phones (< 400px) Optimization */
+@media (max-width: 400px) {
+  .site-header {
+    height: 64px !important;
+  }
+
+  .header-inner {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    gap: 6px !important;
+  }
+
+  .brand-logo {
+    max-width: calc(100% - 130px) !important;
+  }
+
+  .logo-img {
+    height: 38px !important;
+    max-height: 38px !important;
+  }
+
+  .header-actions {
+    gap: 7px !important;
+  }
+
+  .btn-call {
+    padding: 7px 11px !important;
+    font-size: 0.78rem !important;
+    height: 35px !important;
+    gap: 5px !important;
+  }
+
+  .mobile-toggle-btn {
+    width: 35px !important;
+    height: 35px !important;
+    min-width: 35px !important;
+  }
+}
+
 
 
 
