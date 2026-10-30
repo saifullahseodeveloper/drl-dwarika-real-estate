@@ -72,14 +72,17 @@ if (!str_starts_with($ogImage, 'http')) {
 
   <!-- Inline Critical CSS (zero render-blocking) -->
   <?php
-  $criticalCssPath = (defined('APP_ROOT') ? APP_ROOT : dirname(__DIR__, 2)) . '/public/assets/css/critical.min.css';
+  $publicPath = (defined('APP_ROOT') ? APP_ROOT : dirname(__DIR__, 2)) . '/public';
+  $criticalCssPath = $publicPath . '/assets/css/critical.min.css';
+  $stylesMinPath   = $publicPath . '/assets/css/styles.min.css';
+  $cssVer = file_exists($stylesMinPath) ? filemtime($stylesMinPath) : '3.2';
   if (file_exists($criticalCssPath)): ?>
     <style id="critical-css"><?= file_get_contents($criticalCssPath) ?></style>
-    <!-- Load full CSS non-blocking via print trick -->
-    <link rel="stylesheet" href="/assets/css/styles.min.css" media="print" onload="this.media='all'; this.onload=null;">
-    <noscript><link rel="stylesheet" href="/assets/css/styles.min.css"></noscript>
+    <!-- Load full CSS non-blocking via print trick with auto-cache-busting -->
+    <link rel="stylesheet" href="/assets/css/styles.min.css?v=<?= $cssVer ?>" media="print" onload="this.media='all'; this.onload=null;">
+    <noscript><link rel="stylesheet" href="/assets/css/styles.min.css?v=<?= $cssVer ?>"></noscript>
   <?php else: ?>
-    <link rel="stylesheet" href="/assets/css/styles.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css?v=<?= $cssVer ?>">
   <?php endif; ?>
 
   <!-- Chatbot CSS deferred (non-blocking) -->
